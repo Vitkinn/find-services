@@ -5,7 +5,7 @@ import 'package:tcc_frontend/src/modules/user/domain/usecases/create_user_usecas
 import 'package:tcc_frontend/src/modules/user/domain/usecases/list_users_usecase.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/controllers/list_user_controller.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/controllers/new_user_controller.dart';
-import 'package:tcc_frontend/src/modules/user/presentation/pages/list_users_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/login_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/new_user_page.dart';
 
 import 'data/datasource/remote/user_datasource.dart';
@@ -33,7 +33,9 @@ class UserModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const ListUsersPage()),
+        ChildRoute('/',
+            child: (context, args) =>
+                const LoginPage()), //Definir para página de login
         ChildRoute('/new_user',
             child: (context, args) => NewUserPage(args.data)),
       ];

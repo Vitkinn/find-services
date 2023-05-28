@@ -17,8 +17,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'ViaCep Mobile',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: 'FindServices',
+      theme: ThemeData(primarySwatch: Colors.green),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
     );
