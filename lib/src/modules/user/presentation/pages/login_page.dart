@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/components/custom_button.dart';
-import '../../../../../components/custom_text_field.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/shared/components/custom_button.dart';
+import '../../../../../shared/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +14,9 @@ class _LoginPageState extends State<LoginPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void sign() {}
+  void sign() {
+    Modular.to.navigate('register');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +27,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Image.asset(
                   'lib/assets/images/FindServices.png',
                   height: 100,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 const Text(
                   'Entrar',
                   style: TextStyle(
@@ -37,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 75),
                 CustomTextField(
                   controller: userNameController,
                   hintText: 'Usuário',
@@ -63,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 CustomButton(
                   onTap: () => {sign()},
                 ),
@@ -77,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 18,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10),
                     Text(
                       'Registre-se aqui',
                       style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),

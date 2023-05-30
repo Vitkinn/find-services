@@ -7,6 +7,7 @@ import 'package:tcc_frontend/src/modules/user/presentation/controllers/list_user
 import 'package:tcc_frontend/src/modules/user/presentation/controllers/new_user_controller.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/login_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/new_user_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/register_page.dart';
 
 import 'data/datasource/remote/user_datasource.dart';
 import 'data/repositories/user_repository.dart';
@@ -36,7 +37,7 @@ class UserModule extends Module {
         ChildRoute('/',
             child: (context, args) =>
                 const LoginPage()), //Definir para página de login
-        ChildRoute('/new_user',
-            child: (context, args) => NewUserPage(args.data)),
+        ChildRoute('/register',
+            child: (context, args) => RegisterPage(args.data)),
       ];
 }
