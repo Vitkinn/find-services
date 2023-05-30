@@ -67,10 +67,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 40),
                 CustomButton(
                   onTap: () => {},
+                  hintText: 'Avançar',
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
                   onTap: () => {},
+                  hintText: 'Cancelar',
+                  hexColor: '999999',
                 ),
               ],
             ),
