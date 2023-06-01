@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:tcc_frontend/shared/components/app_banner.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
-import '../../../../../shared/components/custom_text_field.dart';
+import 'package:tcc_frontend/shared/components/custom_text_field.dart';
 
 class RegisterDataPage extends StatefulWidget {
   dynamic data;
@@ -15,6 +17,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final dynamic data;
+  bool _isChecked = false;
 
   _RegisterDataPageState(this.data);
 
@@ -28,18 +31,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
             child: Column(
               children: [
                 const SizedBox(height: 25),
-                Image.asset(
-                  'lib/assets/images/FindServices.png',
-                  height: 100,
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Cadastrar-se',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const AppBanner(title: 'Cadastrar-se'),
                 const SizedBox(height: 25),
                 CustomTextField(
                   controller: userNameController,
@@ -63,6 +55,28 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                   controller: passwordController,
                   hintText: 'Informe seu CPF',
                   obscureText: false,
+                ),
+                const SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: _isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _isChecked = value!;
+                          });
+                        },
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'Declaro ter lido e estar de acordo com os termos de uso.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 40),
                 CustomButton(
