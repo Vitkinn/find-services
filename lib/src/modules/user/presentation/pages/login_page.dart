@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
+import 'package:tcc_frontend/shared/components/app_banner.dart';
+
 import 'package:tcc_frontend/shared/components/custom_button.dart';
-import '../../../../../shared/components/custom_text_field.dart';
+import 'package:tcc_frontend/shared/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,25 +30,14 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 const SizedBox(height: 50),
-                Image.asset(
-                  'lib/assets/images/FindServices.png',
-                  height: 100,
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Entrar',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 75),
+                const AppBanner(title: 'Entrar'),
+                const SizedBox(height: 100),
                 CustomTextField(
                   controller: userNameController,
                   hintText: 'Usuário',
                   obscureText: false,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 CustomTextField(
                   controller: passwordController,
                   hintText: 'Senha',
@@ -66,10 +57,10 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
                 CustomButton(
-                  onTap: () => {sign()},
                   hintText: 'Entrar',
+                  onTap: () => {sign()},
                 ),
                 const SizedBox(height: 20),
                 const Row(
