@@ -1,13 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/user/data/datasource/i_user_datasource.dart';
 import 'package:tcc_frontend/src/modules/user/domain/repositories/i_user_repository.dart';
-import 'package:tcc_frontend/src/modules/user/domain/usecases/create_user_usecase.dart';
-import 'package:tcc_frontend/src/modules/user/domain/usecases/list_users_usecase.dart';
-import 'package:tcc_frontend/src/modules/user/presentation/controllers/list_user_controller.dart';
-import 'package:tcc_frontend/src/modules/user/presentation/controllers/new_user_controller.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/login_page.dart';
-import 'package:tcc_frontend/src/modules/user/presentation/pages/new_user_page.dart';
-import 'package:tcc_frontend/src/modules/user/presentation/pages/register_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/register_data_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/register_password_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/register_photo_page.dart';
 
 import 'data/datasource/remote/user_datasource.dart';
 import 'data/repositories/user_repository.dart';
@@ -20,24 +17,16 @@ class UserModule extends Module {
         //Repositories
         Bind.lazySingleton<IUserRepository>(
             (i) => UserRepository(datasource: i.get())),
-        //Usecases
-        Bind.lazySingleton<ICreateUserUsecase>(
-            (i) => CreateUserUsecase(repository: i.get())),
-        Bind.lazySingleton<IListUsersUsecase>(
-            (i) => ListUsersUsecase(repository: i.get())),
-        //Controllers
-        Bind.lazySingleton<ListUserController>(
-            (i) => ListUserController(listUsersUsecase: i.get())),
-        Bind.lazySingleton<NewUserController>(
-            (i) => NewUserController(createUserUsecase: i.get())),
       ];
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/',
-            child: (context, args) =>
-                const LoginPage()), //Definir para página de login
-        ChildRoute('/register',
-            child: (context, args) => RegisterPage(args.data)),
+        ChildRoute('/', child: (context, args) => const LoginPage()),
+        ChildRoute('/register_data',
+            child: (context, args) => RegisterDataPage(args.data)),
+        ChildRoute('/register_photo',
+            child: (context, args) => RegisterPhotoPage(args.data)),
+        ChildRoute('/Register_password',
+            child: (context, args) => RegisterPasswordPage(args.data)),
       ];
 }

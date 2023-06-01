@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
 import '../../../../../shared/components/custom_text_field.dart';
 
-class RegisterDataPage extends StatefulWidget {
+class RegisterPasswordPage extends StatefulWidget {
   dynamic data;
 
-  RegisterDataPage(this.data, {super.key});
+  RegisterPasswordPage(this.data, {super.key});
 
   @override
-  State<RegisterDataPage> createState() => _RegisterDataPageState(data);
+  State<RegisterPasswordPage> createState() => _RegisterPasswordPageState(data);
 }
 
-class _RegisterDataPageState extends State<RegisterDataPage> {
+class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final dynamic data;
 
-  _RegisterDataPageState(this.data);
+  _RegisterPasswordPageState(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +45,6 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                   controller: userNameController,
                   hintText: 'Informe seu nome completo',
                   obscureText: false,
-                ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: userNameController,
-                  hintText: 'Informe seu e-mail',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: userNameController,
-                  hintText: 'Confirme seu e-mail',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: passwordController,
-                  hintText: 'Informe seu CPF',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 40),
-                CustomButton(
-                  onTap: () => {},
-                  hintText: 'Avançar',
-                ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  onTap: () => {},
-                  hintText: 'Cancelar',
-                  hexColor: '999999',
                 ),
               ],
             ),
