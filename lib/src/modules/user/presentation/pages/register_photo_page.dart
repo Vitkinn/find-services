@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcc_frontend/shared/components/app_banner.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
 
 class RegisterPhotoPage extends StatefulWidget {
@@ -37,18 +38,14 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 25),
-                Image.asset(
-                  'lib/assets/images/FindServices.png',
-                  height: 100,
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Text(
-                    'Por favor, selecione uma foto para o seu perfil e defina o seu sexo.',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 18),
-                  ),
+                const SizedBox(height: 50),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: AppBanner(
+                      title:
+                          'Por favor, agora selecione uma foto para o seu perfil e defina o seu sexo.',
+                      titleSize: 18,
+                      titleHexColor: '808080'),
                 ),
                 const SizedBox(height: 25),
                 Stack(
@@ -75,7 +72,7 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -84,10 +81,6 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                       value: _selectedOption,
                       isExpanded: true,
                       decoration: InputDecoration(
-                          label: Text(
-                            'Sexo',
-                            style: TextStyle(fontSize: 18),
-                          ),
                           hintText: 'Selecione o seu sexo',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6))),
@@ -105,7 +98,7 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 60),
                 CustomButton(
                   onTap: () => {},
                   hintText: 'Avançar',

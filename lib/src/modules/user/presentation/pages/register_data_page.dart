@@ -30,7 +30,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
                 const AppBanner(title: 'Cadastrar-se'),
                 const SizedBox(height: 25),
                 CustomTextField(
@@ -47,7 +47,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: userNameController,
-                  hintText: 'Confirme seu e-mail',
+                  hintText: 'Informe seu telefone',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
