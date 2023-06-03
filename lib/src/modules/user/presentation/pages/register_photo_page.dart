@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:tcc_frontend/shared/components/app_banner.dart';
-import 'package:tcc_frontend/shared/components/custom_button.dart';
+import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
+import 'package:tcc_frontend/src/modules/shared/components/custom_button.dart';
 
 class RegisterPhotoPage extends StatefulWidget {
   const RegisterPhotoPage({super.key});
@@ -107,14 +107,15 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                 ),
                 const SizedBox(height: 60),
                 CustomButton(
-                  onTap: () => {advance()},
                   hintText: 'Avançar',
+                  color: '14cd84',
+                  onTap: () => {advance()},
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
-                  onTap: () => {cancel()},
                   hintText: 'Cancelar',
-                  hexColor: '999999',
+                  color: '999999',
+                  onTap: () => {cancel()},
                 ),
               ],
             ),

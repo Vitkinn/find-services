@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/shared/color_utils.dart';
+import 'package:tcc_frontend/src/modules/shared/utils/color_utils.dart';
 
 class AppBanner extends StatelessWidget {
   final String? title;
@@ -26,7 +26,6 @@ class AppBanner extends StatelessWidget {
         title ?? 'Title',
         style: TextStyle(
             fontSize: titleSize ?? 30,
-            fontWeight: FontWeight.bold,
             color: ColorUtils.getHexadecimalColor(titleHexColor)),
       )
     ]);

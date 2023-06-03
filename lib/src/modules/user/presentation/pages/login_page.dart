@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/shared/components/app_banner.dart';
+import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 
-import 'package:tcc_frontend/shared/components/custom_button.dart';
-import 'package:tcc_frontend/shared/components/custom_text_field.dart';
+import 'package:tcc_frontend/src/modules/shared/components/custom_button.dart';
+import 'package:tcc_frontend/src/modules/shared/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 100),
                 CustomButton(
                   hintText: 'Entrar',
+                  color: '14cd84',
                   onTap: () => {sign()},
                 ),
                 const SizedBox(height: 20),
