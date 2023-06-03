@@ -16,7 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void sign() {
+  void sign() {}
+
+  void register() {
     Modular.to.navigate('register_data');
   }
 
@@ -63,19 +65,23 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () => {sign()},
                 ),
                 const SizedBox(height: 20),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Ainda não tem uma conta?',
                       style: TextStyle(
                         fontSize: 18,
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Registre-se aqui',
-                      style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      child: const Text(
+                        'Registre-se aqui',
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                      ),
+                      onTap: () => {register()},
                     ),
                   ],
                 ),

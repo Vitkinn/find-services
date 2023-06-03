@@ -21,14 +21,12 @@ class UserModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        //ChildRoute('/', child: (context, args) => const LoginPage()),
-        ChildRoute('/',
-            child: (context, args) => RegisterPasswordPage(args.data)),
+        ChildRoute('/', child: (context, args) => const LoginPage()),
         ChildRoute('/register_data',
-            child: (context, args) => RegisterDataPage(args.data)),
+            child: (context, args) => const RegisterDataPage()),
         ChildRoute('/register_photo',
-            child: (context, args) => RegisterPhotoPage(args.data)),
-        ChildRoute('/Register_password',
-            child: (context, args) => RegisterPasswordPage(args.data)),
+            child: (context, args) => const RegisterPhotoPage()),
+        ChildRoute('/register_password',
+            child: (context, args) => const RegisterPasswordPage()),
       ];
 }

@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:tcc_frontend/shared/components/app_banner.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
 import '../../../../../shared/components/custom_text_field.dart';
 
 class RegisterPasswordPage extends StatefulWidget {
-  dynamic data;
-
-  RegisterPasswordPage(this.data, {super.key});
+  const RegisterPasswordPage({super.key});
 
   @override
-  State<RegisterPasswordPage> createState() => _RegisterPasswordPageState(data);
+  State<RegisterPasswordPage> createState() => _RegisterPasswordPageState();
 }
 
 class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  final dynamic data;
 
-  _RegisterPasswordPageState(this.data);
+  void advance() {
+    Modular.to.navigate('/register_password');
+  }
+
+  void cancel() {
+    Modular.to.navigate('/');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +32,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
         child: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 25),
                 const Padding(
@@ -36,7 +42,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                       titleSize: 18,
                       titleHexColor: '808080'),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 120),
                 CustomTextField(
                   controller: userNameController,
                   hintText: 'Informe a sua senha',
@@ -59,14 +65,14 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                   hintText: 'Confirme a sua senha',
                   obscureText: false,
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 120),
                 CustomButton(
-                  onTap: () => {},
-                  hintText: 'Avançar',
+                  onTap: () => {advance()},
+                  hintText: 'Finalizar',
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
-                  onTap: () => {},
+                  onTap: () => {cancel()},
                   hintText: 'Cancelar',
                   hexColor: '999999',
                 ),

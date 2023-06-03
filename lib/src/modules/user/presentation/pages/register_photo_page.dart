@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:tcc_frontend/shared/components/app_banner.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
 
 class RegisterPhotoPage extends StatefulWidget {
-  dynamic data;
-
-  RegisterPhotoPage(this.data, {super.key});
+  const RegisterPhotoPage({super.key});
 
   @override
-  State<RegisterPhotoPage> createState() => _RegisterPhotoPageState(data);
+  State<RegisterPhotoPage> createState() => _RegisterPhotoPageState();
 }
 
 class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final String _profilePictureUrl = 'lib/assets/images/UserIcon.png';
-
   String? _selectedOption;
 
   List<String> _options = [
@@ -25,9 +24,13 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
     'Prefiro não definir',
   ];
 
-  final dynamic data;
+  void advance() {
+    Modular.to.navigate('/register_password');
+  }
 
-  _RegisterPhotoPageState(this.data);
+  void cancel() {
+    Modular.to.navigate('/');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +40,19 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
         child: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 50),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: AppBanner(
-                      title:
-                          'Por favor, agora selecione uma foto para o seu perfil e defina o seu sexo.',
-                      titleSize: 18,
-                      titleHexColor: '808080'),
+                    title:
+                        'Por favor, agora selecione uma foto para o seu perfil e defina o seu sexo.',
+                    titleSize: 18,
+                    titleHexColor: '808080',
+                  ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -76,14 +81,16 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
-                    color: Colors.grey[200],
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8)),
                     child: DropdownButtonFormField(
                       value: _selectedOption,
                       isExpanded: true,
                       decoration: InputDecoration(
                           hintText: 'Selecione o seu sexo',
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6))),
+                              borderRadius: BorderRadius.circular(8))),
                       items: _options.map((String option) {
                         return DropdownMenuItem(
                           value: option,
@@ -100,12 +107,12 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                 ),
                 const SizedBox(height: 60),
                 CustomButton(
-                  onTap: () => {},
+                  onTap: () => {advance()},
                   hintText: 'Avançar',
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
-                  onTap: () => {},
+                  onTap: () => {cancel()},
                   hintText: 'Cancelar',
                   hexColor: '999999',
                 ),

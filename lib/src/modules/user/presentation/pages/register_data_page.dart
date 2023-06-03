@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:tcc_frontend/shared/components/app_banner.dart';
 import 'package:tcc_frontend/shared/components/custom_button.dart';
 import 'package:tcc_frontend/shared/components/custom_text_field.dart';
 
 class RegisterDataPage extends StatefulWidget {
-  dynamic data;
-
-  RegisterDataPage(this.data, {super.key});
+  const RegisterDataPage({super.key});
 
   @override
-  State<RegisterDataPage> createState() => _RegisterDataPageState(data);
+  State<RegisterDataPage> createState() => _RegisterDataPageState();
 }
 
 class _RegisterDataPageState extends State<RegisterDataPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  final dynamic data;
   bool _isChecked = false;
 
-  _RegisterDataPageState(this.data);
+  void advance() {
+    Modular.to.navigate('/register_photo');
+  }
+
+  void cancel() {
+    Modular.to.navigate('/');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
         child: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 50),
                 const AppBanner(title: 'Cadastrar-se'),
@@ -56,7 +61,7 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                   hintText: 'Informe seu CPF',
                   obscureText: false,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -78,14 +83,14 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 10),
                 CustomButton(
-                  onTap: () => {},
+                  onTap: () => {advance()},
                   hintText: 'Avançar',
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
-                  onTap: () => {},
+                  onTap: () => {cancel()},
                   hintText: 'Cancelar',
                   hexColor: '999999',
                 ),
