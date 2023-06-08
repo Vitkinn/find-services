@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -105,39 +106,13 @@ class ProfilePage extends StatelessWidget {
                       )
                     ],
                   ),
-                )
-                // const Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 50),
-                //   child: Row(
-                //     children: [
-                //       CircleAvatar(
-                //         radius: 25,
-                //         backgroundImage:
-                //             AssetImage('lib/assets/images/user_icon.png'),
-                //         backgroundColor: Colors.grey,
-                //       ),
-                //       SizedBox(width: 10),
-                //       Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text(
-                //               'Fulano de tal',
-                //               style: TextStyle(fontSize: 18),
-                //             ),
-                //             SizedBox(height: 10),
-                //             Text(
-                //               'Ótimo cliente, acompanhou todo o processo do serviço.',
-                //               style: TextStyle(fontSize: 16),
-                //             ),
-                //           ])
-                //     ],
-                //   ),
-                // ),
+                ),
               ],
             ),
           ),
         ),
       ),
+      bottomNavigationBar: FootBar(),
     );
   }
 }
