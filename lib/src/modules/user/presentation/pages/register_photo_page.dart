@@ -14,7 +14,7 @@ class RegisterPhotoPage extends StatefulWidget {
 class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  final String _profilePictureUrl = 'lib/assets/images/UserIcon.png';
+  final String _profilePictureUrl = 'lib/assets/images/user_icon.png';
   String? _selectedOption;
 
   List<String> _options = [

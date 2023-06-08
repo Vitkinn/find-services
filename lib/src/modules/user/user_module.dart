@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/user/data/datasource/i_user_datasource.dart';
 import 'package:tcc_frontend/src/modules/user/domain/repositories/i_user_repository.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/login_page.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/profile_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/register_data_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/register_password_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/register_photo_page.dart';
@@ -21,12 +22,13 @@ class UserModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const LoginPage()),
+        //ChildRoute('/', child: (context, args) => const LoginPage()),
         ChildRoute('/register_data',
             child: (context, args) => const RegisterDataPage()),
         ChildRoute('/register_photo',
             child: (context, args) => const RegisterPhotoPage()),
         ChildRoute('/register_password',
             child: (context, args) => const RegisterPasswordPage()),
+        ChildRoute('/', child: (context, args) => const ProfilePage()),
       ];
 }
