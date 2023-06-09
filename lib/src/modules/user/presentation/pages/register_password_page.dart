@@ -27,7 +27,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(

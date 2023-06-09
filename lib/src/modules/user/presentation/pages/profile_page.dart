@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
     double _rating = 4;
 
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
