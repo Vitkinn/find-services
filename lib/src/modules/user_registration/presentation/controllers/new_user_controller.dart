@@ -1,5 +1,5 @@
-import 'package:tcc_frontend/src/modules/user/domain/entities/user_entity.dart';
-import 'package:tcc_frontend/src/modules/user/domain/usecases/create_user_usecase.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
 
 class NewUserController {
   final CreateUserUsecase createUserUsecase;

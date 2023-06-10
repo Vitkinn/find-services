@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/modules/user/domain/entities/user_entity.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../data/models/user_model.dart';

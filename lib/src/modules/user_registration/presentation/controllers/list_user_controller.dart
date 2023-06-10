@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tcc_frontend/src/modules/user/domain/entities/user_entity.dart';
-import 'package:tcc_frontend/src/modules/user/domain/usecases/list_users_usecase.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/list_users_usecase.dart';
 
 class ListUserController {
   final ListUsersUsecase listUsersUsecase;
