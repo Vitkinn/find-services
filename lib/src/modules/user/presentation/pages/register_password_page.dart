@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 
 class RegisterPasswordPage extends StatefulWidget {
   const RegisterPasswordPage({super.key});
@@ -31,9 +32,20 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
         child: SafeArea(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Column(
+                      children: [
+                        ReturnButton(onTap: cancel),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: AppBanner(

@@ -32,11 +32,10 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
         child: SafeArea(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 50),
                 const AppBanner(title: 'Cadastrar-se'),
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
                 CustomTextField(
                   controller: userNameController,
                   hintText: 'Informe seu nome completo',

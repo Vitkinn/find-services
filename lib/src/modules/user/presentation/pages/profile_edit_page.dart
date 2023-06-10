@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
@@ -33,6 +34,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     Modular.to.navigate('/profile');
   }
 
+  bool showSaveCancelButtons() {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,15 +48,21 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             child: Column(
               children: [
                 const SizedBox(height: 50),
-                const Align(
+                Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Text(
-                      'Básico',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                  child: Column(
+                    children: [
+                      ReturnButton(onTap: cancel),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Text(
+                          'Básico',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 25),
@@ -173,9 +184,11 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SizedBox(
-          height: 120,
-          child: SaveCancelButtons(onSaveTap: save, onCancelTap: cancel)),
+      floatingActionButton: Visibility(
+          visible: showSaveCancelButtons(),
+          child: SizedBox(
+              height: 120,
+              child: SaveCancelButtons(onSaveTap: save, onCancelTap: cancel))),
       bottomNavigationBar: const FootBar(),
     );
   }
