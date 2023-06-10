@@ -16,7 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void sign() {}
+  void sign() {
+    Modular.to.navigate('home');
+  }
 
   void register() {
     Modular.to.navigate('register_data');

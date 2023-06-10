@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/custom_button.dart';
 
 import 'package:tcc_frontend/src/modules/shared/components/custom_text_field.dart';
@@ -25,6 +26,14 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
 
+  void save() {
+    Modular.to.navigate('/profile');
+  }
+
+  void cancel() {
+    Modular.to.navigate('/profile');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +46,16 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 child: Column(
                   children: [
                     const SizedBox(height: 50),
-                    const Text(
-                      'Básico',
-                      style: TextStyle(fontSize: 18),
+                    const Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Text(
+                          'Básico',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 25),
                     Stack(
@@ -67,7 +83,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     const SizedBox(height: 20),
                     CustomTextField(
                       controller: userNameController,
-                      hintText: 'Usuário',
+                      hintText: 'Nome completo',
                       obscureText: false,
                     ),
                     const SizedBox(height: 10),
@@ -94,11 +110,18 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
                     ),
                     const SizedBox(height: 30),
-                    const Text(
-                      'Endereço',
-                      style: TextStyle(fontSize: 18),
+                    const Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Text(
+                          'Endereço',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     CustomTextField(
                       controller: cepController,
                       hintText: 'CEP',
@@ -179,13 +202,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 CustomButton(
                   hintText: 'Salvar',
                   color: '14cd84',
-                  onTap: () => {},
+                  onTap: () => {save()},
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
                   hintText: 'Cancelar',
                   color: '999999',
-                  onTap: () => {},
+                  onTap: () => {cancel()},
                 ),
               ],
             ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
+
+  void edit() {
+    Modular.to.navigate('/profile_edit');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,23 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 50),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: GestureDetector(
+                      child: const Text(
+                        'Editar',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF14cd84)),
+                      ),
+                      onTap: () => {edit()},
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -112,7 +134,7 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: FootBar(),
+      bottomNavigationBar: const FootBar(),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/user/data/datasource/i_user_datasource.dart';
 import 'package:tcc_frontend/src/modules/user/domain/repositories/i_user_repository.dart';
+import 'package:tcc_frontend/src/modules/user/presentation/pages/home_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/login_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/profile_edit_page.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/profile_page.dart';
@@ -23,7 +25,8 @@ class UserModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        //ChildRoute('/', child: (context, args) => const LoginPage()),
+        ChildRoute('/', child: (context, args) => const LoginPage()),
+        ChildRoute('/home', child: (context, args) => const HomePage()),
         ChildRoute('/register_data',
             child: (context, args) => const RegisterDataPage()),
         ChildRoute('/register_photo',
@@ -31,6 +34,7 @@ class UserModule extends Module {
         ChildRoute('/register_password',
             child: (context, args) => const RegisterPasswordPage()),
         ChildRoute('/profile', child: (context, args) => const ProfilePage()),
-        ChildRoute('/', child: (context, args) => const ProfileEditPage()),
+        ChildRoute('/profile_edit',
+            child: (context, args) => const ProfileEditPage()),
       ];
 }
