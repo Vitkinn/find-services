@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/user/data/datasource/i_user_datasource.dart';
 import 'package:tcc_frontend/src/modules/user/domain/repositories/i_user_repository.dart';
 import 'package:tcc_frontend/src/modules/user/presentation/pages/home_page.dart';

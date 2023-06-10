@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
-import 'package:tcc_frontend/src/modules/shared/components/custom_button.dart';
-import 'package:tcc_frontend/src/modules/shared/components/custom_text_field.dart';
+import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 
 class RegisterDataPage extends StatefulWidget {
   const RegisterDataPage({super.key});
@@ -83,23 +82,16 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  hintText: 'Avançar',
-                  color: '14cd84',
-                  onTap: () => {advance()},
-                ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  hintText: 'Cancelar',
-                  color: '999999',
-                  onTap: () => {cancel()},
-                ),
               ],
             ),
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: SizedBox(
+          height: 150,
+          child: SaveCancelButtons(
+              saveText: 'Avançar', onSaveTap: advance, onCancelTap: cancel)),
     );
   }
 }
