@@ -1,11 +1,14 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/user_registration/data/datasource/i_user_datasource.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/repositories/i_user_repository.dart';
-import 'package:tcc_frontend/src/modules/home/presentation/home_page.dart';
+import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
+import 'package:tcc_frontend/src/modules/home/presentation/pages/home_page.dart';
 
 class HomeModule extends Module {
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+        Bind.lazySingleton(
+          (i) => HomeController(),
+        )
+      ];
 
   @override
   List<ModularRoute> get routes => [

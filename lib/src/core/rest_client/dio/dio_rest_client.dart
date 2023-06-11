@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/core/rest_client/interceptors/auth_interceptor.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
 
 import '../interceptors/failure_interceptor.dart';
@@ -9,14 +9,11 @@ import '../rest_client.dart';
 import '../rest_client_response.dart';
 
 class DioRestClient implements RestClient {
-  late final BARRER = 'barrer';
-
   late final Dio _dio;
   final String? baseUrl;
   late final IAuthController _authController;
 
   BaseOptions _defaultOptions() => BaseOptions(
-        // TODO - Alterar essa base URL...
         baseUrl: 'http://localhost:8080',
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
@@ -24,20 +21,6 @@ class DioRestClient implements RestClient {
           HttpHeaders.contentTypeHeader: "application/json; charset=utf-8",
         },
       );
-
-  void addBarrer(Map<String, dynamic> headers) {
-    if (headers.containsKey(BARRER)) {
-      headers.remove(BARRER);
-      return;
-    }
-
-    final token = _authController.getToken();
-    if (token != null) {
-      headers[BARRER] = token;
-    } else {
-      Modular.to.navigate('/');
-    }
-  }
 
   DioRestClient({
     required IAuthController authController,
@@ -48,6 +31,7 @@ class DioRestClient implements RestClient {
     _authController = authController;
     _dio.interceptors.addAll([
       FailureInterceptor(),
+      AuthInterceptor(authController: authController),
     ]);
   }
 
@@ -59,7 +43,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.delete(
         url,
         data: data,
@@ -80,7 +63,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.get(
         url,
         queryParameters: queryParameters,
@@ -101,7 +83,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.patch(
         url,
         data: data,
@@ -123,7 +104,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.post(
         url,
         data: data,
@@ -145,7 +125,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.put(
         url,
         data: data,
@@ -168,7 +147,6 @@ class DioRestClient implements RestClient {
     Map<String, dynamic> headers = const {},
   }) async {
     try {
-      addBarrer(headers);
       final response = await _dio.request(
         url,
         data: data,

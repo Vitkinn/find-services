@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
@@ -13,6 +14,15 @@ class ProfileEditPage extends StatefulWidget {
 }
 
 class _ProfileEditPageState extends State<ProfileEditPage> {
+  late final ProfileEditController _profileEditController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _profileEditController = Modular.get<ProfileEditController>();
+  }
+
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final cellPhoneController = TextEditingController();

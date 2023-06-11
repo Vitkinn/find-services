@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/login/data/models/loged_user_model.dart';
 import 'package:tcc_frontend/src/modules/login/data/models/login_model.dart';
