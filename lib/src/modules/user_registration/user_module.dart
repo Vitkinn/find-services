@@ -21,7 +21,6 @@ class UserModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/home', child: (context, args) => const HomePage()),
         ChildRoute('/register_data',
             child: (context, args) => const RegisterDataPage()),
         ChildRoute('/register_photo',
