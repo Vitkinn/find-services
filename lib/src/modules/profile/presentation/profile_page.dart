@@ -98,7 +98,7 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
                 const SizedBox(height: 25),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
