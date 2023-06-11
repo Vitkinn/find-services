@@ -23,31 +23,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     _profileEditController = Modular.get<ProfileEditController>();
   }
 
-  final userNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final cellPhoneController = TextEditingController();
-  final cpfController = TextEditingController();
-  final cepController = TextEditingController();
-  final neighborhoodController = TextEditingController();
-  final cityController = TextEditingController();
-  final ufController = TextEditingController();
-  final streetController = TextEditingController();
-  final numberController = TextEditingController();
-  final complementController = TextEditingController();
-  final referencePointController = TextEditingController();
-
-  void save() {
-    Modular.to.navigate('/profile');
-  }
-
-  void cancel() {
-    Modular.to.navigate('/profile');
-  }
-
-  bool showSaveCancelButtons() {
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +37,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   alignment: AlignmentDirectional.centerStart,
                   child: Column(
                     children: [
-                      ReturnButton(onTap: cancel),
+                      ReturnButton(onTap: _profileEditController.cancel),
                       const SizedBox(height: 20),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -100,25 +75,25 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 ),
                 const SizedBox(height: 20),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: _profileEditController.userNameController,
                   hintText: 'Nome completo',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: emailController,
+                  controller: _profileEditController.emailController,
                   hintText: 'E-mail',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: cellPhoneController,
+                  controller: _profileEditController.cellPhoneController,
                   hintText: 'Telefone',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: cpfController,
+                  controller: _profileEditController.cpfController,
                   hintText: 'CPF',
                   obscureText: false,
                 ),
@@ -141,49 +116,49 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 ),
                 const SizedBox(height: 20),
                 CustomTextField(
-                  controller: cepController,
+                  controller: _profileEditController.cepController,
                   hintText: 'CEP',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: neighborhoodController,
+                  controller: _profileEditController.neighborhoodController,
                   hintText: 'Bairro',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: cityController,
+                  controller: _profileEditController.cityController,
                   hintText: 'Cidade',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: ufController,
+                  controller: _profileEditController.ufController,
                   hintText: 'Estado',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: streetController,
+                  controller: _profileEditController.streetController,
                   hintText: 'Rua',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: numberController,
+                  controller: _profileEditController.numberController,
                   hintText: 'Número',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: complementController,
+                  controller: _profileEditController.complementController,
                   hintText: 'Complemento',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: referencePointController,
+                  controller: _profileEditController.referencePointController,
                   hintText: 'Ponto de referência',
                   obscureText: false,
                 ),
@@ -195,11 +170,14 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Visibility(
-          visible: showSaveCancelButtons(),
+          visible: _profileEditController.showSaveCancelButtons(),
           child: SizedBox(
               height: 120,
-              child: SaveCancelButtons(onSaveTap: save, onCancelTap: cancel))),
-      bottomNavigationBar: const FootBar(),
+              child: SaveCancelButtons(
+                onSaveTap: _profileEditController.save,
+                onCancelTap: _profileEditController.cancel,
+              ))),
+      bottomNavigationBar: const FootBar(initialIndex: 1),
     );
   }
 }

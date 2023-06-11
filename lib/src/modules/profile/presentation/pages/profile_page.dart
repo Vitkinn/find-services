@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  void edit() {
-    Modular.to.navigate('/profile_edit');
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late final ProfileController _profileController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _profileController = Modular.get<ProfileController>();
   }
 
   @override
   Widget build(BuildContext context) {
-    late final _ratingController;
-    double _rating = 4;
-
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
@@ -35,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF14cd84)),
                       ),
-                      onTap: () => {edit()},
+                      onTap: () => {_profileController.edit()},
                     ),
                   ),
                 ),
@@ -71,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 RatingBar(
-                  initialRating: _rating,
+                  initialRating: _profileController.rating,
                   direction: Axis.horizontal,
                   ignoreGestures: true,
                   allowHalfRating: true,
@@ -87,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  '$_rating Avaliações',
+                  '${_profileController.rating} Avaliações',
                   style: const TextStyle(fontSize: 15),
                 ),
                 const SizedBox(height: 10),
@@ -98,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
                 const SizedBox(height: 25),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +142,7 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const FootBar(),
+      bottomNavigationBar: const FootBar(initialIndex: 2),
     );
   }
 }
