@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/modules/login/presentation/controllers/login_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_button.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
@@ -12,15 +13,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
+  late final LoginController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Modular.get<LoginController>();
+  }
 
   void sign() {
     Modular.to.navigate('home');
-  }
-
-  void register() {
-    Modular.to.navigate('register_data');
   }
 
   @override
@@ -36,23 +38,23 @@ class _LoginPageState extends State<LoginPage> {
                 const AppBanner(title: 'Entrar'),
                 const SizedBox(height: 100),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: controller.userNameController,
                   hintText: 'Usuário',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: passwordController,
+                  controller: controller.passwordController,
                   hintText: 'Senha',
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Esqueceu sua senha?',
                         style:
                             TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
@@ -64,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomButton(
                   hintText: 'Entrar',
                   color: '14cd84',
-                  onTap: () => {sign()},
+                  onTap: () => {controller.login()},
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         style:
                             TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
                       ),
-                      onTap: () => {register()},
+                      onTap: () => {controller.register()},
                     ),
                   ],
                 ),
