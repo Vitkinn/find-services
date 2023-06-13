@@ -1,3 +1,4 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_evaluation_model.dart';
@@ -10,6 +11,7 @@ class UserProfileDatasource extends IUserProfileDatasource {
 
   @override
   Future<UserProfileModel> loadUserProfile(String userId) async {
+    restClient = Modular.get<RestClient>();
     final resutl = await restClient.get('/api/user/${userId.toString()}');
     return UserProfileModel.fromMap(resutl.data);
   }

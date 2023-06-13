@@ -163,8 +163,7 @@ class DioRestClient implements RestClient {
     }
   }
 
-  Future<RestClientResponse<T>> _dioResponseConverter<T>(
-      Response<dynamic> response) async {
+  Future<RestClientResponse<T>> _dioResponseConverter<T>(Response<dynamic> response) async {
     return RestClientResponse<T>(
       data: response.data,
       statusCode: response.statusCode,

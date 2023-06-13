@@ -6,8 +6,7 @@ class AuthInterceptor extends Interceptor {
 
   late final IAuthController _authController;
 
-  AuthInterceptor({required IAuthController authController})
-      : _authController = authController;
+  AuthInterceptor({required IAuthController authController}) : _authController = authController;
 
   @override
   void onRequest(
@@ -18,7 +17,7 @@ class AuthInterceptor extends Interceptor {
       options.headers.remove(BARRER);
       return;
     } else {
-      options.headers['barrer'] = _authController.getToken();
+      options.headers.addAll({'Authorization': 'Bearer ${_authController.getToken()}'});
     }
     handler.next(options);
   }
