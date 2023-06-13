@@ -2,27 +2,27 @@ import 'package:tcc_frontend/src/modules/login/domain/entities/login_entity.dart
 
 class LoginModel extends LoginEntity {
   LoginModel({
-    required super.login,
+    required super.username,
     required super.password,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      "login": login,
+      "username": username,
       "password": password,
     };
   }
 
   static LoginModel fromMap(Map<String, dynamic> map) {
     return LoginModel(
-      login: map["login"],
+      username: map["username"],
       password: map["password"],
     );
   }
 
   static LoginModel fromEntity(LoginEntity entity) {
     return LoginModel(
-      login: entity.login,
+      username: entity.username,
       password: entity.password,
     );
   }

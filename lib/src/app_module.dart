@@ -14,7 +14,7 @@ class AppModule extends Module {
 
   @override
   List<Bind> get binds => [
-        Bind.singleton<RestClient>(
+        Bind.lazySingleton<RestClient>(
             (i) => DioRestClient(authController: i.get())),
       ];
 

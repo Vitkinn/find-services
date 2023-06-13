@@ -21,10 +21,6 @@ class _LoginPageState extends State<LoginPage> {
     controller = Modular.get<LoginController>();
   }
 
-  void sign() {
-    Modular.to.navigate('home');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +35,13 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 100),
                 CustomTextField(
                   controller: controller.userNameController,
+                  requiredField: true,
                   hintText: 'Usuário',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
+                  requiredField: true,
                   controller: controller.passwordController,
                   hintText: 'Senha',
                   obscureText: true,

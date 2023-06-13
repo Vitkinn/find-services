@@ -10,14 +10,19 @@ class LoginController {
 
   LoginController({required this.loginUsecase});
 
-  login() {
+  login() async {
     LoginEntity login = LoginEntity(
-      login: userNameController.text,
+      username: userNameController.text,
       password: passwordController.text,
     );
 
-    loginUsecase.call(login);
-    Modular.to.navigate('home');
+    final loginResutl = await loginUsecase.call(login);
+
+    loginResutl.fold((l) {
+      userNameController.text = '';
+    }, (r) {
+      Modular.to.navigate('home');
+    });
   }
 
   register() {
