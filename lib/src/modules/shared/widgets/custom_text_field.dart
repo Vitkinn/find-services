@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:tcc_frontend/src/modules/shared/utils/validators.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
   final bool requiredField;
+  final String? errorText;
+  final List<Validator> validators;
 
   const CustomTextField({
     super.key,
     this.requiredField = false,
+    this.validators = const [],
+    this.errorText,
     required this.controller,
     required this.hintText,
     required this.obscureText,
@@ -19,8 +24,10 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            for (var validator in getValidators()) {
+            final validators = getValidators();
+            for (Validator validator in validators) {
               var validatorResult = validator.call(value!);
               if (validatorResult != null) {
                 return validatorResult;
@@ -36,20 +43,18 @@ class CustomTextField extends StatelessWidget {
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFF14cd84))),
               fillColor: Colors.grey.shade200,
+              errorText: errorText,
               filled: true,
               hintText: hintText)),
     );
   }
 
-  List getValidators() {
-    final validators = [];
+  List<Validator> getValidators() {
+    List<Validator> defaultValidators = [];
     if (requiredField) {
-      validators.add(requiredField);
+      defaultValidators.add(RequiredValidator());
     }
-    return validators;
-  }
-
-  String? requiredValidator(text) {
-    return text == null || text.isEmpty ? 'O campo é obrigatório' : null;
+    defaultValidators.addAll(validators);
+    return defaultValidators;
   }
 }

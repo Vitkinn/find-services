@@ -4,7 +4,6 @@ import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_evaluation_model.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/repositories/i_user_profile_repository.dart';
-import 'package:uuid/uuid.dart';
 
 class UserProfileRepository extends IUserProfileRepository {
   final IUserProfileDatasource datasource;
@@ -12,7 +11,7 @@ class UserProfileRepository extends IUserProfileRepository {
   UserProfileRepository({required this.datasource});
 
   @override
-  Future<Either<Failure, UserProfileModel>> loadUserProfile(Uuid userId) async {
+  Future<Either<Failure, UserProfileModel>> loadUserProfile(String userId) async {
     try {
       final result = await datasource.loadUserProfile(userId);
 
@@ -26,7 +25,7 @@ class UserProfileRepository extends IUserProfileRepository {
 
   @override
   Future<Either<Failure, ProfileEvaluationModel>> loadProfileEvaluations(
-    Uuid userId,
+    String userId,
   ) async {
     try {
       final result = await datasource.loadProfileEvaluations(userId);

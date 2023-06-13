@@ -26,11 +26,8 @@ class LoginUsecase extends ILoginUsecase {
     Either<Failure, LogedUserModel> result =
         await repository.login(LoginModel.fromEntity(entity));
     return result.fold((l) {
-      print("erro no login");
-      print(l.message);
       return left(l);
     }, (r) {
-      print("sucesso no login");
       authController.login(r);
       return result;
     });

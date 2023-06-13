@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
 
-    _profileController = Modular.get<ProfileController>();
+    _profileController = Modular.get<ProfileController>()..loadProfile();
   }
 
   @override
@@ -39,9 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: const Text(
                         'Editar',
                         style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF14cd84)),
+                            fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF14cd84)),
                       ),
                       onTap: () => {_profileController.edit()},
                     ),
@@ -53,8 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     const CircleAvatar(
                       radius: 75,
-                      backgroundImage:
-                          AssetImage('lib/assets/images/user_icon.png'),
+                      backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
                       backgroundColor: Colors.grey,
                     ),
                     Container(
@@ -106,15 +103,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
                 const SizedBox(height: 25),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
                         radius: 25,
-                        backgroundImage:
-                            AssetImage('lib/assets/images/user_icon.png'),
+                        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
                         backgroundColor: Colors.grey,
                       ),
                       SizedBox(width: 10),

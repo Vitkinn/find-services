@@ -19,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     controller = Modular.get<LoginController>();
+    controller.passwordError.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -28,66 +31,70 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                const AppBanner(title: 'Entrar'),
-                const SizedBox(height: 100),
-                CustomTextField(
-                  controller: controller.userNameController,
-                  requiredField: true,
-                  hintText: 'Usuário',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  requiredField: true,
-                  controller: controller.passwordController,
-                  hintText: 'Senha',
-                  obscureText: true,
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                children: [
+                  const SizedBox(height: 50),
+                  const AppBanner(title: 'Entrar'),
+                  const SizedBox(height: 100),
+                  CustomTextField(
+                    controller: controller.userNameController,
+                    requiredField: true,
+                    hintText: 'Usuário',
+                    obscureText: false,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextField(
+                    requiredField: true,
+                    controller: controller.passwordController,
+                    hintText: 'Senha',
+                    obscureText: true,
+                    errorText: controller.passwordError.value,
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        const Text(
+                          'Esqueceu sua senha?',
+                          style:
+                              TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 100),
+                  CustomButton(
+                    hintText: 'Entrar',
+                    color: '14cd84',
+                    onTap: () => {controller.login()},
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Esqueceu sua senha?',
-                        style:
-                            TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                        'Ainda não tem uma conta?',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        child: const Text(
+                          'Registre-se aqui',
+                          style:
+                              TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                        ),
+                        onTap: () => {controller.register()},
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 100),
-                CustomButton(
-                  hintText: 'Entrar',
-                  color: '14cd84',
-                  onTap: () => {controller.login()},
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Ainda não tem uma conta?',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      child: const Text(
-                        'Registre-se aqui',
-                        style:
-                            TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
-                      ),
-                      onTap: () => {controller.register()},
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

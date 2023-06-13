@@ -11,10 +11,10 @@ import '../rest_client_response.dart';
 class DioRestClient implements RestClient {
   late final Dio _dio;
   final String? baseUrl;
-  // late final IAuthController _authController;
+  late final IAuthController _authController;
 
   BaseOptions _defaultOptions() => BaseOptions(
-        baseUrl: 'http://10.3.16.187:8080',
+        baseUrl: 'http://192.168.0.84:8080',
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         headers: {
@@ -28,10 +28,10 @@ class DioRestClient implements RestClient {
     this.baseUrl,
   }) {
     _dio = Dio(baseOptions ?? _defaultOptions());
-    // _authController = authController;
+    _authController = authController;
     _dio.interceptors.addAll([
       FailureInterceptor(),
-      // AuthInterceptor(authController: _authController),
+      AuthInterceptor(authController: _authController),
     ]);
   }
 

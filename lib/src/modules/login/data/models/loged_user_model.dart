@@ -4,6 +4,7 @@ import '../../domain/entities/role_type.dart';
 
 class LogedUserModel extends LogedUserEntity {
   LogedUserModel({
+    required super.id,
     required super.username,
     required super.role,
     required super.accessToken,
@@ -12,6 +13,7 @@ class LogedUserModel extends LogedUserEntity {
 
   Map<String, dynamic> toMap() {
     return {
+      "id": id,
       "username": username,
       "role": role.toString(),
       "accesstoken": accessToken,
@@ -21,6 +23,7 @@ class LogedUserModel extends LogedUserEntity {
 
   static LogedUserModel fromMap(Map<String, dynamic> map) {
     return LogedUserModel(
+      id: map["id"],
       username: map["login"],
       role: RoleType.valueOf(map["role"]),
       accessToken: map["accessToken"],
@@ -30,6 +33,7 @@ class LogedUserModel extends LogedUserEntity {
 
   static LogedUserModel fromEntity(LogedUserEntity entity) {
     return LogedUserModel(
+      id: entity.id,
       username: entity.username,
       role: entity.role,
       accessToken: entity.accessToken,
