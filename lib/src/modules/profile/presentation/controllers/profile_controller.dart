@@ -5,7 +5,7 @@ import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_profile_us
 
 class ProfileController {
   late final ILoadProfileUsecase _loadProfileUsecase;
-  late final ValueNotifier<UserProfileEntity?> userProfile = ValueNotifier(null);
+  late ValueNotifier<UserProfileEntity?> userProfile;
   late bool isProfileLoading = true;
   late bool isEvaluationsLoading = true;
 
@@ -19,19 +19,38 @@ class ProfileController {
   }
 
   void loadPage() {
+    userProfile = ValueNotifier(null);
     loadProfile();
   }
 
+  String getName(UserProfileEntity? user) {
+    return '${userProfile.value?.name} ${userProfile.value?.lastName}';
+  }
+
   void loadProfile() async {
+    isProfileLoading = true;
     final userProfileRequest = await _loadProfileUsecase.call();
     userProfileRequest.fold((l) {
-      print("Deu errado");
+      isEvaluationsLoading = false;
     }, (r) {
-      print("deu certo");
-      isProfileLoading = false;
       userProfile.value = r;
+      isProfileLoading = false;
     });
   }
 
   void loadEvaluations() async {}
+
+  void dispose() {
+    userProfile.value = null;
+    userProfile.dispose();
+    isEvaluationsLoading = true;
+    isProfileLoading = true;
+  }
+
+  String getPhotoUrl() {
+    if (userProfile.value == null || userProfile.value?.photoUrl == null) {
+      return 'lib/assets/images/user_icon.png';
+    }
+    return userProfile.value!.photoUrl!;
+  }
 }

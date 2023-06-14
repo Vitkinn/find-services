@@ -1,6 +1,5 @@
 import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
-import 'package:uuid/uuid.dart';
 
 class AuthController extends IAuthController {
   LogedUserEntity? currentUser;

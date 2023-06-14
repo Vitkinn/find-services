@@ -14,7 +14,7 @@ class DioRestClient implements RestClient {
   late final IAuthController _authController;
 
   BaseOptions _defaultOptions() => BaseOptions(
-        baseUrl: 'http://192.168.0.84:8080',
+        baseUrl: 'http://172.20.18.214:8080',
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         headers: {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,7 +20,13 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
 
-    _profileController = Modular.get<ProfileController>()..loadProfile();
+    _profileController = Modular.get<ProfileController>()..loadPage();
+  }
+
+  @override
+  void dispose() {
+    _profileController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,6 +57,23 @@ class _ProfilePageState extends State<ProfilePage> {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
+                    Visibility(
+                      visible: !_profileController.isProfileLoading,
+                      replacement: const CircleAvatar(
+                        radius: 75,
+                        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
+                        backgroundColor: Colors.grey,
+                      ),
+                      child: ValueListenableBuilder(
+                          valueListenable: _profileController.userProfile,
+                          builder: (context, value, child) {
+                            return CircleAvatar(
+                              radius: 75,
+                              backgroundImage: AssetImage(_profileController.getPhotoUrl()),
+                              backgroundColor: Colors.grey,
+                            );
+                          }),
+                    ),
                     const CircleAvatar(
                       radius: 75,
                       backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
@@ -68,11 +93,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Nome do Usuário',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                Visibility(
+                  visible: !_profileController.isProfileLoading,
+                  replacement: const CustomShimmer(width: 80, height: 15),
+                  child: ValueListenableBuilder(
+                      valueListenable: _profileController.userProfile,
+                      builder: (context, value, child) {
+                        return Text(
+                          _profileController.getName(value),
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        );
+                      }),
                 ),
                 const SizedBox(height: 20),
                 RatingBar(
@@ -103,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
                 const SizedBox(height: 25),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

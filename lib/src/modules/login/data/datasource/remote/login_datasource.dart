@@ -11,7 +11,11 @@ class LoginDatasource extends ILoginDatasource {
 
   @override
   Future<LogedUserModel> login(LoginModel login) async {
-    final result = await restClient.post('/auth/signin', data: login.toMap());
+    final result = await restClient.post(
+      '/auth/signin',
+      data: login.toMap(),
+      headers: {"Authorization": ""},
+    );
     return LogedUserModel.fromMap(result.data);
   }
 }
