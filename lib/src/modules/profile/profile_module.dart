@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/remote/user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/repositories/user_profile_repository.dart';
+import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_evaluations_usecase.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_profile_usecase.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
@@ -20,8 +21,15 @@ class ProfileModule extends Module {
               repository: i.get(),
               authController: i.get(),
             )),
+        Bind.lazySingleton((i) => LoadCurrentUserEvaluationsUsecase(
+              repository: i.get(),
+              authController: i.get(),
+            )),
         // Controller
-        Bind.lazySingleton((i) => ProfileController(loadProfileUsercase: i.get())),
+        Bind.lazySingleton((i) => ProfileController(
+              loadProfileUsercase: i.get(),
+              loadEvaluationsUsecase: i.get(),
+            )),
         Bind.lazySingleton((i) => ProfileEditController()),
       ];
 

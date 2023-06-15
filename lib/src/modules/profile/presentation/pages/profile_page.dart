@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
@@ -21,11 +21,14 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
 
     _profileController = Modular.get<ProfileController>()..loadPage();
+    _profileController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
-    _profileController.dispose();
+    _profileController.disposePage();
     super.dispose();
   }
 
@@ -57,27 +60,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    Visibility(
-                      visible: !_profileController.isProfileLoading,
-                      replacement: const CircleAvatar(
-                        radius: 75,
-                        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
-                        backgroundColor: Colors.grey,
-                      ),
-                      child: ValueListenableBuilder(
-                          valueListenable: _profileController.userProfile,
-                          builder: (context, value, child) {
-                            return CircleAvatar(
-                              radius: 75,
-                              backgroundImage: AssetImage(_profileController.getPhotoUrl()),
-                              backgroundColor: Colors.grey,
-                            );
-                          }),
-                    ),
-                    const CircleAvatar(
-                      radius: 75,
-                      backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
-                      backgroundColor: Colors.grey,
+                    ImageLoading(
+                      loading: _profileController.isProfileLoading,
+                      getImageWidget: _profileController.getImage,
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -136,35 +121,38 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
                 const SizedBox(height: 25),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
-                        backgroundColor: Colors.grey,
-                      ),
-                      SizedBox(width: 10),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Fulano de tal',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'Ótimo cliente, acompanhou todo o processo do serviço.',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
+                ListView.builder(
+                  itemCount: _profileController.evaluation.evaluations!.length,
+                  itemBuilder: (context, index) {
+                    EvaluationEntity evaluation = _profileController.getEvaluation(index);
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
+                          backgroundColor: Colors.grey,
                         ),
-                      )
-                    ],
-                  ),
+                        SizedBox(width: 10),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _profileController.getName(evaluation.user),
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                _profileController.getEvaluation(index).message!,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
@@ -172,6 +160,36 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       bottomNavigationBar: const FootBar(initialIndex: 2),
+    );
+  }
+}
+
+typedef ImageBuild = ImageProvider Function();
+
+class ImageLoading extends StatelessWidget {
+  final bool loading;
+  final ImageBuild getImageWidget;
+
+  const ImageLoading({
+    super.key,
+    required this.loading,
+    required this.getImageWidget,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: !loading,
+      replacement: const CircleAvatar(
+        radius: 75,
+        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
+        backgroundColor: Colors.grey,
+      ),
+      child: CircleAvatar(
+        radius: 75,
+        backgroundImage: getImageWidget.call(),
+        backgroundColor: Colors.grey,
+      ),
     );
   }
 }
