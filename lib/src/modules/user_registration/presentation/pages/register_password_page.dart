@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/datasource/remote/user_datasource.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/repositories/user_repository.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
+import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
 
 class RegisterPasswordPage extends StatefulWidget {
   const RegisterPasswordPage({super.key});
@@ -13,11 +18,19 @@ class RegisterPasswordPage extends StatefulWidget {
 }
 
 class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  late final NewUserController _newUserController;
+
+  @override
+  void initState() {
+    _newUserController = NewUserController(
+        createUserUsecase: CreateUserUsecase(
+            repository:
+                UserRepository(datasource: UserDatasource(restClient: Modular.get<RestClient>()))));
+    super.initState();
+  }
 
   void advance() {
-    Modular.to.navigate('/register_password');
+    Modular.to.navigate('/');
   }
 
   void cancel() {
@@ -55,7 +68,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                 ),
                 const SizedBox(height: 120),
                 CustomTextField(
-                  controller: passwordController,
+                  controller: _newUserController.passwordController,
                   hintText: 'Informe a sua senha',
                   obscureText: true,
                 ),
@@ -72,7 +85,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                 ),
                 const SizedBox(height: 20),
                 CustomTextField(
-                  controller: confirmPasswordController,
+                  controller: _newUserController.confirmPasswordController,
                   hintText: 'Confirme a sua senha',
                   obscureText: true,
                 ),
@@ -84,8 +97,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
           height: 150,
-          child: SaveCancelButtons(
-              saveText: 'Finalizar', onSaveTap: advance, onCancelTap: cancel)),
+          child: SaveCancelButtons(saveText: 'Finalizar', onSaveTap: advance, onCancelTap: cancel)),
     );
   }
 }

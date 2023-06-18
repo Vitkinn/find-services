@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/datasource/remote/user_datasource.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/repositories/user_repository.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/repositories/i_user_repository.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
+import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
 
 class RegisterDataPage extends StatefulWidget {
   const RegisterDataPage({super.key});
@@ -12,9 +18,18 @@ class RegisterDataPage extends StatefulWidget {
 }
 
 class _RegisterDataPageState extends State<RegisterDataPage> {
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
+  late final NewUserController _newUserController;
   bool _isChecked = false;
+
+  @override
+  void initState() {
+    // _newUserController = Modular.get<NewUserController>();
+    _newUserController = NewUserController(
+        createUserUsecase: CreateUserUsecase(
+            repository:
+                UserRepository(datasource: UserDatasource(restClient: Modular.get<RestClient>()))));
+    super.initState();
+  }
 
   void advance() {
     Modular.to.navigate('/register_photo');
@@ -37,25 +52,25 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                 const AppBanner(title: 'Cadastrar-se'),
                 const SizedBox(height: 50),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: _newUserController.userNameController,
                   hintText: 'Informe seu nome completo',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: _newUserController.emailController,
                   hintText: 'Informe seu e-mail',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: _newUserController.phoneController,
                   hintText: 'Informe seu telefone',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: passwordController,
+                  controller: _newUserController.cpfController,
                   hintText: 'Informe seu CPF',
                   obscureText: false,
                 ),

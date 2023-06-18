@@ -2,7 +2,7 @@ class UserEntity {
   final String? fullname;
   final String? login;
   final String? password;
-  final String? cep;
+  final String? cpf;
   final String? number;
   final String? complement;
   final String? phone;
@@ -11,7 +11,7 @@ class UserEntity {
     this.fullname,
     this.login,
     this.password,
-    this.cep,
+    this.cpf,
     this.number,
     this.complement,
     this.phone,
@@ -21,13 +21,13 @@ class UserEntity {
     String? fullname,
     String? login,
     String? password,
-    String? cep,
+    String? cpf,
     String? number,
     String? complement,
     String? phone,
   }) {
     return UserEntity(
-      cep: cep ?? this.cep,
+      cpf: cpf ?? this.cpf,
       complement: complement ?? this.complement,
       fullname: fullname ?? this.fullname,
       login: login ?? this.login,
