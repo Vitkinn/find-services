@@ -5,6 +5,7 @@ class UserProfileModel extends UserProfileEntity {
     required super.name,
     required super.lastName,
     required super.photoUrl,
+    required super.createAccountDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -12,6 +13,7 @@ class UserProfileModel extends UserProfileEntity {
       "name": name,
       "lastName": lastName,
       "photoUrl": photoUrl,
+      "createAccountDate": createAccountDate,
     };
   }
 
@@ -20,6 +22,7 @@ class UserProfileModel extends UserProfileEntity {
       name: map["name"],
       lastName: map["lastName"],
       photoUrl: map["photoUrl"],
+      createAccountDate: DateTime.parse(map["createAccountDate"]),
     );
   }
 
@@ -28,6 +31,7 @@ class UserProfileModel extends UserProfileEntity {
       name: entity.name,
       lastName: entity.lastName,
       photoUrl: entity.photoUrl,
+      createAccountDate: entity.createAccountDate,
     );
   }
 }

@@ -90,7 +90,11 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
       floatingActionButton: SizedBox(
           height: 150,
           child: SaveCancelButtons(
-              saveText: 'Avançar', onSaveTap: advance, onCancelTap: cancel)),
+            saveText: 'Avançar',
+            cancelText: 'Cancelar',
+            onSaveTap: advance,
+            onCancelTap: cancel,
+          )),
     );
   }
 }

@@ -6,17 +6,18 @@ class ProfileEvaluationModel extends ProfileEvaluationEntity {
     required super.rate,
     required super.quantity,
     required super.evaluations,
+    required super.evaluationDate,
   });
 
   static ProfileEvaluationModel fromMap(Map<String, dynamic> map) {
-    List<Map<String, dynamic>> evaluations = map["evaluations"];
-    List<EvaluationModel> mapedEvaluations = evaluations
-        .map((evaluation) => EvaluationModel.fromMap(evaluation))
-        .toList();
+    List evaluations = map["evaluations"];
+    List<EvaluationModel> mapedEvaluations =
+        evaluations.map((evaluation) => EvaluationModel.fromMap(evaluation)).toList();
 
     return ProfileEvaluationModel(
       rate: map["rate"],
       quantity: map["quantity"],
+      evaluationDate: map["evaluationDate"],
       evaluations: mapedEvaluations,
     );
   }
@@ -25,17 +26,19 @@ class ProfileEvaluationModel extends ProfileEvaluationEntity {
 class EvaluationModel extends EvaluationEntity {
   EvaluationModel({
     required super.rate,
-    required super.message,
+    required super.comment,
     required super.user,
+    required super.evaluationDate,
   });
 
   static EvaluationModel fromMap(Map<String, dynamic> map) {
-    UserProfileModel user = UserProfileModel.fromMap(map["user"]);
+    UserProfileModel user = UserProfileModel.fromMap(map["evaluatorUser"]);
 
     return EvaluationModel(
       rate: map["rate"],
-      message: map["message"],
+      comment: map["comment"],
       user: user,
+      evaluationDate: DateTime.parse(map['evaluationDate']),
     );
   }
 }

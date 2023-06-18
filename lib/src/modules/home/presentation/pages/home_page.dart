@@ -72,8 +72,7 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               width: 75,
                               height: 75,
-                              margin:
-                                  const EdgeInsets.only(left: 20, bottom: 5),
+                              margin: const EdgeInsets.only(left: 20, bottom: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 image: const DecorationImage(
@@ -139,8 +138,7 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               width: 75,
                               height: 75,
-                              margin:
-                                  const EdgeInsets.only(left: 20, bottom: 5),
+                              margin: const EdgeInsets.only(left: 20, bottom: 5),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -220,14 +218,19 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 252,
+                                Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Prestador $index',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
                                       ),
                                       const Text(
                                         'Informações sobre o prestador deverão constar aqui.',
@@ -235,7 +238,6 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                                const Spacer(),
                                 const Icon(Icons.star_border),
                               ],
                             ),

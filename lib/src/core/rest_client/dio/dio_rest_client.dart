@@ -15,8 +15,8 @@ class DioRestClient implements RestClient {
 
   BaseOptions _defaultOptions() => BaseOptions(
         baseUrl: 'http://192.168.0.84:8080',
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 60),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json; charset=utf-8",
         },

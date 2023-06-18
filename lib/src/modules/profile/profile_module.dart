@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
+import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/remote/user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/repositories/user_profile_repository.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_evaluations_usecase.dart';
@@ -13,7 +14,8 @@ class ProfileModule extends Module {
   @override
   List<Bind> get binds => [
         // Datasource
-        Bind.lazySingleton((i) => UserProfileDatasource(restClient: i.get<RestClient>())),
+        Bind.lazySingleton<IUserProfileDatasource>(
+            (i) => UserProfileDatasource(restClient: i.get<RestClient>())),
         // Repository
         Bind.lazySingleton((i) => UserProfileRepository(datasource: i.get())),
         // Usecase
