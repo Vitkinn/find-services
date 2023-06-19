@@ -28,8 +28,7 @@ abstract class Failure extends DioError {
 
     String? message;
 
-    if (dioError.response?.data is Map &&
-        dioError.response?.data["description"] != null) {
+    if (dioError.response?.data is Map && dioError.response?.data["description"] != null) {
       message = dioError.response?.data["description"];
     } else {
       try {
@@ -41,12 +40,9 @@ abstract class Failure extends DioError {
 
     if (data != null && data.containsKey('message')) {
       message = data['message'];
-    } else if (message == null &&
-        dioError.message != null &&
-        dioError.message!.isNotEmpty) {
+    } else if (message == null && dioError.message != null && dioError.message!.isNotEmpty) {
       message = dioError.message;
-    } else if (message == null &&
-        dioError.response?.statusMessage?.isNotEmpty == true) {
+    } else if (message == null && dioError.response?.statusMessage?.isNotEmpty == true) {
       message = dioError.response!.statusMessage;
     }
 
@@ -79,10 +75,7 @@ class ServerFailure extends Failure {
 
 class UnhandledFailure extends Failure {
   UnhandledFailure({String? message, int? code, Object? list})
-      : super(
-            message: message ?? "Ocorreu um erro, verifique.",
-            code: code,
-            list: list);
+      : super(message: message ?? "Ocorreu um erro, verifique.", code: code, list: list);
 }
 
 class NotFoundFailure extends Failure {

@@ -19,8 +19,12 @@ class AuthController extends IAuthController {
   }
 
   @override
+  String getCurrentUserId() {
+    return currentUser!.id!;
+  }
+
+  @override
   bool isAuthenticated() {
-    return currentUser != null &&
-        currentUser!.expiration!.isAfter(DateTime.now());
+    return currentUser != null && currentUser!.expiration!.isAfter(DateTime.now());
   }
 }

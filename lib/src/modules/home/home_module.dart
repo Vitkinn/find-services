@@ -5,9 +5,7 @@ import 'package:tcc_frontend/src/modules/home/presentation/pages/home_page.dart'
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.lazySingleton(
-          (i) => HomeController(),
-        )
+        Bind.lazySingleton((i) => HomeController()),
       ];
 
   @override

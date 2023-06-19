@@ -1,18 +1,18 @@
 class LoginEntity {
-  final String? login;
+  final String? username;
   final String? password;
 
   LoginEntity({
-    this.login,
+    this.username,
     this.password,
   });
 
   LoginEntity copyWith({
-    String? login,
+    String? username,
     String? password,
   }) {
     return LoginEntity(
-      login: login ?? this.login,
+      username: username ?? this.username,
       password: password ?? this.password,
     );
   }

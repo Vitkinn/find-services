@@ -14,15 +14,14 @@ class AppModule extends Module {
 
   @override
   List<Bind> get binds => [
-        Bind.singleton<RestClient>(
-            (i) => DioRestClient(authController: i.get())),
+        Bind.singleton<RestClient>((i) => DioRestClient(authController: i.get())),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ModuleRoute(Modular.initialRoute, module: LoginModule()),
-        ModuleRoute(Modular.initialRoute, module: HomeModule()),
         ModuleRoute(Modular.initialRoute, module: UserModule()),
+        ModuleRoute(Modular.initialRoute, module: HomeModule()),
         ModuleRoute(Modular.initialRoute, module: ProfileModule()),
       ];
 }

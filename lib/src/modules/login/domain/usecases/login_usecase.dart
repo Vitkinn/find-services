@@ -25,9 +25,11 @@ class LoginUsecase extends ILoginUsecase {
   Future<Either<Failure, LogedUserEntity>> call(LoginEntity entity) async {
     Either<Failure, LogedUserModel> result =
         await repository.login(LoginModel.fromEntity(entity));
-    result.fold((l) {}, (r) {
+    return result.fold((l) {
+      return left(l);
+    }, (r) {
       authController.login(r);
+      return result;
     });
-    return result;
   }
 }

@@ -14,9 +14,9 @@ class DioRestClient implements RestClient {
   late final IAuthController _authController;
 
   BaseOptions _defaultOptions() => BaseOptions(
-        baseUrl: 'http://localhost:8080',
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 60),
+        baseUrl: 'http://192.168.0.84:8080',
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json; charset=utf-8",
         },
@@ -31,7 +31,7 @@ class DioRestClient implements RestClient {
     _authController = authController;
     _dio.interceptors.addAll([
       FailureInterceptor(),
-      AuthInterceptor(authController: authController),
+      AuthInterceptor(authController: _authController),
     ]);
   }
 
@@ -163,8 +163,7 @@ class DioRestClient implements RestClient {
     }
   }
 
-  Future<RestClientResponse<T>> _dioResponseConverter<T>(
-      Response<dynamic> response) async {
+  Future<RestClientResponse<T>> _dioResponseConverter<T>(Response<dynamic> response) async {
     return RestClientResponse<T>(
       data: response.data,
       statusCode: response.statusCode,

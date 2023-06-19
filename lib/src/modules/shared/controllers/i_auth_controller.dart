@@ -4,4 +4,5 @@ abstract class IAuthController {
   void login(LogedUserEntity user);
   String? getToken();
   bool isAuthenticated();
+  String getCurrentUserId();
 }

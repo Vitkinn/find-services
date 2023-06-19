@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class FootBar extends StatefulWidget {
-  const FootBar({super.key});
+  final int initialIndex;
+
+  const FootBar({super.key, this.initialIndex = 0});
 
   @override
-  State<FootBar> createState() => _FootBarState();
+  State<FootBar> createState() => _FootBarState(currentindex: initialIndex);
 }
 
 class _FootBarState extends State<FootBar> {
   int _currentIndex = 0;
+
+  _FootBarState({required int currentindex}) : _currentIndex = currentindex;
 
   void _onTabTapped(int index) {
     if (index != _currentIndex) {
