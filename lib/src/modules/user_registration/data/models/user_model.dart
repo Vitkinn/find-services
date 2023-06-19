@@ -2,7 +2,8 @@ import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_
 
 class UserModel extends UserEntity {
   UserModel({
-    required super.fullname,
+    required super.name,
+    required super.lastName,
     required super.login,
     required super.password,
     required super.cpf,
@@ -13,7 +14,8 @@ class UserModel extends UserEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      "fullname": fullname,
+      "name": name,
+      "lastName": lastName,
       "login": login,
       "password": password,
       "cep": cpf,
@@ -25,7 +27,8 @@ class UserModel extends UserEntity {
 
   static UserModel fromMap(Map<String, dynamic> map) {
     return UserModel(
-      fullname: map["fullname"],
+      name: map["name"],
+      lastName: map["lastName"],
       login: map["login"],
       password: map["password"],
       cpf: map["cpf"],
@@ -37,7 +40,8 @@ class UserModel extends UserEntity {
 
   static UserModel fromEntity(UserEntity entity) {
     return UserModel(
-      fullname: entity.fullname,
+      name: entity.name,
+      lastName: entity.lastName,
       login: entity.login,
       password: entity.password,
       cpf: entity.cpf,

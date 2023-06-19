@@ -18,22 +18,26 @@ class UserModule extends Module {
         Bind.lazySingleton<IUserDatasource>((i) => UserDatasource(restClient: i.get<RestClient>()),
             export: true),
         //Repositories
-        Bind.lazySingleton<IUserRepository>(
-            (i) => UserRepository(datasource: i.get<IUserDatasource>()),
+        Bind.lazySingleton<IUserRepository>((i) => UserRepository(datasource: i.get()),
             export: true),
         //Usercases
-        Bind.lazySingleton<ICreateUserUsecase>(
-            (i) => CreateUserUsecase(repository: i.get<IUserRepository>())),
+        Bind.lazySingleton<ICreateUserUsecase>((i) => CreateUserUsecase(repository: i.get())),
         // Controllers
         Bind.lazySingleton<NewUserController>(
-          (i) => NewUserController(createUserUsecase: i.get<ICreateUserUsecase>()),
+          (i) => NewUserController(createUserUsecase: i.get()),
         ),
       ];
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/register_data', child: (context, args) => const RegisterDataPage()),
-        ChildRoute('/register_photo', child: (context, args) => const RegisterPhotoPage()),
-        ChildRoute('/register_password', child: (context, args) => const RegisterPasswordPage()),
+        ChildRoute(
+          '/register_data',
+          child: (context, args) => const RegisterDataPage(),
+          maintainState: false,
+        ),
+        ChildRoute('/register_photo',
+            child: (context, args) => const RegisterPhotoPage(), maintainState: false),
+        ChildRoute('/register_password',
+            child: (context, args) => const RegisterPasswordPage(), maintainState: false),
       ];
 }

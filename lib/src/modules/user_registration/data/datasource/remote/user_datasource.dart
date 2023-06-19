@@ -4,7 +4,7 @@ import 'package:tcc_frontend/src/modules/user_registration/data/models/user_mode
 import '../i_user_datasource.dart';
 
 class UserDatasource extends IUserDatasource {
-  final RestClient restClient;
+  late final RestClient restClient;
 
   UserDatasource({required this.restClient});
 
@@ -23,7 +23,8 @@ class UserDatasource extends IUserDatasource {
       const Duration(seconds: 1),
       () => [
         UserModel(
-          fullname: "David",
+          name: "David",
+          lastName: "H",
           cpf: "48121457",
           complement: "casa",
           login: "david_nine",

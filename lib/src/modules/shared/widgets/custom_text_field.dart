@@ -12,11 +12,11 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     this.requiredField = false,
+    this.obscureText = false,
     this.validators = const [],
     this.errorText,
     required this.controller,
     required this.hintText,
-    required this.obscureText,
   });
 
   @override
@@ -38,10 +38,9 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
-              enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey)),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF14cd84))),
+              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder:
+                  const OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF14cd84))),
               fillColor: Colors.grey.shade200,
               errorText: errorText,
               filled: true,

@@ -13,12 +13,10 @@ class LoginModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton<ILoginDatasource>(
             (i) => LoginDatasource(restClient: i.get<RestClient>())),
-        Bind.lazySingleton<ILoginRepository>(
-            (i) => LoginRepository(datasource: i.get())),
+        Bind.lazySingleton<ILoginRepository>((i) => LoginRepository(datasource: i.get())),
         Bind.lazySingleton<ILoginUsecase>(
             (i) => LoginUsecase(repository: i.get(), authController: i.get())),
-        Bind.lazySingleton<LoginController>(
-            (i) => LoginController(loginUsecase: i.get())),
+        Bind.lazySingleton<LoginController>((i) => LoginController(loginUsecase: i.get())),
       ];
 
   @override
