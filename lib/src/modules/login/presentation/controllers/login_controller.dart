@@ -35,7 +35,7 @@ class LoginController {
   }
 
   register() {
-    Modular.to.navigate('register_data');
+    Modular.to.navigate('/register_data');
   }
 
   bool isValid() {

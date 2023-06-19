@@ -35,7 +35,7 @@ class NewUserController extends ChangeNotifier {
     );
     final result = await createUserUsecase(user);
 
-    result.fold((l) => null, (r) => {});
+    result.fold((l) => null, (r) => {Modular.to.navigate('/')});
   }
 
   void cancel() {

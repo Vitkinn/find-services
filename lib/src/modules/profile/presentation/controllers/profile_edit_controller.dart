@@ -15,8 +15,12 @@ class ProfileEditController {
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
 
+  final GlobalKey<FormState> formState = GlobalKey<FormState>();
+
   void save() {
-    Modular.to.navigate('/profile');
+    if (formState.currentState!.validate()) {
+      Modular.to.navigate('/profile');
+    }
   }
 
   void cancel() {

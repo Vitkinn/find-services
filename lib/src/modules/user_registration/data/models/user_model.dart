@@ -18,7 +18,7 @@ class UserModel extends UserEntity {
       "lastName": lastName,
       "login": login,
       "password": password,
-      "cep": cpf,
+      "cpf": cpf,
       "number": number,
       "complement": complement,
       "phone": phone

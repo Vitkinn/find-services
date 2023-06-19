@@ -15,11 +15,9 @@ class UserModule extends Module {
   @override
   List<Bind> get binds => [
         //Datasources
-        Bind.lazySingleton<IUserDatasource>((i) => UserDatasource(restClient: i.get<RestClient>()),
-            export: true),
+        Bind.lazySingleton<IUserDatasource>((i) => UserDatasource(restClient: i.get<RestClient>())),
         //Repositories
-        Bind.lazySingleton<IUserRepository>((i) => UserRepository(datasource: i.get()),
-            export: true),
+        Bind.lazySingleton<IUserRepository>((i) => UserRepository(datasource: i.get())),
         //Usercases
         Bind.lazySingleton<ICreateUserUsecase>((i) => CreateUserUsecase(repository: i.get())),
         // Controllers
@@ -33,11 +31,14 @@ class UserModule extends Module {
         ChildRoute(
           '/register_data',
           child: (context, args) => const RegisterDataPage(),
-          maintainState: false,
         ),
-        ChildRoute('/register_photo',
-            child: (context, args) => const RegisterPhotoPage(), maintainState: false),
-        ChildRoute('/register_password',
-            child: (context, args) => const RegisterPasswordPage(), maintainState: false),
+        ChildRoute(
+          '/register_photo',
+          child: (context, args) => const RegisterPhotoPage(),
+        ),
+        ChildRoute(
+          '/register_password',
+          child: (context, args) => const RegisterPasswordPage(),
+        ),
       ];
 }

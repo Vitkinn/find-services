@@ -16,19 +16,21 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileController _profileController;
-
   @override
   void initState() {
     super.initState();
 
     _profileController = Modular.get<ProfileController>()..loadPage();
-    _profileController.addListener(() {
-      setState(() {});
-    });
+    _profileController.stateChange.addListener(stateChange);
+  }
+
+  void stateChange() {
+    setState(() {});
   }
 
   @override
   void dispose() {
+    _profileController.stateChange.removeListener(stateChange);
     _profileController.disposePage();
     super.dispose();
   }
@@ -63,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ImageLoading(
                     radius: 75,
                     loading: _profileController.isProfileLoading,
-                    userProfile: _profileController.userProfile.value,
+                    userProfile: _profileController.userProfile,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -82,16 +84,12 @@ class _ProfilePageState extends State<ProfilePage> {
               Visibility(
                 visible: !_profileController.isProfileLoading,
                 replacement: const CustomShimmer(width: 80, height: 15),
-                child: ValueListenableBuilder(
-                    valueListenable: _profileController.userProfile,
-                    builder: (context, value, child) {
-                      return Text(
-                        _profileController.getName(value),
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      );
-                    }),
+                child: Text(
+                  _profileController.getName(_profileController.userProfile),
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               Visibility(
