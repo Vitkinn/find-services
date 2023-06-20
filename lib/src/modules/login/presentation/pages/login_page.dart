@@ -53,11 +53,11 @@ class _LoginPageState extends State<LoginPage> {
                     errorText: controller.passwordError.value,
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
+                      children: [
                         Text(
                           'Esqueceu sua senha?',
                           style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),

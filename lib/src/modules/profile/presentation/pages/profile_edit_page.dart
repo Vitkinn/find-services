@@ -21,6 +21,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     super.initState();
 
     _profileEditController = Modular.get<ProfileEditController>();
+    _profileEditController.loadUserData();
   }
 
   @override
@@ -43,8 +44,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         padding: EdgeInsets.symmetric(horizontal: 25.0),
                         child: Text(
                           'Básico',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -56,8 +56,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   children: [
                     const CircleAvatar(
                       radius: 75,
-                      backgroundImage:
-                          AssetImage('lib/assets/images/user_icon.png'),
+                      backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
                       backgroundColor: Colors.grey,
                     ),
                     Container(
@@ -76,7 +75,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 const SizedBox(height: 20),
                 CustomTextField(
                   controller: _profileEditController.userNameController,
-                  hintText: 'Nome completo',
+                  hintText: 'Nome',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _profileEditController.lastNameController,
+                  hintText: 'Sobrenome',
                   obscureText: false,
                 ),
                 const SizedBox(height: 10),
@@ -87,7 +92,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: _profileEditController.cellPhoneController,
+                  controller: _profileEditController.phoneController,
                   hintText: 'Telefone',
                   obscureText: false,
                 ),
@@ -109,8 +114,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     padding: EdgeInsets.symmetric(horizontal: 25.0),
                     child: Text(
                       'Endereço',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -177,7 +181,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 onSaveTap: _profileEditController.save,
                 onCancelTap: _profileEditController.cancel,
               ))),
-      bottomNavigationBar: const FootBar(initialIndex: 1),
+      bottomNavigationBar: const FootBar(initialIndex: 2),
     );
   }
 }
