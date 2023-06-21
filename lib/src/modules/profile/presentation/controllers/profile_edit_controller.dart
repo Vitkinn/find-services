@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_current_user_profile.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/update_user_usecase.dart';
 
@@ -24,7 +22,7 @@ class ProfileEditController {
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
 
-  final GlobalKey<FormState> formState = GlobalKey<FormState>();
+  final GlobalKey<FormState> _userFormState = GlobalKey<FormState>();
   final bool _loading = true;
 
   ProfileEditController({
@@ -34,7 +32,7 @@ class ProfileEditController {
         _updateUserUsecase = updateUserUsecase;
 
   void save() async {
-    if (formState.currentState!.validate()) {
+    if (_userFormState.currentState!.validate()) {
       final user = ProfileEditModel(
         name: userNameController.text,
         lastName: lastNameController.text,
@@ -71,4 +69,5 @@ class ProfileEditController {
   }
 
   bool get isLoading => _loading;
+  GlobalKey<FormState> get userFormState => _userFormState;
 }

@@ -23,5 +23,6 @@ class AppModule extends Module {
         ModuleRoute(Modular.initialRoute, module: UserModule()),
         ModuleRoute(Modular.initialRoute, module: HomeModule()),
         ModuleRoute(Modular.initialRoute, module: ProfileModule()),
+        ModuleRoute(Modular.initialRoute, module: SharedModule()),
       ];
 }
