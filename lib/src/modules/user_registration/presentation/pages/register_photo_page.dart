@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
+import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
 
 class RegisterPhotoPage extends StatefulWidget {
   const RegisterPhotoPage({super.key});
@@ -12,24 +13,25 @@ class RegisterPhotoPage extends StatefulWidget {
 }
 
 class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final String _profilePictureUrl = 'lib/assets/images/user_icon.png';
+  late final NewUserController _newUserController;
+  late final String _profilePictureUrl = 'lib/assets/images/user_icon.png';
   String? _selectedOption;
 
-  List<String> _options = [
+  final List<String> _options = [
     '---',
     'Masculino',
     'Feminino',
     'Prefiro não definir',
   ];
 
-  void advance() {
-    Modular.to.navigate('/register_password');
+  @override
+  void initState() {
+    super.initState();
+    _newUserController = Modular.get<NewUserController>();
   }
 
-  void cancel() {
-    Modular.to.navigate('/');
+  void advance() {
+    Modular.to.navigate('/register_password');
   }
 
   @override
@@ -49,7 +51,7 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                     alignment: AlignmentDirectional.centerStart,
                     child: Column(
                       children: [
-                        ReturnButton(onTap: cancel),
+                        ReturnButton(onTap: _newUserController.cancel),
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -93,16 +95,14 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
+                    decoration:
+                        BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
                     child: DropdownButtonFormField(
                       value: _selectedOption,
                       isExpanded: true,
                       decoration: InputDecoration(
                           hintText: 'Selecione o seu sexo',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8))),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
                       items: _options.map((String option) {
                         return DropdownMenuItem(
                           value: option,
@@ -126,7 +126,10 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
       floatingActionButton: SizedBox(
           height: 150,
           child: SaveCancelButtons(
-              saveText: 'Avançar', onSaveTap: advance, onCancelTap: cancel)),
+            saveText: 'Avançar',
+            onSaveTap: advance,
+            onCancelTap: _newUserController.cancel,
+          )),
     );
   }
 }

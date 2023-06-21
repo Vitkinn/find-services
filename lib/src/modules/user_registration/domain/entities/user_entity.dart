@@ -1,35 +1,39 @@
 class UserEntity {
-  final String? fullname;
+  final String? name;
+  final String? lastName;
   final String? login;
   final String? password;
-  final String? cep;
+  final String? cpf;
   final String? number;
   final String? complement;
   final String? phone;
 
   UserEntity({
-    this.fullname,
+    this.name,
+    this.lastName,
     this.login,
     this.password,
-    this.cep,
+    this.cpf,
     this.number,
     this.complement,
     this.phone,
   });
 
   UserEntity copyWith({
-    String? fullname,
+    String? name,
+    String? lastName,
     String? login,
     String? password,
-    String? cep,
+    String? cpf,
     String? number,
     String? complement,
     String? phone,
   }) {
     return UserEntity(
-      cep: cep ?? this.cep,
+      cpf: cpf ?? this.cpf,
       complement: complement ?? this.complement,
-      fullname: fullname ?? this.fullname,
+      name: name ?? this.name,
+      lastName: lastName ?? this.lastName,
       login: login ?? this.login,
       number: number ?? this.number,
       password: password ?? this.password,

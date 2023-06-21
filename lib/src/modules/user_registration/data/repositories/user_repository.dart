@@ -1,12 +1,12 @@
-import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
-import 'package:tcc_frontend/src/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:tcc_frontend/src/core/errors/failure.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/repositories/i_user_repository.dart';
 
 import '../datasource/i_user_datasource.dart';
 
 class UserRepository extends IUserRepository {
-  final IUserDatasource datasource;
+  late final IUserDatasource datasource;
 
   UserRepository({required this.datasource});
 

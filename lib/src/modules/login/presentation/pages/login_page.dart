@@ -53,11 +53,11 @@ class _LoginPageState extends State<LoginPage> {
                     errorText: controller.passwordError.value,
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
+                      children: [
                         Text(
                           'Esqueceu sua senha?',
                           style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
@@ -65,37 +65,43 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 100),
-                  CustomButton(
-                    hintText: 'Entrar',
-                    color: '14cd84',
-                    onTap: () => {controller.login()},
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Ainda não tem uma conta?',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        child: const Text(
-                          'Registre-se aqui',
-                          style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
-                        ),
-                        onTap: () => {controller.register()},
-                      ),
-                    ],
-                  ),
+                  const SizedBox(height: 90),
                 ],
               ),
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CustomButton(
+            hintText: 'Entrar',
+            color: '14cd84',
+            onTap: () => {controller.login()},
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Ainda não tem uma conta?',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(width: 10),
+              GestureDetector(
+                child: const Text(
+                  'Registre-se aqui',
+                  style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                ),
+                onTap: () => {controller.register()},
+              ),
+            ],
+          ),
+          const SizedBox(height: 15.0)
+        ],
       ),
     );
   }

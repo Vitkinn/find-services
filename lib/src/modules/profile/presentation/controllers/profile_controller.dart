@@ -6,13 +6,14 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_en
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_evaluations_usecase.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_profile_usecase.dart';
 
-class ProfileController extends ChangeNotifier {
+class ProfileController {
   late final ILoadProfileUsecase _loadProfileUsecase;
   late final ILoadCurrentUserEvaluationsUsecase _loadEvaluationsUsecase;
-  late final ValueNotifier<UserProfileEntity?> _userProfile;
+  late UserProfileEntity? _userProfile;
   late ProfileEvaluationEntity _evaluation;
   late bool _isProfileLoading = true;
   late bool _isEvaluationsLoading = true;
+  late ValueNotifier<void> stateChange = ValueNotifier(null);
 
   bool get isProfileLoading => _isProfileLoading;
   bool get isEvaluationsLoading => _isEvaluationsLoading;
@@ -26,14 +27,14 @@ class ProfileController extends ChangeNotifier {
   double rating = 4;
 
   ProfileEvaluationEntity get evaluation => _evaluation;
-  ValueNotifier<UserProfileEntity?> get userProfile => _userProfile;
+  UserProfileEntity? get userProfile => _userProfile;
 
   void edit() {
     Modular.to.navigate('/profile_edit');
   }
 
   void loadPage() {
-    _userProfile = ValueNotifier(null);
+    _userProfile = UserProfileEntity();
     _evaluation = ProfileEvaluationEntity(evaluations: []);
     loadProfile();
     loadEvaluations();
@@ -48,11 +49,11 @@ class ProfileController extends ChangeNotifier {
     final userProfileRequest = await _loadProfileUsecase.call();
     userProfileRequest.fold((l) {
       _isProfileLoading = false;
-      notifyListeners();
+      stateChange.notifyListeners();
     }, (r) {
-      _userProfile.value = r;
+      _userProfile = r;
       _isProfileLoading = false;
-      notifyListeners();
+      stateChange.notifyListeners();
     });
   }
 
@@ -62,17 +63,16 @@ class ProfileController extends ChangeNotifier {
 
     loadEvaluationsReq.fold((l) {
       _isEvaluationsLoading = false;
-      notifyListeners();
+      stateChange.notifyListeners();
     }, (r) {
       _evaluation = r;
       _isEvaluationsLoading = false;
-      notifyListeners();
+      stateChange.notifyListeners();
     });
   }
 
   void disposePage() {
-    _userProfile.value = null;
-    _userProfile.dispose();
+    _userProfile = null;
     _evaluation = ProfileEvaluationEntity(evaluations: []);
     _isEvaluationsLoading = true;
     _isProfileLoading = true;
@@ -87,9 +87,9 @@ class ProfileController extends ChangeNotifier {
   }
 
   String getCreateAccountDate() {
-    if (_userProfile.value != null) {
+    if (_userProfile?.createAccountDate != null) {
       final DateFormat formatter = DateFormat('dd/MM/yyyy');
-      return formatter.format(_userProfile.value!.createAccountDate!);
+      return formatter.format(_userProfile!.createAccountDate!);
     }
     return '';
   }

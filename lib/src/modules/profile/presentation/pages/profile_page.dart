@@ -16,19 +16,21 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileController _profileController;
-
   @override
   void initState() {
     super.initState();
 
     _profileController = Modular.get<ProfileController>()..loadPage();
-    _profileController.addListener(() {
-      setState(() {});
-    });
+    _profileController.stateChange.addListener(stateChange);
+  }
+
+  void stateChange() {
+    setState(() {});
   }
 
   @override
   void dispose() {
+    _profileController.stateChange.removeListener(stateChange);
     _profileController.disposePage();
     super.dispose();
   }
@@ -37,104 +39,101 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: Center(
-        child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    child: const Text(
-                      'Editar',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF14cd84)),
+      body: SingleChildScrollView(
+        child: Center(
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: GestureDetector(
+                      child: const Text(
+                        'Editar',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF14cd84)),
+                      ),
+                      onTap: () => {_profileController.edit()},
                     ),
-                    onTap: () => {_profileController.edit()},
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  ImageLoading(
-                    radius: 75,
-                    loading: _profileController.isProfileLoading,
-                    userProfile: _profileController.userProfile.value,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius: BorderRadius.circular(75),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.camera_alt),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Visibility(
-                visible: !_profileController.isProfileLoading,
-                replacement: const CustomShimmer(width: 80, height: 15),
-                child: ValueListenableBuilder(
-                    valueListenable: _profileController.userProfile,
-                    builder: (context, value, child) {
-                      return Text(
-                        _profileController.getName(value),
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      );
-                    }),
-              ),
-              const SizedBox(height: 20),
-              Visibility(
-                visible: !_profileController.isEvaluationsLoading,
-                replacement: Container(),
-                child: Column(
+                const SizedBox(height: 10),
+                Stack(
+                  alignment: Alignment.bottomRight,
                   children: [
-                    RatingBar(
-                      initialRating: _profileController.getUserRating(),
-                      direction: Axis.horizontal,
-                      ignoreGestures: true,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      ratingWidget: RatingWidget(
-                        full: Image.asset('lib/assets/images/star.png'),
-                        half: Image.asset('lib/assets/images/star_half.png'),
-                        empty: Image.asset('lib/assets/images/star_border.png'),
-                      ),
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      onRatingUpdate: (rating) {},
-                      itemSize: 25,
+                    ImageLoading(
+                      radius: 75,
+                      loading: _profileController.isProfileLoading,
+                      userProfile: _profileController.userProfile,
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      '${_profileController.evaluation.quantity} Avaliações',
-                      style: const TextStyle(fontSize: 15),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(75),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.camera_alt),
+                        color: Colors.white,
+                        onPressed: () {},
+                      ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              TextVisible(
-                visible: !_profileController.isProfileLoading,
-                text: 'Na plataforma desde ${_profileController.getCreateAccountDate()}',
-              ),
-              const SizedBox(height: 50),
-              const Text('Comentários', style: TextStyle(fontSize: 25)),
-              const SizedBox(height: 25),
-              Visibility(
-                visible: !_profileController.isEvaluationsLoading,
-                replacement: const Center(child: CircularProgressIndicator()),
-                child: Expanded(
+                const SizedBox(height: 20),
+                Visibility(
+                  visible: !_profileController.isProfileLoading,
+                  replacement: const CustomShimmer(width: 80, height: 15),
+                  child: Text(
+                    _profileController.getName(_profileController.userProfile),
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Visibility(
+                  visible: !_profileController.isEvaluationsLoading,
+                  replacement: Container(),
+                  child: Column(
+                    children: [
+                      RatingBar(
+                        initialRating: _profileController.getUserRating(),
+                        direction: Axis.horizontal,
+                        ignoreGestures: true,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        ratingWidget: RatingWidget(
+                          full: Image.asset('lib/assets/images/star.png'),
+                          half: Image.asset('lib/assets/images/star_half.png'),
+                          empty: Image.asset('lib/assets/images/star_border.png'),
+                        ),
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        onRatingUpdate: (rating) {},
+                        itemSize: 25,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        '${_profileController.evaluation.quantity} Avaliações',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextVisible(
+                  visible: !_profileController.isProfileLoading,
+                  text: 'Na plataforma desde ${_profileController.getCreateAccountDate()}',
+                ),
+                const SizedBox(height: 50),
+                const Text('Comentários', style: TextStyle(fontSize: 25)),
+                const SizedBox(height: 25),
+                Visibility(
+                  visible: !_profileController.isEvaluationsLoading,
+                  replacement: const Center(child: CircularProgressIndicator()),
                   child: ListView.builder(
+                    shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: _profileController.getEvaluationsSize(),
                     itemBuilder: (context, index) {
@@ -184,8 +183,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

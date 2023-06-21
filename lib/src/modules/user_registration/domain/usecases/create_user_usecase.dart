@@ -10,7 +10,7 @@ abstract class ICreateUserUsecase {
 }
 
 class CreateUserUsecase extends ICreateUserUsecase {
-  final IUserRepository repository;
+  late final IUserRepository repository;
 
   CreateUserUsecase({required this.repository});
 
