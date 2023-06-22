@@ -99,6 +99,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.blue,
                           ),
                         ),
+                        onTap: () => {Modular.to.navigate('/categories')},
                       )
                     ],
                   ),

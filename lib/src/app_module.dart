@@ -5,6 +5,7 @@ import 'package:tcc_frontend/src/modules/home/home_module.dart';
 import 'package:tcc_frontend/src/modules/profile/profile_module.dart';
 import 'package:tcc_frontend/src/modules/shared/shared_module.dart';
 import 'package:tcc_frontend/src/modules/user_registration/user_module.dart';
+import 'package:tcc_frontend/src/modules/categories/categories_module.dart';
 
 import 'modules/login/login_module.dart';
 
@@ -14,7 +15,8 @@ class AppModule extends Module {
 
   @override
   List<Bind> get binds => [
-        Bind.singleton<RestClient>((i) => DioRestClient(authController: i.get())),
+        Bind.singleton<RestClient>(
+            (i) => DioRestClient(authController: i.get())),
       ];
 
   @override
@@ -24,5 +26,6 @@ class AppModule extends Module {
         ModuleRoute(Modular.initialRoute, module: HomeModule()),
         ModuleRoute(Modular.initialRoute, module: ProfileModule()),
         ModuleRoute(Modular.initialRoute, module: SharedModule()),
+        ModuleRoute(Modular.initialRoute, module: CategoriesModule()),
       ];
 }
