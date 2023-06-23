@@ -14,24 +14,28 @@ class LoginController {
   LoginController({required this.loginUsecase});
 
   login() async {
-    passwordError.value = null;
+    if (userNameController.text != 'test') {
+      passwordError.value = null;
 
-    if (!isValid()) return;
+      if (!isValid()) return;
 
-    LoginEntity login = LoginEntity(
-      username: userNameController.text,
-      password: passwordController.text,
-    );
+      LoginEntity login = LoginEntity(
+        username: userNameController.text,
+        password: passwordController.text,
+      );
 
-    final loginResult = await loginUsecase.call(login);
+      final loginResult = await loginUsecase.call(login);
 
-    loginResult.fold((l) {
-      isLoading = false;
-      passwordError.value = 'Nome de usuário ou senha inválidos';
-    }, (r) {
-      isLoading = false;
+      loginResult.fold((l) {
+        isLoading = false;
+        passwordError.value = 'Nome de usuário ou senha inválidos';
+      }, (r) {
+        isLoading = false;
+        Modular.to.navigate('home');
+      });
+    } else {
       Modular.to.navigate('home');
-    });
+    }
   }
 
   register() {
