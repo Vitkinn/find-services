@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
@@ -21,7 +23,8 @@ class ProfileEditController {
   final numberController = TextEditingController();
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
-  String? photo;
+  String? photoUrl;
+  File? _image;
 
   final GlobalKey<FormState> _userFormState = GlobalKey<FormState>();
   final ValueNotifier<bool> _loading = ValueNotifier(true);
@@ -40,10 +43,10 @@ class ProfileEditController {
         cpf: cpfController.text,
         login: emailController.text,
         phone: phoneController.text,
-        photoUrl: null,
+        photoUrl: photoUrl,
       );
 
-      final result = await _updateUserUsecase.call(user);
+      final result = await _updateUserUsecase.call(user, image);
       result.fold((l) => null, (r) {
         Modular.to.navigate('/profile');
       });
@@ -59,6 +62,7 @@ class ProfileEditController {
   }
 
   void loadUserData() async {
+    _loading.value = true;
     final result = await _loadCurrentUserProfileUsecase.call();
     result.fold((l) => null, (r) {
       userNameController.text = r.name!;
@@ -67,7 +71,7 @@ class ProfileEditController {
       emailController.text = r.login!;
       phoneController.text = r.phone!;
       if (r.photoUrl != null) {
-        photo = 'https://storage.googleapis.com${r.photoUrl}';
+        photoUrl = r.photoUrl;
       }
       _loading.value = false;
     });
@@ -75,4 +79,9 @@ class ProfileEditController {
 
   ValueNotifier<bool> get isLoading => _loading;
   GlobalKey<FormState> get userFormState => _userFormState;
+  set image(File? image) {
+    _image = image;
+  }
+
+  File? get image => _image;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';

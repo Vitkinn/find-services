@@ -7,6 +7,7 @@ class UserEntity {
   final String? number;
   final String? complement;
   final String? phone;
+  final String? userPhotoUrl;
 
   UserEntity({
     this.name,
@@ -17,6 +18,7 @@ class UserEntity {
     this.number,
     this.complement,
     this.phone,
+    this.userPhotoUrl,
   });
 
   UserEntity copyWith({
@@ -28,6 +30,7 @@ class UserEntity {
     String? number,
     String? complement,
     String? phone,
+    String? userPhotoUrl,
   }) {
     return UserEntity(
       cpf: cpf ?? this.cpf,
@@ -38,6 +41,7 @@ class UserEntity {
       number: number ?? this.number,
       password: password ?? this.password,
       phone: phone ?? this.phone,
+      userPhotoUrl: userPhotoUrl ?? this.userPhotoUrl,
     );
   }
 }

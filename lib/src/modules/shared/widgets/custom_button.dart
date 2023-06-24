@@ -4,6 +4,7 @@ import 'package:tcc_frontend/src/modules/shared/utils/color_utils.dart';
 class CustomButton extends StatelessWidget {
   final String hintText;
   final String? color;
+  final double padding;
 
   final Function()? onTap;
 
@@ -12,6 +13,7 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     required this.hintText,
     this.color,
+    this.padding = 15,
   });
 
   @override
@@ -19,14 +21,12 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(padding),
         margin: const EdgeInsets.symmetric(horizontal: 25.0),
         decoration: BoxDecoration(
-            color: ColorUtils.getHexadecimalColor(color),
-            borderRadius: BorderRadius.circular(10)),
+            color: ColorUtils.getHexadecimalColor(color), borderRadius: BorderRadius.circular(10)),
         child: Center(
-            child: Text(hintText,
-                style: const TextStyle(color: Colors.white, fontSize: 20))),
+            child: Text(hintText, style: const TextStyle(color: Colors.white, fontSize: 20))),
       ),
     );
   }
