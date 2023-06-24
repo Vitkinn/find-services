@@ -243,7 +243,7 @@ class ImageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((photoUrl != null && loading) || (photoUrl != null && imageFile == null)) {
+    if ((photoUrl == null && loading) || (photoUrl != null && imageFile == null)) {
       return Visibility(
         visible: !loading,
         replacement: CircleAvatar(
