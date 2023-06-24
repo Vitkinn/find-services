@@ -21,9 +21,10 @@ class ProfileEditController {
   final numberController = TextEditingController();
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
+  String? photo;
 
   final GlobalKey<FormState> _userFormState = GlobalKey<FormState>();
-  final bool _loading = true;
+  final ValueNotifier<bool> _loading = ValueNotifier(true);
 
   ProfileEditController({
     required ILoadCurrentUserProfileUsecase loadCurrentUserProfileUsecase,
@@ -65,9 +66,13 @@ class ProfileEditController {
       cpfController.text = r.cpf!;
       emailController.text = r.login!;
       phoneController.text = r.phone!;
+      if (r.photoUrl != null) {
+        photo = 'https://storage.googleapis.com${r.photoUrl}';
+      }
+      _loading.value = false;
     });
   }
 
-  bool get isLoading => _loading;
+  ValueNotifier<bool> get isLoading => _loading;
   GlobalKey<FormState> get userFormState => _userFormState;
 }

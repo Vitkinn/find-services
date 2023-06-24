@@ -22,6 +22,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
     _profileEditController = Modular.get<ProfileEditController>();
     _profileEditController.loadUserData();
+    _profileEditController.isLoading.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -56,10 +59,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      const CircleAvatar(
+                      ImageLoading(
+                        loading: _profileEditController.isLoading.value,
                         radius: 75,
-                        backgroundImage: AssetImage('lib/assets/images/user_icon.png'),
-                        backgroundColor: Colors.grey,
+                        photoUrl: _profileEditController.photo,
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -183,16 +186,52 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           ),
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: Visibility(
-      //     visible: _profileEditController.showSaveCancelButtons(),
-      //     child: SizedBox(
-      //         height: 120,
-      //         child: SaveCancelButtons(
-      //           onSaveTap: _profileEditController.save,
-      //           onCancelTap: _profileEditController.cancel,
-      //         ))),
       bottomNavigationBar: const FootBar(initialIndex: 2),
     );
+  }
+}
+
+typedef ImageBuild = ImageProvider Function(String? photoUrl);
+
+class ImageLoading extends StatelessWidget {
+  final bool loading;
+  final String? photoUrl;
+  final double radius;
+
+  const ImageLoading({
+    super.key,
+    this.photoUrl,
+    required this.radius,
+    required this.loading,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Modular.to.navigate("/profile_edit");
+      },
+      child: Visibility(
+        visible: !loading,
+        replacement: CircleAvatar(
+          radius: radius,
+          backgroundImage: const AssetImage('lib/assets/images/user_icon.png'),
+          backgroundColor: Colors.grey,
+        ),
+        child: CircleAvatar(
+          radius: radius,
+          backgroundImage: getImage(photoUrl),
+          backgroundColor: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  ImageProvider getImage(String? photoUrl) {
+    if (photoUrl != null && photoUrl != "") {
+      var imageUrl = 'https://storage.googleapis.com${photoUrl!}';
+      return NetworkImage(imageUrl);
+    }
+    return const AssetImage('lib/assets/images/user_icon.png');
   }
 }

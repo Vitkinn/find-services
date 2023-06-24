@@ -5,37 +5,36 @@ import 'package:tcc_frontend/src/modules/login/domain/usecases/login_usecase.dar
 
 class LoginController {
   final LoginUsecase loginUsecase;
+  final ValueNotifier<void> notifyPage = ValueNotifier(null);
+  late final ValueNotifier<bool> _isLoading = ValueNotifier(false);
+
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   late ValueNotifier<String?> passwordError = ValueNotifier(null);
   final formKey = GlobalKey<FormState>();
-  late bool isLoading = false;
 
   LoginController({required this.loginUsecase});
 
   login() async {
-    if (userNameController.text != 'test') {
-      passwordError.value = null;
+    passwordError.value = null;
+    _isLoading.value = true;
 
-      if (!isValid()) return;
+    if (!isValid()) return;
 
-      LoginEntity login = LoginEntity(
-        username: userNameController.text,
-        password: passwordController.text,
-      );
+    LoginEntity login = LoginEntity(
+      username: userNameController.text,
+      password: passwordController.text,
+    );
 
-      final loginResult = await loginUsecase.call(login);
+    final loginResult = await loginUsecase.call(login);
 
-      loginResult.fold((l) {
-        isLoading = false;
-        passwordError.value = 'Nome de usuário ou senha inválidos';
-      }, (r) {
-        isLoading = false;
-        Modular.to.navigate('home');
-      });
-    } else {
+    loginResult.fold((l) {
+      _isLoading.value = false;
+      passwordError.value = 'Nome de usuário ou senha inválidos';
+    }, (r) {
+      _isLoading.value = false;
       Modular.to.navigate('home');
-    }
+    });
   }
 
   register() {
@@ -45,4 +44,6 @@ class LoginController {
   bool isValid() {
     return formKey.currentState!.validate();
   }
+
+  ValueNotifier<bool> get isLoading => _isLoading;
 }

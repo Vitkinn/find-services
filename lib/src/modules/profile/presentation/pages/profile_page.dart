@@ -232,24 +232,30 @@ class ImageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: !loading,
-      replacement: CircleAvatar(
-        radius: radius,
-        backgroundImage: const AssetImage('lib/assets/images/user_icon.png'),
-        backgroundColor: Colors.grey,
-      ),
-      child: CircleAvatar(
-        radius: radius,
-        backgroundImage: getImage(userProfile),
-        backgroundColor: Colors.grey,
+    return GestureDetector(
+      onTap: () {
+        Modular.to.navigate("/profile_edit");
+      },
+      child: Visibility(
+        visible: !loading,
+        replacement: CircleAvatar(
+          radius: radius,
+          backgroundImage: const AssetImage('lib/assets/images/user_icon.png'),
+          backgroundColor: Colors.grey,
+        ),
+        child: CircleAvatar(
+          radius: radius,
+          backgroundImage: getImage(userProfile),
+          backgroundColor: Colors.grey,
+        ),
       ),
     );
   }
 
   ImageProvider getImage(UserProfileEntity? userProfileEntity) {
     if (userProfileEntity?.photoUrl != null && userProfileEntity?.photoUrl != "") {
-      return NetworkImage(userProfileEntity!.photoUrl!);
+      var imageUrl = 'https://storage.googleapis.com${userProfileEntity!.photoUrl!}';
+      return NetworkImage(imageUrl);
     }
     return const AssetImage('lib/assets/images/user_icon.png');
   }

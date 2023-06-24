@@ -22,87 +22,106 @@ class _LoginPageState extends State<LoginPage> {
     controller.passwordError.addListener(() {
       setState(() {});
     });
+    controller.isLoading.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Form(
-              key: controller.formKey,
-              child: Column(
-                children: [
-                  const SizedBox(height: 50),
-                  const AppBanner(title: 'Entrar'),
-                  const SizedBox(height: 100),
-                  CustomTextField(
-                    controller: controller.userNameController,
-                    requiredField: true,
-                    hintText: 'Usuário',
-                    obscureText: false,
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    requiredField: true,
-                    controller: controller.passwordController,
-                    hintText: 'Senha',
-                    obscureText: true,
-                    errorText: controller.passwordError.value,
-                  ),
-                  const SizedBox(height: 20),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Esqueceu sua senha?',
-                          style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Colors.grey[100],
+          body: SingleChildScrollView(
+            child: SafeArea(
+              child: Center(
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      const AppBanner(title: 'Entrar'),
+                      const SizedBox(height: 100),
+                      CustomTextField(
+                        controller: controller.userNameController,
+                        requiredField: true,
+                        hintText: 'Usuário',
+                        obscureText: false,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomTextField(
+                        requiredField: true,
+                        controller: controller.passwordController,
+                        hintText: 'Senha',
+                        obscureText: true,
+                        errorText: controller.passwordError.value,
+                      ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Esqueceu sua senha?',
+                              style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 90),
+                    ],
                   ),
-                  const SizedBox(height: 90),
-                ],
+                ),
               ),
             ),
           ),
+          bottomNavigationBar: Visibility(
+            visible: !controller.isLoading.value,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomButton(
+                  hintText: 'Entrar',
+                  color: '14cd84',
+                  onTap: () => {controller.login()},
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Ainda não tem uma conta?',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      child: const Text(
+                        'Registre-se aqui',
+                        style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                      ),
+                      onTap: () => {controller.register()},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15.0)
+              ],
+            ),
+          ),
         ),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CustomButton(
-            hintText: 'Entrar',
-            color: '14cd84',
-            onTap: () => {controller.login()},
+        if (controller.isLoading.value)
+          const Opacity(
+            opacity: 0.8,
+            child: ModalBarrier(dismissible: false, color: Colors.black),
           ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Ainda não tem uma conta?',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              const SizedBox(width: 10),
-              GestureDetector(
-                child: const Text(
-                  'Registre-se aqui',
-                  style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
-                ),
-                onTap: () => {controller.register()},
-              ),
-            ],
+        if (controller.isLoading.value)
+          const Center(
+            child: CircularProgressIndicator(),
           ),
-          const SizedBox(height: 15.0)
-        ],
-      ),
+      ],
     );
   }
 }

@@ -34,4 +34,8 @@ class AuthController extends IAuthController {
     currentUser = null;
     Modular.to.navigate('/');
   }
+
+  LogedUserEntity getCurrentUser() {
+    return currentUser!;
+  }
 }
