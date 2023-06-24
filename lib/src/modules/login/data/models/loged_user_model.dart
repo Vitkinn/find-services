@@ -9,6 +9,8 @@ class LogedUserModel extends LogedUserEntity {
     required super.role,
     required super.accessToken,
     required super.expiration,
+    required super.login,
+    required super.photoUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -18,16 +20,20 @@ class LogedUserModel extends LogedUserEntity {
       "role": role.toString(),
       "accesstoken": accessToken,
       "expiration": expiration,
+      "login": login,
+      "photoUrl": photoUrl,
     };
   }
 
   static LogedUserModel fromMap(Map<String, dynamic> map) {
     return LogedUserModel(
       id: map["id"],
-      username: map["login"],
+      username: map["username"],
+      login: map["login"],
       role: RoleType.valueOf(map["role"]),
       accessToken: map["accessToken"],
       expiration: DateTime.parse(map["expiration"]),
+      photoUrl: map["photoUrl"],
     );
   }
 
@@ -35,9 +41,11 @@ class LogedUserModel extends LogedUserEntity {
     return LogedUserModel(
       id: entity.id,
       username: entity.username,
+      login: entity.login,
       role: entity.role,
       accessToken: entity.accessToken,
       expiration: entity.expiration,
+      photoUrl: entity.photoUrl,
     );
   }
 }

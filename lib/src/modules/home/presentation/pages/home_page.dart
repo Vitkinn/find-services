@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,47 +24,7 @@ class _HomePageState extends State<HomePage> {
         actions: [GestureDetector(child: Icon(Icons.chat))],
         elevation: 0,
       ),
-      drawer: Drawer(
-        width: MediaQuery.of(context).size.width * 70 / 100,
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.asset('lib/assets/images/user_icon.png'),
-              ),
-              accountName: Text('David'),
-              accountEmail: Text('davihildebran@gmail.com'),
-            ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const ListTile(
-                      leading: Icon(Icons.work),
-                      title: Text('Tornar-se um prestador de serviço!'),
-                    ),
-                    GestureDetector(
-                      onTap: () => Modular.to.navigate('/logout'),
-                      child: const ListTile(
-                        leading: Icon(Icons.exit_to_app),
-                        title: Text('Sair'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person_off_rounded),
-              title: Text('Inativar conta'),
-            ),
-          ],
-        ),
-      ),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
