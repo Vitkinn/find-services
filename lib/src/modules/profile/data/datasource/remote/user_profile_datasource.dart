@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_evaluation_model.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/models/image_id_model.dart';
 
 class UserProfileDatasource extends IUserProfileDatasource {
   final RestClient restClient;
@@ -30,5 +34,19 @@ class UserProfileDatasource extends IUserProfileDatasource {
   Future<ProfileEditModel> loadUserEdit() async {
     final result = await restClient.get('/api/user');
     return ProfileEditModel.fromMap(result.data);
+  }
+
+  @override
+  Future<ImageIdModel> uploadPhoto(File photo) async {
+    FormData formData = FormData.fromMap({
+      "image": await MultipartFile.fromFile(photo.path),
+    });
+
+    final response = await restClient.post(
+      '/api/user/uploadPhoto',
+      data: formData,
+      headers: {"Authorization": ""},
+    );
+    return ImageIdModel.fromMap(response.data);
   }
 }

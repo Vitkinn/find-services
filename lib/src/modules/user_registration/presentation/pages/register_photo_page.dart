@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/custom_button.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
 
@@ -28,6 +31,9 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   void initState() {
     super.initState();
     _newUserController = Modular.get<NewUserController>();
+    _newUserController.image.addListener(() {
+      setState(() {});
+    });
   }
 
   void advance() {
@@ -70,10 +76,14 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    CircleAvatar(
-                      radius: 75,
-                      backgroundImage: AssetImage(_profilePictureUrl),
-                      backgroundColor: Colors.grey,
+                    GestureDetector(
+                      onTap: () {
+                        _dialogBuilder(context);
+                      },
+                      child: ImageLoading(
+                        radius: 75,
+                        file: _newUserController.image.value,
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -131,5 +141,84 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
             onCancelTap: _newUserController.cancel,
           )),
     );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            Column(
+              children: [
+                const SizedBox(height: 10),
+                CustomButton(
+                  padding: 5,
+                  onTap: () {
+                    _newUserController
+                        .pickImageFromGallery()
+                        .then((value) => Navigator.pop(context, false));
+                  },
+                  color: '14cd84',
+                  hintText: 'Galeria',
+                ),
+                const SizedBox(height: 10),
+                CustomButton(
+                  padding: 5,
+                  color: '14cd84',
+                  onTap: () {
+                    _newUserController
+                        .pickImageFromCamera()
+                        .then((value) => Navigator.pop(context, false));
+                  },
+                  hintText: 'Câmera',
+                ),
+                const SizedBox(height: 10),
+              ],
+            )
+          ],
+        );
+      },
+    ).then((exit) {
+      if (exit == null) return;
+
+      if (exit) {
+        // user pressed Yes button
+      } else {
+        // user pressed No button
+      }
+    });
+  }
+}
+
+class ImageLoading extends StatelessWidget {
+  final double radius;
+  final File? file;
+
+  const ImageLoading({super.key, this.file, required this.radius});
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: file != null,
+      replacement: CircleAvatar(
+        radius: radius,
+        backgroundImage: const AssetImage('lib/assets/images/user_icon.png'),
+        backgroundColor: Colors.grey,
+      ),
+      child: CircleAvatar(
+        radius: radius,
+        backgroundImage: getImage(),
+        backgroundColor: Colors.grey,
+      ),
+    );
+  }
+
+  ImageProvider getImage() {
+    if (file != null) {
+      return FileImage(file!);
+    }
+    return const AssetImage('lib/assets/images/user_icon.png');
   }
 }

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
 
@@ -20,6 +24,8 @@ class NewUserController extends ChangeNotifier {
   final GlobalKey<FormState> _formRegisterPhoto = GlobalKey<FormState>();
   final GlobalKey<FormState> _formRegisterPassword = GlobalKey<FormState>();
 
+  final ValueNotifier<File?> _image = ValueNotifier(null);
+
   NewUserController({required this.createUserUsecase});
 
   Future<void> create() async {
@@ -33,7 +39,7 @@ class NewUserController extends ChangeNotifier {
       complement: cpfController.text,
       number: cpfController.text,
     );
-    final result = await createUserUsecase(user);
+    final result = await createUserUsecase(user, _image.value);
 
     result.fold((l) => null, (r) => {Modular.to.navigate('/')});
   }
@@ -69,6 +75,26 @@ class NewUserController extends ChangeNotifier {
     return _formRegisterPassword.currentState!.validate();
   }
 
+  Future pickImageFromGallery() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      _image.value = File(image.path);
+    } on PlatformException catch (e) {
+      print('Erro ao carregar a imagem: $e');
+    }
+  }
+
+  Future pickImageFromCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      _image.value = File(image.path);
+    } on PlatformException catch (e) {
+      print('Erro ao carregar a imagem: $e');
+    }
+  }
+
   get nameController => _nameController;
   get lastNameController => _lastNameController;
   get passwordController => _passwordController;
@@ -81,6 +107,8 @@ class NewUserController extends ChangeNotifier {
   get formRegisterPassword => _formRegisterPassword;
   get isTermsChecked => _isTermsChecked;
   get isTermsTouched => _isTermsTouched;
+  ValueNotifier<File?> get image => _image;
+
   set termsChecked(bool? value) {
     _isTermsTouched = true;
     _isTermsChecked = value ?? false;

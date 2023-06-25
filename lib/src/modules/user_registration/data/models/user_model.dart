@@ -10,6 +10,7 @@ class UserModel extends UserEntity {
     required super.number,
     required super.complement,
     required super.phone,
+    required super.userPhotoUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,7 +22,8 @@ class UserModel extends UserEntity {
       "cpf": cpf,
       "number": number,
       "complement": complement,
-      "phone": phone
+      "phone": phone,
+      "userPhotoUrl": userPhotoUrl,
     };
   }
 
@@ -35,6 +37,7 @@ class UserModel extends UserEntity {
       number: map["number"],
       complement: map["complement"],
       phone: map["phone"],
+      userPhotoUrl: map["userPhotoUrl"],
     );
   }
 
@@ -48,6 +51,7 @@ class UserModel extends UserEntity {
       number: entity.number,
       complement: entity.complement,
       phone: entity.phone,
+      userPhotoUrl: entity.userPhotoUrl,
     );
   }
 }

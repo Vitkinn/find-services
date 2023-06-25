@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:tcc_frontend/src/core/errors/failure.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/models/image_id_model.dart';
 import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/repositories/i_user_repository.dart';
 
@@ -27,6 +30,19 @@ class UserRepository extends IUserRepository {
   Future<Either<Failure, List<UserModel>>> listUsers() async {
     try {
       final result = await datasource.listUsers();
+
+      return right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } catch (_) {
+      return Left(UnhandledFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ImageIdModel>> uploadPhoto(File photo) async {
+    try {
+      final result = await datasource.uploadPhoto(photo);
 
       return right(result);
     } on Failure catch (e) {

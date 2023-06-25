@@ -5,6 +5,7 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluat
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -39,12 +40,20 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        title: const Text('FindServices'),
+        actions: [GestureDetector(child: Icon(Icons.chat))],
+        elevation: 0,
+      ),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Center(
           child: SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 35),
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: Padding(
@@ -63,10 +72,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    ImageLoading(
-                      radius: 75,
-                      loading: _profileController.isProfileLoading,
-                      userProfile: _profileController.userProfile,
+                    GestureDetector(
+                      onTap: () {
+                        Modular.to.navigate("/profile_edit");
+                      },
+                      child: ImageLoading(
+                        radius: 75,
+                        loading: _profileController.isProfileLoading,
+                        userProfile: _profileController.userProfile,
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -233,9 +247,6 @@ class ImageLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Modular.to.navigate("/profile_edit");
-      },
       child: Visibility(
         visible: !loading,
         replacement: CircleAvatar(

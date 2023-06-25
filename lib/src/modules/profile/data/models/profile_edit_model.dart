@@ -15,7 +15,7 @@ class ProfileEditModel extends ProfileEditEntity {
       name: map["name"],
       lastName: map["lastName"],
       phone: map["phone"],
-      photoUrl: map["photoUrl"],
+      photoUrl: map["userPhotoUrl"],
       cpf: map["cpf"],
       login: map["login"],
     );
@@ -26,9 +26,20 @@ class ProfileEditModel extends ProfileEditEntity {
       "name": name,
       "lastName": lastName,
       "phone": phone,
-      "photoUrl": photoUrl,
+      "userPhotoUrl": photoUrl,
       "cpf": cpf,
       "login": login,
     };
+  }
+
+  static ProfileEditModel fromEntity(ProfileEditEntity entity) {
+    return ProfileEditModel(
+      name: entity.name,
+      lastName: entity.lastName,
+      login: entity.login,
+      cpf: entity.cpf,
+      phone: entity.phone,
+      photoUrl: entity.photoUrl,
+    );
   }
 }
