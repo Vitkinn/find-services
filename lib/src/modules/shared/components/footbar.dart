@@ -16,24 +16,23 @@ class _FootBarState extends State<FootBar> {
   _FootBarState({required int currentindex}) : _currentIndex = currentindex;
 
   void _onTabTapped(int index) {
-    if (index != _currentIndex) {
-      switch (index) {
-        case 0:
-          Modular.to.navigate('/home');
-          break;
-        case 1:
-          Modular.to.navigate('/profile_edit');
-          break;
-        case 2:
-          Modular.to.navigate('/profile');
-          break;
-        default:
-          Modular.to.navigate('/home');
-          break;
-      }
-      setState(() {
-        _currentIndex = index;
-      });
+    setState(() {
+      _currentIndex = index;
+    });
+
+    switch (_currentIndex) {
+      case 0:
+        Modular.to.navigate('/home');
+        break;
+      case 1:
+        Modular.to.navigate('/categories');
+        break;
+      case 2:
+        Modular.to.navigate('/profile');
+        break;
+      default:
+        Modular.to.navigate('/home');
+        break;
     }
   }
 
@@ -42,20 +41,20 @@ class _FootBarState extends State<FootBar> {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       onTap: _onTabTapped,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: '',
+          label: 'Início',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.list),
+          label: 'Categorias',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.assignment),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: '',
+          label: 'Serviços',
         ),
       ],
     );
