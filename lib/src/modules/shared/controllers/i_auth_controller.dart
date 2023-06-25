@@ -7,4 +7,5 @@ abstract class IAuthController {
   bool isAuthenticated();
   String getCurrentUserId();
   LogedUserEntity getCurrentUser();
+  void toServiceProvider();
 }

@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final bool requiredField;
   final String? errorText;
   final List<Validator> validators;
+  final double? width;
 
   const CustomTextField({
     super.key,
@@ -15,36 +16,40 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.validators = const [],
     this.errorText,
+    this.width,
     required this.controller,
     required this.hintText,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) {
-            final validators = getValidators();
-            for (Validator validator in validators) {
-              var validatorResult = validator.call(value!);
-              if (validatorResult != null) {
-                return validatorResult;
+    return SizedBox(
+      width: width ?? MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) {
+              final validators = getValidators();
+              for (Validator validator in validators) {
+                var validatorResult = validator.call(value!);
+                if (validatorResult != null) {
+                  return validatorResult;
+                }
               }
-            }
-            return null;
-          },
-          controller: controller,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-              focusedBorder:
-                  const OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF14cd84))),
-              fillColor: Colors.grey.shade200,
-              errorText: errorText,
-              filled: true,
-              hintText: hintText)),
+              return null;
+            },
+            controller: controller,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+                enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                focusedBorder:
+                    const OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF14cd84))),
+                fillColor: Colors.grey.shade200,
+                errorText: errorText,
+                filled: true,
+                hintText: hintText)),
+      ),
     );
   }
 

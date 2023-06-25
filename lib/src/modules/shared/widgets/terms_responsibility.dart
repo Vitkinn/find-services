@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class TermsResponsibilityPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +34,13 @@ class TermsResponsibilityPage extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    Modular.to.navigate('/profile_edit', arguments: true);
+                    Modular.to.navigate(
+                      '/profile_edit',
+                      arguments: {
+                        "createServicePrivider": true,
+                        "userId": null,
+                      },
+                    );
                   },
                   child: const Text('Confirmar'),
                 ),

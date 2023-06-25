@@ -20,7 +20,6 @@ class ProfileEditPage extends StatefulWidget {
 class _ProfileEditPageState extends State<ProfileEditPage> {
   late final ProfileEditController _profileEditController;
   late final IImagePickerController _imagePickerController;
-  late bool isServiceProvider = false;
 
   @override
   void initState() {
@@ -29,15 +28,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     _profileEditController = Modular.get<ProfileEditController>();
     _imagePickerController = Modular.get<IImagePickerController>();
 
-    isServiceProvider = (Modular.args.data as bool?) ?? false;
-    _profileEditController.loadUserData(isServiceProvider);
+    _profileEditController
+        .checkServiceProvider(Modular.args.data?['createServicePrivider'] as bool?);
+    _profileEditController.loadUserData();
     _profileEditController.isLoading.addListener(() {
       setState(() {});
     });
-
-    if (isServiceProvider != null) {
-      _profileEditController.isServiceProvider = isServiceProvider;
-    }
   }
 
   @override
@@ -205,7 +201,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       const SizedBox(height: 30),
                       const SizedBox(height: 30),
                       Visibility(
-                        visible: isServiceProvider,
+                        visible: _profileEditController.isServiceProvider,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -238,10 +234,63 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               obscureText: false,
                             ),
                             const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _profileEditController.citiesController,
-                              hintText: 'Cidades',
-                              obscureText: false,
+                            const Align(
+                              alignment: AlignmentDirectional.centerStart,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                child: Text(
+                                  'Cidades de atuação',
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _profileEditController.citiesController.length,
+                              itemBuilder: (context, index) {
+                                var controller = _profileEditController.citiesController[index];
+                                return Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        CustomTextField(
+                                          controller: controller,
+                                          hintText: 'Cidade',
+                                          obscureText: false,
+                                          width: MediaQuery.of(context).size.width * 0.80,
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            child: Icon(Icons.delete_forever),
+                                            onPressed: () {
+                                              setState(() {
+                                                _profileEditController.citiesController
+                                                    .remove(controller);
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 25),
+                              child: ElevatedButton(
+                                child: Icon(Icons.add_box_sharp),
+                                onPressed: () {
+                                  setState(() {
+                                    _profileEditController.citiesController
+                                        .add(TextEditingController());
+                                  });
+                                },
+                              ),
                             ),
                             SizedBox(height: 30),
                           ],

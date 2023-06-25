@@ -4,6 +4,7 @@ import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.da
 import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/image_picker_controller.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/terms_responsibility.dart';
 
 class SharedModule extends Module {
   @override
@@ -19,6 +20,12 @@ class SharedModule extends Module {
           child: (context, args) {
             Modular.get<IAuthController>().logount();
             return const Text('');
+          },
+        ),
+        ChildRoute(
+          '/terms_responsability',
+          child: (context, args) {
+            return TermsResponsibilityPage();
           },
         ),
       ];
