@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
+import 'package:tcc_frontend/src/modules/user_registration/data/models/image_id_model.dart';
 import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
 
 import '../i_user_datasource.dart';
@@ -31,8 +35,23 @@ class UserDatasource extends IUserDatasource {
           number: "547",
           password: "dsandsnvsda",
           phone: "74945471256",
+          userPhotoUrl: "74945471256",
         )
       ],
     );
+  }
+
+  @override
+  Future<ImageIdModel> uploadPhoto(File photo) async {
+    FormData formData = FormData.fromMap({
+      "image": await MultipartFile.fromFile(photo.path),
+    });
+
+    final response = await restClient.post(
+      '/api/user/uploadPhoto',
+      data: formData,
+      headers: {"Authorization": ""},
+    );
+    return ImageIdModel.fromMap(response.data);
   }
 }
