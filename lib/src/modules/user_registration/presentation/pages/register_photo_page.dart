@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
+import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_button.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
@@ -17,6 +18,7 @@ class RegisterPhotoPage extends StatefulWidget {
 
 class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   late final NewUserController _newUserController;
+  late final IImagePickerController _imagePickerController;
   late final String _profilePictureUrl = 'lib/assets/images/user_icon.png';
   String? _selectedOption;
 
@@ -31,6 +33,7 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   void initState() {
     super.initState();
     _newUserController = Modular.get<NewUserController>();
+    _imagePickerController = Modular.get<IImagePickerController>();
     _newUserController.image.addListener(() {
       setState(() {});
     });
@@ -78,7 +81,9 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        _dialogBuilder(context);
+                        _imagePickerController.dialogBuilder(context).then((value) {
+                          _newUserController.image.value = _imagePickerController.image();
+                        });
                       },
                       child: ImageLoading(
                         radius: 75,

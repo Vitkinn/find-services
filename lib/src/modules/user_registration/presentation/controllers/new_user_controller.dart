@@ -19,6 +19,7 @@ class NewUserController extends ChangeNotifier {
   final _cpfController = TextEditingController();
   bool _isTermsChecked = false;
   bool _isTermsTouched = false;
+  final ValueNotifier<bool> loading = ValueNotifier(false);
 
   final GlobalKey<FormState> _formRegisterData = GlobalKey<FormState>();
   final GlobalKey<FormState> _formRegisterPhoto = GlobalKey<FormState>();
@@ -29,6 +30,7 @@ class NewUserController extends ChangeNotifier {
   NewUserController({required this.createUserUsecase});
 
   Future<void> create() async {
+    loading.value = true;
     final user = UserEntity(
       cpf: cpfController.text,
       name: _nameController.text,

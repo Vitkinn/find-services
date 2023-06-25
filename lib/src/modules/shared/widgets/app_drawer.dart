@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
               child: Image.asset('lib/assets/images/user_icon.png'),
             ),
             accountName: Text(user.username!),
-            accountEmail: Text('davihildebran@gmail.com'),
+            accountEmail: Text(user.login!),
           ),
           Expanded(
             child: Align(
