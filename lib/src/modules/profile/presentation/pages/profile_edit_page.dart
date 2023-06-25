@@ -7,7 +7,7 @@ import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 
 class ProfileEditPage extends StatefulWidget {
-  const ProfileEditPage({super.key});
+  const ProfileEditPage({Key? key}) : super(key: key);
 
   @override
   State<ProfileEditPage> createState() => _ProfileEditPageState();
@@ -15,17 +15,23 @@ class ProfileEditPage extends StatefulWidget {
 
 class _ProfileEditPageState extends State<ProfileEditPage> {
   late final ProfileEditController _profileEditController;
+  late bool isServiceProvider = false;
 
   @override
-  void initState() {
-    super.initState();
+void initState() {
+  super.initState();
 
-    _profileEditController = Modular.get<ProfileEditController>();
-    _profileEditController.loadUserData();
+  _profileEditController = Modular.get<ProfileEditController>();
+  isServiceProvider = (Modular.args?.data as bool?) ?? false;
+
+  if (isServiceProvider != null) {
+    _profileEditController.isServiceProvider = isServiceProvider;
+    _profileEditController.loadUserData(isServiceProvider);
     _profileEditController.isLoading.addListener(() {
       setState(() {});
     });
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +54,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 25.0),
                           child: Text(
-                            'Básico',
+                            'Dados Pessoais',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -106,11 +112,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     controller: _profileEditController.cpfController,
                     hintText: 'CPF',
                     obscureText: false,
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Alterar a minha senha',
-                    style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
                   ),
                   const SizedBox(height: 30),
                   const Align(
@@ -173,13 +174,58 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   ),
                   const SizedBox(height: 30),
                   Visibility(
-                      visible: _profileEditController.showSaveCancelButtons(),
-                      child: SizedBox(
-                          height: 120,
-                          child: SaveCancelButtons(
-                            onSaveTap: _profileEditController.save,
-                            onCancelTap: _profileEditController.cancel,
-                          ))),
+                    visible: isServiceProvider,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 25.0),
+                            child: Text(
+                              'Prestador de Serviço',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          controller: _profileEditController.cnpjController,
+                          hintText: 'CNPJ',
+                          obscureText: false,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _profileEditController.categoryController,
+                          hintText: 'Categoria de Serviço',
+                          obscureText: false,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _profileEditController.descriptionController,
+                          hintText: 'Descrição',
+                          obscureText: false,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _profileEditController.citiesController,
+                          hintText: 'Cidades',
+                          obscureText: false,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Visibility(
+                    visible: _profileEditController.showSaveCancelButtons(),
+                    child: SizedBox(
+                      height: 120,
+                      child: SaveCancelButtons(
+                        onSaveTap: _profileEditController.save,
+                        onCancelTap: _profileEditController.cancel,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -199,11 +245,11 @@ class ImageLoading extends StatelessWidget {
   final double radius;
 
   const ImageLoading({
-    super.key,
-    this.photoUrl,
+    Key? key,
+    required this.photoUrl,
     required this.radius,
     required this.loading,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
