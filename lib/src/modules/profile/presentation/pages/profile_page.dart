@@ -5,6 +5,8 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluat
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
@@ -17,11 +19,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileController _profileController;
+  late final IAuthController _authController;
   @override
   void initState() {
     super.initState();
 
     _profileController = Modular.get<ProfileController>()..loadPage();
+    _authController = Modular.get<IAuthController>();
     _profileController.stateChange.addListener(stateChange);
   }
 
@@ -74,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Modular.to.navigate("/profile_edit");
+                        Modular.to.navigate("/profile_edit", arguments: {"userId": null});
                       },
                       child: ImageLoading(
                         radius: 75,

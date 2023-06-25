@@ -42,6 +42,7 @@ class ProfileModule extends Module {
             )),
         Bind.lazySingleton((i) => ProfileEditController(
               loadCurrentUserProfileUsecase: i.get(),
+              authController: i.get(),
               updateUserUsecase: i.get(),
             )),
       ];

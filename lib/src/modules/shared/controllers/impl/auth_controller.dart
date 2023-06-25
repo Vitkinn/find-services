@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
+import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
 
 class AuthController extends IAuthController {
@@ -35,7 +36,13 @@ class AuthController extends IAuthController {
     Modular.to.navigate('/');
   }
 
+  @override
   LogedUserEntity getCurrentUser() {
     return currentUser!;
+  }
+
+  @override
+  void toServiceProvider() {
+    currentUser = currentUser!.copyWith(role: RoleType.serviceProvider);
   }
 }

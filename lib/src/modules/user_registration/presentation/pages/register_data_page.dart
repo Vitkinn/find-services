@@ -133,15 +133,6 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
           ),
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: SizedBox(
-      //     height: 150,
-      //     child: SaveCancelButtons(
-      //       saveText: 'Avançar',
-      //       cancelText: 'Cancelar',
-      //       onSaveTap: _newUserController.registerDataAdvance,
-      //       onCancelTap: _newUserController.cancel,
-      //     )),
     );
   }
 }
