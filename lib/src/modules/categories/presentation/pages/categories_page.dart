@@ -92,7 +92,7 @@ class CategoriesPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const FootBar(),
+      bottomNavigationBar: const FootBar(initialIndex: 1),
     );
   }
 }

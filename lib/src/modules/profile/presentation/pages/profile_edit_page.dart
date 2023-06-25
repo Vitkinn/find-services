@@ -11,7 +11,7 @@ import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 
 class ProfileEditPage extends StatefulWidget {
-  const ProfileEditPage({super.key});
+  const ProfileEditPage({Key? key}) : super(key: key);
 
   @override
   State<ProfileEditPage> createState() => _ProfileEditPageState();
@@ -20,6 +20,7 @@ class ProfileEditPage extends StatefulWidget {
 class _ProfileEditPageState extends State<ProfileEditPage> {
   late final ProfileEditController _profileEditController;
   late final IImagePickerController _imagePickerController;
+  late bool isServiceProvider = false;
 
   @override
   void initState() {
@@ -28,10 +29,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     _profileEditController = Modular.get<ProfileEditController>();
     _imagePickerController = Modular.get<IImagePickerController>();
 
-    _profileEditController.loadUserData();
+    isServiceProvider = (Modular.args.data as bool?) ?? false;
+    _profileEditController.loadUserData(isServiceProvider);
     _profileEditController.isLoading.addListener(() {
       setState(() {});
     });
+
+    if (isServiceProvider != null) {
+      _profileEditController.isServiceProvider = isServiceProvider;
+    }
   }
 
   @override
@@ -143,7 +149,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 25.0),
                           child: Text(
-                            'Endereços',
+                            'Dados Pessoais',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -197,6 +203,50 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         obscureText: false,
                       ),
                       const SizedBox(height: 30),
+                      const SizedBox(height: 30),
+                      Visibility(
+                        visible: isServiceProvider,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Align(
+                              alignment: AlignmentDirectional.centerStart,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                child: Text(
+                                  'Prestador de Serviço',
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            CustomTextField(
+                              controller: _profileEditController.cnpjController,
+                              hintText: 'CNPJ',
+                              obscureText: false,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _profileEditController.categoryController,
+                              hintText: 'Categoria de Serviço',
+                              obscureText: false,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _profileEditController.descriptionController,
+                              hintText: 'Descrição',
+                              obscureText: false,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _profileEditController.citiesController,
+                              hintText: 'Cidades',
+                              obscureText: false,
+                            ),
+                            SizedBox(height: 30),
+                          ],
+                        ),
+                      ),
                       Visibility(
                           visible: _profileEditController.showSaveCancelButtons(),
                           child: SizedBox(
@@ -243,7 +293,9 @@ class ImageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((photoUrl == null && loading) || (photoUrl != null && imageFile == null)) {
+    if ((photoUrl == null && loading) ||
+        (photoUrl != null && imageFile == null) ||
+        (photoUrl == null && imageFile == null)) {
       return Visibility(
         visible: !loading,
         replacement: CircleAvatar(
