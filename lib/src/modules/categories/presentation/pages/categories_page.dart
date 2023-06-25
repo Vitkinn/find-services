@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:tcc_frontend/src/modules/categories/domain/entities/category_entity.dart';
+import 'package:tcc_frontend/src/modules/categories/presentation/controller/categories_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 
-class CategoriesPage extends StatelessWidget {
-  final List<String> categorias = [
-    'Limpeza residencial',
-    'Limpeza de carpetes e estofados',
-    'Limpeza pós-obra',
-    'Limpeza de janelas',
-    'Passar roupas',
-    'Lavagem de roupas',
-    'Cozinhar/refeições caseiras',
-    'Babá ou cuidador de crianças',
-    'Cuidador de idosos',
-    'Passeador de cães',
-    'Limpeza residencial',
-    'Limpeza de carpetes e estofados',
-    'Limpeza pós-obra',
-    'Limpeza de janelas',
-    'Passar roupas',
-    'Lavagem de roupas',
-    'Cozinhar/refeições caseiras',
-    'Babá ou cuidador de crianças',
-    'Cuidador de idosos',
-    'Passeador de cães',
-  ];
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({super.key});
 
-  CategoriesPage({super.key});
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  final CategoriesController _categoriesController = CategoriesController();
+
+  @override
+  void initState() {
+    super.initState();
+    _categoriesController.loadCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,46 +37,61 @@ class CategoriesPage extends StatelessWidget {
           child: Form(
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-                  child: Text(
-                    'Categorias',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                const SizedBox(height: 25),
+                const Text(
+                  'Categorias',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(height: 25),
                 Expanded(
-                  child: GridView.count(
+                  child: ListView.builder(
                     shrinkWrap: true,
-                    crossAxisCount: 2,
-                    padding: const EdgeInsets.all(16.0),
-                    childAspectRatio: 3.0,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
                     physics: const BouncingScrollPhysics(),
-                    children: categorias.map((categoria) {
-                      return GestureDetector(
-                        onTap: () {
-                          print('Categoria selecionada: $categoria');
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(color: Colors.grey),
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('lib/assets/images/banner.jpg'),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Center(
-                            child: Text(
-                              categoria,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 16),
+                    itemCount: _categoriesController.getCategoriesSize(),
+                    itemBuilder: (context, index) {
+                      CategoryEntity category =
+                          _categoriesController.getCategory(index);
+                      return Container(
+                        width: 75,
+                        height: 75,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: _categoriesController
+                                .getCategoryImage(category.name!)
+                                .image,
+                            fit: BoxFit.cover,
+                          ),
+                          border: const Border(
+                            bottom: BorderSide(
+                              color: Colors.white70,
+                              width: 2.0,
                             ),
                           ),
                         ),
+                        child: Stack(
+                          children: [
+                            Opacity(
+                              opacity: 0.5,
+                              child: Container(
+                                color: Colors.black,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                category.description!,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
                       );
-                    }).toList(),
+                    },
                   ),
                 ),
               ],
