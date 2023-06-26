@@ -6,12 +6,10 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_en
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
 class ProfilePage extends StatefulWidget {
-
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
@@ -33,8 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
     if (Modular.args.data?['profilerId'] != null) {
       _userId = Modular.args.data?['profilerId'];
       _profileController.loadPage(_userId!);
-    }
-    else{
+    } else {
       _profileController.loadPage(null);
     }
   }
@@ -45,7 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void dispose() {
-    _profileController.stateChange.removeListener(stateChange);
     _profileController.disposePage();
     super.dispose();
   }
@@ -68,27 +64,27 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               children: [
                 Visibility(
-                    visible: Modular.args.data?['profilerId'] == null,
-                    child: Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: GestureDetector(
-                          child: const Text(
-                            'Editar',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF14cd84),
-                            ),
+                  visible: Modular.args.data?['profilerId'] == null,
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: GestureDetector(
+                        child: const Text(
+                          'Editar',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF14cd84),
                           ),
-                          onTap: () {
-                            _profileController.edit();
-                          },
                         ),
+                        onTap: () {
+                          _profileController.edit();
+                        },
                       ),
                     ),
                   ),
+                ),
                 const SizedBox(height: 10),
                 Stack(
                   alignment: Alignment.bottomRight,
@@ -157,14 +153,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Visibility(
-                    visible: Modular.args.data?['profilerId'] != null,
-                    child: ElevatedButton(
-                      onPressed: _profileController.isProfileLoading ? null : () {
-                        Modular.to.navigate('/form_service');
-                      },
-                      child: const Text('Solicitar'),
-                    ),
+                  visible: Modular.args.data?['profilerId'] != null,
+                  child: ElevatedButton(
+                    onPressed: _profileController.isProfileLoading
+                        ? null
+                        : () {
+                            Modular.to.navigate('/form_service');
+                          },
+                    child: const Text('Solicitar'),
                   ),
+                ),
                 const SizedBox(height: 10),
                 TextVisible(
                   visible: !_profileController.isProfileLoading,
@@ -259,8 +257,6 @@ class TextVisible extends StatelessWidget {
     );
   }
 }
-
-typedef ImageBuild = ImageProvider Function(UserProfileEntity? userProfileEntity);
 
 class ImageLoading extends StatelessWidget {
   final bool loading;

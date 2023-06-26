@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/categories/domain/entities/category_entity.dart';
 import 'package:tcc_frontend/src/modules/categories/presentation/controller/categories_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -49,46 +51,49 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: _categoriesController.getCategoriesSize(),
                     itemBuilder: (context, index) {
-                      CategoryEntity category =
-                          _categoriesController.getCategory(index);
-                      return Container(
-                        width: 75,
-                        height: 75,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: _categoriesController
-                                .getCategoryImage(category.name!)
-                                .image,
-                            fit: BoxFit.cover,
-                          ),
-                          border: const Border(
-                            bottom: BorderSide(
-                              color: Colors.white70,
-                              width: 2.0,
+                      CategoryEntity category = _categoriesController.getCategory(index);
+                      return GestureDetector(
+                        onTap: () {
+                          Modular.to.navigate('/home',
+                              arguments: {"filter": FilterEntity(category: category.name)});
+                        },
+                        child: Container(
+                          width: 75,
+                          height: 75,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: _categoriesController.getCategoryImage(category.name!).image,
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                        ),
-                        child: Stack(
-                          children: [
-                            Opacity(
-                              opacity: 0.5,
-                              child: Container(
-                                color: Colors.black,
+                            border: const Border(
+                              bottom: BorderSide(
+                                color: Colors.white70,
+                                width: 2.0,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                category.description!,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                          ),
+                          child: Stack(
+                            children: [
+                              Opacity(
+                                opacity: 0.5,
+                                child: Container(
+                                  color: Colors.black,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ),
-                          ],
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  category.description!,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
