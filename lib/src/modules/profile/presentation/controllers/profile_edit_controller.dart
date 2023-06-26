@@ -124,7 +124,8 @@ class ProfileEditController {
 
   void checkServiceProvider(bool? data) {
     isServiceProvider = (Modular.args.data?['createServicePrivider'] as bool?) ?? false;
-    if (!isServiceProvider) {}
-    isServiceProvider = _authController.getCurrentUser().role == RoleType.serviceProvider;
+    if (!isServiceProvider) {
+      isServiceProvider = _authController.getCurrentUser().role == RoleType.serviceProvider;
+    }
   }
 }
