@@ -6,7 +6,6 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_en
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
@@ -26,16 +25,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
     _profileController = Modular.get<ProfileController>()..loadPage();
     _authController = Modular.get<IAuthController>();
-    _profileController.stateChange.addListener(stateChange);
-  }
-
-  void stateChange() {
-    setState(() {});
+    _profileController.stateChange.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
-    _profileController.stateChange.removeListener(stateChange);
     _profileController.disposePage();
     super.dispose();
   }
@@ -233,8 +229,6 @@ class TextVisible extends StatelessWidget {
     );
   }
 }
-
-typedef ImageBuild = ImageProvider Function(UserProfileEntity? userProfileEntity);
 
 class ImageLoading extends StatelessWidget {
   final bool loading;

@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/terms_responsibility.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
