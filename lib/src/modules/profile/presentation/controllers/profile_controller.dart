@@ -33,20 +33,20 @@ class ProfileController {
     Modular.to.navigate('/profile_edit');
   }
 
-  void loadPage() {
+  void loadPage(String? id) {
     _userProfile = UserProfileEntity();
     _evaluation = ProfileEvaluationEntity(evaluations: []);
-    loadProfile();
-    loadEvaluations();
+    loadProfile(id);
+    loadEvaluations(id);
   }
-
+  
   String getName(UserProfileEntity? user) {
     return '${user?.name} ${user?.lastName}';
   }
 
-  void loadProfile() async {
+  void loadProfile(String? providerId) async {
     _isProfileLoading = true;
-    final userProfileRequest = await _loadProfileUsecase.call();
+    final userProfileRequest = await _loadProfileUsecase.call(providerId);
     userProfileRequest.fold((l) {
       _isProfileLoading = false;
       stateChange.notifyListeners();
@@ -57,9 +57,9 @@ class ProfileController {
     });
   }
 
-  void loadEvaluations() async {
+  void loadEvaluations(String? providerId) async {
     _isEvaluationsLoading = true;
-    final loadEvaluationsReq = await _loadEvaluationsUsecase.call();
+    final loadEvaluationsReq = await _loadEvaluationsUsecase.call(providerId);
 
     loadEvaluationsReq.fold((l) {
       _isEvaluationsLoading = false;

@@ -5,6 +5,7 @@ import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_contr
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/terms_responsibility.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/form_service.dart';
 
 class SharedModule extends Module {
   @override
@@ -27,6 +28,10 @@ class SharedModule extends Module {
           child: (context, args) {
             return TermsResponsibilityPage();
           },
+        ),
+        ChildRoute(
+          '/form_service',
+          child: (_, args) => FormServicePage(),
         ),
       ];
 }

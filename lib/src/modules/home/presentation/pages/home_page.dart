@@ -3,16 +3,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import '../../../profile/domain/entities/profile_evaluation_entity.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final filterController = TextEditingController();
+  List<bool> isStarredList = List.filled(10, false);
 
   @override
   Widget build(BuildContext context) {
@@ -32,76 +34,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                const SizedBox(height: 20),
                 CustomTextField(
                   controller: filterController,
                   hintText: 'Pesquise por um serviço, prestador, etc...',
                   obscureText: false,
                 ),
-                //
-                // TO-DO Recents ListView
-                //
-                // const SizedBox(height: 30),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                //   child: Row(
-                //     children: [
-                //       const Text(
-                //         'Recentes',
-                //         style: TextStyle(
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //       const Spacer(),
-                //       GestureDetector(
-                //         child: const Text(
-                //           'Mais',
-                //           style: TextStyle(
-                //             fontSize: 18,
-                //             fontWeight: FontWeight.bold,
-                //             color: Colors.blue,
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // SizedBox(
-                //   height: 95,
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 10,
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return Column(
-                //         children: [
-                //           Container(
-                //             width: 75,
-                //             height: 75,
-                //             margin: const EdgeInsets.only(left: 20, bottom: 5),
-                //             decoration: const BoxDecoration(
-                //               shape: BoxShape.circle,
-                //               image: DecorationImage(
-                //                 image: NetworkImage(
-                //                     'https://cdn-icons-png.flaticon.com/512/4436/4436481.png'),
-                //                 fit: BoxFit.cover,
-                //               ),
-                //             ),
-                //           ),
-                //           Container(
-                //             height: 15,
-                //             margin: const EdgeInsets.only(left: 20),
-                //             child: Text(
-                //               'Recente $index',
-                //               textAlign: TextAlign.center,
-                //             ),
-                //           ),
-                //         ],
-                //       );
-                //     },
-                //   ),
-                // ),
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -135,52 +72,67 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: ListView.builder(
+                  child: ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 10,
+                    separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10),
                     itemBuilder: (BuildContext context, int index) {
-                      return Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 75,
-                                height: 75,
-                                margin: const EdgeInsets.only(right: 10),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        'https://cdn-icons-png.flaticon.com/512/4436/4436481.png'),
-                                    fit: BoxFit.cover,
+                      return GestureDetector(
+                        onTap: () {
+                          navigateToProfile('5218459d-2cdb-48bb-8b0c-5426078eeb04');
+                        },
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 75,
+                                  height: 75,
+                                  margin: const EdgeInsets.only(right: 10),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          'https://cdn-icons-png.flaticon.com/512/4436/4436481.png'),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Prestador $index',
-                                      style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Prestador $index',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Text(
-                                      'Informações sobre o prestador deverão constar aqui.',
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        'Informações sobre o prestador deverão constar aqui.',
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const Icon(Icons.star_border),
-                            ],
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isStarredList[index] = !isStarredList[index];
+                                    });
+                                  },
+                                  child: Icon(
+                                    isStarredList[index] ? Icons.star : Icons.star_border,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -195,4 +147,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: const FootBar(),
     );
   }
+}
+
+void navigateToProfile(String id) {
+  Modular.to.navigate('/profile', arguments: {"profilerId": id});
 }
