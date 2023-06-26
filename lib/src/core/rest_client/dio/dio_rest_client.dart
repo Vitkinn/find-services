@@ -14,7 +14,7 @@ class DioRestClient implements RestClient {
   late final IAuthController _authController;
 
   BaseOptions _defaultOptions() => BaseOptions(
-        baseUrl: 'http://192.168.0.84:80',
+        baseUrl: 'http://ec2-3-133-112-6.us-east-2.compute.amazonaws.com:80',
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         headers: {
@@ -163,7 +163,8 @@ class DioRestClient implements RestClient {
     }
   }
 
-  Future<RestClientResponse<T>> _dioResponseConverter<T>(Response<dynamic> response) async {
+  Future<RestClientResponse<T>> _dioResponseConverter<T>(
+      Response<dynamic> response) async {
     return RestClientResponse<T>(
       data: response.data,
       statusCode: response.statusCode,

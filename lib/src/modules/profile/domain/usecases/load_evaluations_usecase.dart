@@ -5,7 +5,7 @@ import 'package:tcc_frontend/src/modules/profile/domain/repositories/i_user_prof
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
 
 abstract class ILoadCurrentUserEvaluationsUsecase {
-  Future<Either<Failure, ProfileEvaluationModel>> call();
+  Future<Either<Failure, ProfileEvaluationModel>> call(String? obj);
 }
 
 class LoadCurrentUserEvaluationsUsecase extends ILoadCurrentUserEvaluationsUsecase {
@@ -18,8 +18,11 @@ class LoadCurrentUserEvaluationsUsecase extends ILoadCurrentUserEvaluationsUseca
   });
 
   @override
-  Future<Either<Failure, ProfileEvaluationModel>> call() async {
+  Future<Either<Failure, ProfileEvaluationModel>> call(String? obj) async {
     String userId = authController.getCurrentUserId();
+    if (obj != null){
+      userId = obj;
+    }
     return repository.loadProfileEvaluations(userId);
   }
 }

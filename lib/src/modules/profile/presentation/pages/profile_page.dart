@@ -10,7 +10,7 @@ import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -19,15 +19,25 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileController _profileController;
   late final IAuthController _authController;
+  String? _userId;
+
   @override
   void initState() {
     super.initState();
-
-    _profileController = Modular.get<ProfileController>()..loadPage();
     _authController = Modular.get<IAuthController>();
-    _profileController.stateChange.addListener(() {
-      setState(() {});
-    });
+    _profileController = Modular.get<ProfileController>();
+    _profileController.stateChange.addListener(stateChange);
+
+    if (Modular.args.data?['profilerId'] != null) {
+      _userId = Modular.args.data?['profilerId'];
+      _profileController.loadPage(_userId!);
+    } else {
+      _profileController.loadPage(null);
+    }
+  }
+
+  void stateChange() {
+    setState(() {});
   }
 
   @override
@@ -53,18 +63,25 @@ class _ProfilePageState extends State<ProfilePage> {
           child: SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 35),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: GestureDetector(
-                      child: const Text(
-                        'Editar',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF14cd84)),
+                Visibility(
+                  visible: Modular.args.data?['profilerId'] == null,
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: GestureDetector(
+                        child: const Text(
+                          'Editar',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF14cd84),
+                          ),
+                        ),
+                        onTap: () {
+                          _profileController.edit();
+                        },
                       ),
-                      onTap: () => {_profileController.edit()},
                     ),
                   ),
                 ),
@@ -135,6 +152,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
+                Visibility(
+                  visible: Modular.args.data?['profilerId'] != null,
+                  child: ElevatedButton(
+                    onPressed: _profileController.isProfileLoading
+                        ? null
+                        : () {
+                            Modular.to.navigate('/form_service');
+                          },
+                    child: const Text('Solicitar'),
+                  ),
+                ),
                 const SizedBox(height: 10),
                 TextVisible(
                   visible: !_profileController.isProfileLoading,
@@ -187,7 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Text(
                                     evaluation.comment!,
                                     style: const TextStyle(fontSize: 14),
-                                  ),
+                                  )
                                 ],
                               ),
                             )
@@ -212,10 +240,10 @@ class TextVisible extends StatelessWidget {
   final String text;
 
   const TextVisible({
-    super.key,
+    Key? key,
     required this.visible,
     required this.text,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -236,11 +264,11 @@ class ImageLoading extends StatelessWidget {
   final double radius;
 
   const ImageLoading({
-    super.key,
-    this.userProfile,
+    Key? key,
     required this.radius,
     required this.loading,
-  });
+    this.userProfile,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

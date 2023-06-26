@@ -5,17 +5,19 @@ import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_cont
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import '../../../profile/domain/entities/profile_evaluation_entity.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   late final HomeController _homeController;
   final filterController = TextEditingController();
+  List<bool> isStarredList = List.filled(10, false);
 
   @override
   void initState() {
@@ -52,76 +54,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                const SizedBox(height: 20),
                 CustomTextField(
                   controller: filterController,
                   hintText: 'Pesquise por um serviço, prestador, etc...',
                   obscureText: false,
                 ),
-                //
-                // TO-DO Recents ListView
-                //
-                // const SizedBox(height: 30),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                //   child: Row(
-                //     children: [
-                //       const Text(
-                //         'Recentes',
-                //         style: TextStyle(
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //       const Spacer(),
-                //       GestureDetector(
-                //         child: const Text(
-                //           'Mais',
-                //           style: TextStyle(
-                //             fontSize: 18,
-                //             fontWeight: FontWeight.bold,
-                //             color: Colors.blue,
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // SizedBox(
-                //   height: 95,
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 10,
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return Column(
-                //         children: [
-                //           Container(
-                //             width: 75,
-                //             height: 75,
-                //             margin: const EdgeInsets.only(left: 20, bottom: 5),
-                //             decoration: const BoxDecoration(
-                //               shape: BoxShape.circle,
-                //               image: DecorationImage(
-                //                 image: NetworkImage(
-                //                     'https://cdn-icons-png.flaticon.com/512/4436/4436481.png'),
-                //                 fit: BoxFit.cover,
-                //               ),
-                //             ),
-                //           ),
-                //           Container(
-                //             height: 15,
-                //             margin: const EdgeInsets.only(left: 20),
-                //             child: Text(
-                //               'Recente $index',
-                //               textAlign: TextAlign.center,
-                //             ),
-                //           ),
-                //         ],
-                //       );
-                //     },
-                //   ),
-                // ),
                 const SizedBox(height: 30),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -147,55 +84,68 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       ServiceProviderModel serviceProvider =
                           _homeController.serviceProviders[index];
-                      return Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              Visibility(
-                                visible: !_homeController.loading.value &&
-                                    serviceProvider.user?.userPhotoUrl != null,
-                                replacement: Container(
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage('lib/assets/images/user_icon.png'),
-                                    ),
-                                  ),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          _homeController.getPhotoUrl(serviceProvider)),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${serviceProvider.user!.name!} ${serviceProvider.user!.lastName}',
-                                      style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
+                      return GestureDetector(
+                        onTap: () {
+                          navigateToProfile(serviceProvider.id!);
+                        },
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                children: [
+                                  Visibility(
+                                    visible: !_homeController.loading.value &&
+                                        serviceProvider.user?.userPhotoUrl != null,
+                                    replacement: Container(
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: AssetImage('lib/assets/images/user_icon.png'),
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              _homeController.getPhotoUrl(serviceProvider)),
+                                        ),
+                                      ),
                                     ),
-                                    Text('${serviceProvider.description}'),
-                                  ],
-                                ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${serviceProvider.user!.name!} ${serviceProvider.user!.lastName}',
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text('${serviceProvider.description}'),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              isStarredList[index] = !isStarredList[index];
+                                            });
+                                          },
+                                          child: Icon(
+                                            isStarredList[index] ? Icons.star : Icons.star_border,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const Icon(Icons.star_border),
-                            ],
-                          ),
-                        ),
+                            )),
                       );
                     },
                   ),
@@ -208,4 +158,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: const FootBar(),
     );
   }
+}
+
+void navigateToProfile(String id) {
+  Modular.to.navigate('/profile', arguments: {"profilerId": id});
 }
