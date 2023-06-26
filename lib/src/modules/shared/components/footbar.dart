@@ -28,10 +28,7 @@ class _FootBarState extends State<FootBar> {
         Modular.to.navigate('/categories');
         break;
       case 2:
-        Modular.to.navigate('/profile');
-        break;
-      default:
-        Modular.to.navigate('/home');
+        Modular.to.navigate('/services');
         break;
     }
   }

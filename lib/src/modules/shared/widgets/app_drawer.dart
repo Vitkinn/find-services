@@ -17,13 +17,18 @@ class AppDrawer extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 70 / 100,
       child: Column(
         children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: ClipRRect(
-              borderRadius: BorderRadius.circular(40),
-              child: Image.asset('lib/assets/images/user_icon.png'),
+          GestureDetector(
+            child: UserAccountsDrawerHeader(
+              currentAccountPicture: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Image.asset('lib/assets/images/user_icon.png'),
+              ),
+              accountName: Text(user.username!),
+              accountEmail: Text(user.login!),
             ),
-            accountName: Text(user.username!),
-            accountEmail: Text(user.login!),
+            onTap: () => {
+              Modular.to.navigate('/profile'),
+            },
           ),
           Expanded(
             child: Align(
@@ -47,14 +52,17 @@ class AppDrawer extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(); // Fechar o diálogo
-                                    Modular.to.navigate('/terms_responsability');
+                                    Navigator.of(context)
+                                        .pop(); // Fechar o diálogo
+                                    Modular.to
+                                        .navigate('/terms_responsability');
                                   },
                                   child: const Text('Ver termos'),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(); // Fechar o diálogo
+                                    Navigator.of(context)
+                                        .pop(); // Fechar o diálogo
                                   },
                                   child: const Text('Fechar'),
                                 ),
