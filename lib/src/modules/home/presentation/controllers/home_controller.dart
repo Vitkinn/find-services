@@ -27,7 +27,14 @@ class HomeController {
   }
 
   String getPhotoUrl(ServiceProviderModel serviceProvider) {
-    String photo = serviceProvider.user!.userPhotoUrl!;
-    return 'https://storage.googleapis.com$photo';
+    if (serviceProvider.user?.userPhotoUrl != null) {
+      String photo = serviceProvider.user!.userPhotoUrl!;
+      return 'https://storage.googleapis.com$photo';
+    }
+    return '';
+  }
+
+  bool hasImage(ServiceProviderModel serviceProvider) {
+    return !loading.value && serviceProvider.user?.userPhotoUrl != null;
   }
 }

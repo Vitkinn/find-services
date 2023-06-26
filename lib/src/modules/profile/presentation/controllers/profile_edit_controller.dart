@@ -36,7 +36,7 @@ class ProfileEditController {
   bool isServiceProvider = false;
 
   final GlobalKey<FormState> _userFormState = GlobalKey<FormState>();
-  final ValueNotifier<bool> _loading = ValueNotifier(true);
+  final ValueNotifier<bool> _loading = ValueNotifier(false);
 
   ProfileEditController({
     required ILoadCurrentUserProfileUsecase loadCurrentUserProfileUsecase,
@@ -68,7 +68,9 @@ class ProfileEditController {
       }
       final result = await _updateUserUsecase.call(user, image);
       result.fold((l) => null, (r) {
-        _authController.toServiceProvider();
+        if (isServiceProvider) {
+          _authController.toServiceProvider();
+        }
         Modular.to.navigate('/profile');
       });
     }
@@ -89,7 +91,9 @@ class ProfileEditController {
   void loadUserData() async {
     _loading.value = true;
     final result = await _loadCurrentUserProfileUsecase.call();
-    result.fold((l) => null, (r) {
+    result.fold((l) {
+      _loading.value = false;
+    }, (r) {
       userNameController.text = r.name!;
       lastNameController.text = r.lastName!;
       cpfController.text = r.cpf!;
@@ -99,12 +103,14 @@ class ProfileEditController {
         photoUrl = r.photoUrl;
       }
       if (r.cnpj != null) {
+        isServiceProvider = true;
         cnpjController.text = r.cnpj!;
         descriptionController.text = r.description!;
         categoryController.text = r.category!;
         citiesController.clear();
-        citiesController
-            .addAll(r.actuationCities!.map((city) => TextEditingController(text: city)));
+        citiesController.addAll(
+          r.actuationCities!.map((city) => TextEditingController(text: city)),
+        );
       }
       _loading.value = false;
     });

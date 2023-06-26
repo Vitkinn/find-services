@@ -15,6 +15,7 @@ class ProfileEditModel extends ProfileEditEntity {
   });
 
   static ProfileEditModel fromMap(Map<String, dynamic> map) {
+    var cities = (map["actuationCities"] as List).map((e) => e as String).toList();
     return ProfileEditModel(
       name: map["name"],
       lastName: map["lastName"],
@@ -25,7 +26,7 @@ class ProfileEditModel extends ProfileEditEntity {
       cnpj: map["cnpj"],
       description: map["description"],
       category: map["category"],
-      actuationCities: map["actuationCities"],
+      actuationCities: cities,
     );
   }
 

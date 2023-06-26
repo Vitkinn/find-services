@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: ListView.builder(
@@ -93,21 +93,28 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               margin: const EdgeInsets.only(bottom: 20),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Visibility(
-                                    visible: !_homeController.loading.value &&
-                                        serviceProvider.user?.userPhotoUrl != null,
+                                    visible: _homeController.hasImage(serviceProvider),
                                     replacement: Container(
+                                      width: 60,
+                                      height: 60,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
+                                        color: Colors.grey,
                                         image: DecorationImage(
                                           image: AssetImage('lib/assets/images/user_icon.png'),
                                         ),
                                       ),
                                     ),
                                     child: Container(
+                                      height: 60,
+                                      width: 60,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
+                                        color: Colors.grey,
                                         image: DecorationImage(
                                           image: NetworkImage(
                                               _homeController.getPhotoUrl(serviceProvider)),
@@ -115,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(width: 10),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,17 +138,17 @@ class _HomePageState extends State<HomePage> {
                                           height: 10,
                                         ),
                                         Text('${serviceProvider.description}'),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isStarredList[index] = !isStarredList[index];
-                                            });
-                                          },
-                                          child: Icon(
-                                            isStarredList[index] ? Icons.star : Icons.star_border,
-                                          ),
-                                        ),
                                       ],
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isStarredList[index] = !isStarredList[index];
+                                      });
+                                    },
+                                    child: Icon(
+                                      isStarredList[index] ? Icons.star : Icons.star_border,
                                     ),
                                   ),
                                 ],
