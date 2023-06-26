@@ -4,7 +4,7 @@ import 'package:tcc_frontend/src/modules/home/data/repositories/home_page_reposi
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_service_providers_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/pages/home_page.dart';
-import 'package:tcc_frontend/src/modules/home/presentation/pages/services_page.dart';
+import 'package:tcc_frontend/src/modules/home/presentation/pages/service_page.dart';
 
 class HomeModule extends Module {
   @override
