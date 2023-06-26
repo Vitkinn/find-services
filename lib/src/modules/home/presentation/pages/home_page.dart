@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                           _homeController.serviceProviders[index];
                       return GestureDetector(
                         onTap: () {
-                          navigateToProfile(serviceProvider.id!);
+                          _homeController.navigateToProfile(serviceProvider.id!);
                         },
                         child: Align(
                             alignment: Alignment.centerLeft,
@@ -127,12 +127,16 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          '${serviceProvider.user!.name!} ${serviceProvider.user!.lastName}',
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '${serviceProvider.user!.name!} ${serviceProvider.user!.lastName}',
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(
                                           height: 10,
@@ -166,8 +170,4 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: const FootBar(),
     );
   }
-}
-
-void navigateToProfile(String id) {
-  Modular.to.navigate('/profile', arguments: {"profilerId": id});
 }
