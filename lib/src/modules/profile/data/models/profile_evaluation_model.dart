@@ -1,7 +1,7 @@
 import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
 
-class ProfileEvaluationModel extends ProfileEvaluationEntity {
+class ProfileEvaluationModel extends ServicesEntity {
   ProfileEvaluationModel({
     required super.rate,
     required super.quantity,
@@ -11,8 +11,9 @@ class ProfileEvaluationModel extends ProfileEvaluationEntity {
 
   static ProfileEvaluationModel fromMap(Map<String, dynamic> map) {
     List evaluations = map["evaluations"];
-    List<EvaluationModel> mapedEvaluations =
-        evaluations.map((evaluation) => EvaluationModel.fromMap(evaluation)).toList();
+    List<EvaluationModel> mapedEvaluations = evaluations
+        .map((evaluation) => EvaluationModel.fromMap(evaluation))
+        .toList();
 
     return ProfileEvaluationModel(
       rate: map["rate"],

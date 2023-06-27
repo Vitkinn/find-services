@@ -8,8 +8,8 @@ class ServicePageDatasource extends IServicesPageDatasource {
   ServicePageDatasource({required this.restClient});
 
   @override
-  Future<List<ServiceModel>> findServiceSolicitations() async {
-    final result = await restClient.post('/api/serviceRequest');
-    return (result.data as List).map((e) => ServiceModel.fromMap(e)).toList();
+  Future<ServicesModel> findServiceSolicitations() async {
+    final result = await restClient.get('/api/serviceRequest');
+    return ServicesModel.fromMap(result.data);
   }
 }

@@ -1,14 +1,23 @@
-import 'package:tcc_frontend/src/modules/home/domain/entities/request_status_type.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 
+class ServicesEntity {
+  final List<ServiceEntity>? services;
+  final List<ServiceEntity>? requests;
+
+  ServicesEntity({
+    this.services,
+    this.requests,
+  });
+}
+
 class ServiceEntity {
-  final int? id;
+  final String? id;
   final String? serviceDescription;
   final double? value;
   final double? clientWishValue;
   final String? title;
   final String? valueJustification;
-  final RequestStatusType? requestStatus;
+  final String? requestStatus;
   final UserProfileEntity? serviceProvider;
   final UserProfileEntity? serviceRequester;
 

@@ -4,7 +4,7 @@ import 'package:tcc_frontend/src/modules/home/data/models/service_list_model.dar
 import 'package:tcc_frontend/src/modules/home/domain/repositories/i_service_page_repository.dart';
 
 abstract class ILoadServicesUsecase {
-  Future<Either<Failure, List<ServiceModel>>> call();
+  Future<Either<Failure, ServicesModel>> call();
 }
 
 class LoadServicesUsecase extends ILoadServicesUsecase {
@@ -15,7 +15,7 @@ class LoadServicesUsecase extends ILoadServicesUsecase {
   });
 
   @override
-  Future<Either<Failure, List<ServiceModel>>> call() async {
+  Future<Either<Failure, ServicesModel>> call() async {
     return repository.findServices();
   }
 }

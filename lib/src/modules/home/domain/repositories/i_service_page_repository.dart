@@ -4,5 +4,5 @@ import 'package:tcc_frontend/src/modules/home/data/models/service_list_model.dar
 import '../../../../core/errors/failure.dart';
 
 abstract class IServicePageRepository {
-  Future<Either<Failure, List<ServiceModel>>> findServices();
+  Future<Either<Failure, ServicesModel>> findServices();
 }

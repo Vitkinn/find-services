@@ -1,32 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/home/data/models/service_list_model.dart';
+import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_services_usecase.dart';
-import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
+import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 
 class ServiceController {
   late final ILoadServicesUsecase _loadServicesUsecase;
-  final ValueNotifier<bool> loading = ValueNotifier(true);
-  final List<ServiceModel> services = [];
+  late final List<ServiceEntity> _myRequests = [];
+  late final List<ServiceEntity> _myServices = [];
+  late ValueNotifier<bool> loading = ValueNotifier(true);
 
   ServiceController({
-    required ILoadServicesUsecase loadServiceUsecase,
-  }) : _loadServicesUsecase = loadServiceUsecase;
+    required ILoadServicesUsecase loadServicesUsecase,
+  }) : _loadServicesUsecase = loadServicesUsecase;
 
-  void loadPage(FilterEntity? filter) async {
+  void loadPage() {
+    _myRequests.clear();
+    _myServices.clear();
     loading.value = true;
-    final result = await _loadServicesUsecase.call();
+    loadProfile();
+  }
 
-    result.fold((l) => null, (r) {
-      services.addAll(r);
+  String getName(UserProfileEntity? user) {
+    return '${user?.name} ${user?.lastName}';
+  }
+
+  void loadProfile() async {
+    final services = await _loadServicesUsecase.call();
+    services.fold((l) {
+      loading.value = false;
+    }, (r) {
+      _myRequests.addAll(r.requests!);
+      _myServices.addAll(r.services!);
       loading.value = false;
     });
   }
 
-  void dispose() {
-    services.clear();
+  int getServicesSize() {
+    return _myServices.length;
   }
 
-  ServiceModel getServices(ServiceModel serviceProvider) {
-    return serviceProvider;
+  int getRequestsSize() {
+    return _myRequests.length;
   }
 }
