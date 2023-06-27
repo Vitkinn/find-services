@@ -1,6 +1,27 @@
 import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
 
+class ServicesModel extends ServicesEntity {
+  ServicesModel({
+    required super.services,
+    required super.requests,
+  });
+
+  static ServicesModel fromMap(Map<String, dynamic> map) {
+    List services = map["myServices"];
+    List<ServiceModel> mapedServices =
+        services.map((service) => ServiceModel.fromMap(service)).toList();
+    List requests = map["myRequests"];
+    List<ServiceModel> mapedRequests =
+        requests.map((request) => ServiceModel.fromMap(request)).toList();
+
+    return ServicesModel(
+      services: mapedServices,
+      requests: mapedRequests,
+    );
+  }
+}
+
 class ServiceModel extends ServiceEntity {
   ServiceModel({
     required super.id,

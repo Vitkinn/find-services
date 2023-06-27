@@ -10,6 +10,8 @@ class HomeController {
   late final GetCategoryByKeyUsecase _getCategoryByKeyUsecase;
   final ValueNotifier<bool> loading = ValueNotifier(true);
   final List<ServiceProviderModel> serviceProviders = [];
+  final filterController = TextEditingController();
+
   FilterEntity? filter;
 
   HomeController({
@@ -19,6 +21,7 @@ class HomeController {
         _getCategoryByKeyUsecase = getCategoryByKeyUsecase;
 
   void loadPage(FilterEntity? filter) async {
+    serviceProviders.clear();
     loading.value = true;
     this.filter = filter;
     final result = await _loadServiceProviderUsecase.call(filter ?? FilterEntity());
@@ -50,10 +53,27 @@ class HomeController {
   }
 
   String? getFilterName() {
-    if (filter != null) {
+    if (filter != null && filter?.category != null) {
       return _getCategoryByKeyUsecase.call(filter!.category!);
     } else {
       return null;
     }
+  }
+
+  void clearCategory() {
+    loadPage(FilterEntity(
+      name: filter?.name,
+      category: null,
+      city: filter?.city,
+    ));
+  }
+
+  void filterByName() {
+    filter = filter != null
+        ? filter!
+            .copyWith(name: filterController.text, category: filter?.category, city: filter?.city)
+        : FilterEntity(name: filterController.text);
+
+    loadPage(filter);
   }
 }

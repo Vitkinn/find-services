@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
@@ -46,7 +45,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
             title: const Text('FindServices'),
-            actions: [GestureDetector(child: Icon(Icons.chat))],
             elevation: 0,
           ),
           drawer: const AppDrawer(),

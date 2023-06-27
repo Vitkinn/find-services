@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/home/data/models/service_provider_list_model.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 
@@ -15,7 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final HomeController _homeController;
-  final filterController = TextEditingController();
   List<bool> isStarredList = List.filled(10, false);
 
   @override
@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         title: const Text('FindServices'),
-        actions: [GestureDetector(child: Icon(Icons.chat))],
         elevation: 0,
       ),
       drawer: const AppDrawer(),
@@ -51,8 +50,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const SizedBox(height: 20),
                   CustomTextField(
-                    controller: filterController,
+                    controller: _homeController.filterController,
                     hintText: 'Pesquise por um serviço, prestador, etc...',
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        _homeController.filterByName();
+                      },
+                    ),
                     obscureText: false,
                   ),
                   const SizedBox(height: 30),
@@ -69,16 +74,28 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Visibility(
-                          visible: _homeController.filter != null,
+                          visible: _homeController.filter != null &&
+                              _homeController.filter!.category != null,
                           child: Container(
+                            height: 36,
                             decoration: BoxDecoration(
-                                color: Colors.green[400], borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                              child: Text(
-                                '${_homeController.getFilterName()}',
-                                style: const TextStyle(fontSize: 14),
-                              ),
+                                color: Colors.green[400], borderRadius: BorderRadius.circular(50)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 14.0),
+                                  child: Text(
+                                    '${_homeController.getFilterName()}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                CloseButton(
+                                  onPressed: () {
+                                    _homeController.clearCategory();
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -153,9 +170,9 @@ class _HomePageState extends State<HomePage> {
                                           Container(
                                             decoration: BoxDecoration(
                                                 color: Colors.green[400],
-                                                borderRadius: BorderRadius.circular(20)),
+                                                borderRadius: BorderRadius.circular(50)),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding: const EdgeInsets.all(3.8),
                                               child: Text(
                                                 '${_homeController.translateCategory(serviceProvider)}',
                                                 style: const TextStyle(fontSize: 14),

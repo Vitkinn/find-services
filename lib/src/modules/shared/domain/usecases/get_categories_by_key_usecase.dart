@@ -4,6 +4,11 @@ class GetCategoryByKeyUsecase {
   String call(String key) {
     return [
       CategoryEntity(
+        id: 0,
+        name: 'ALL',
+        description: 'Todas',
+      ),
+      CategoryEntity(
         id: 1,
         name: 'ARCHITECT',
         description: 'Arquiteto',
