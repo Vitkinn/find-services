@@ -10,7 +10,7 @@ class ProfileController {
   late final ILoadProfileUsecase _loadProfileUsecase;
   late final ILoadCurrentUserEvaluationsUsecase _loadEvaluationsUsecase;
   late UserProfileEntity? _userProfile;
-  late ProfileEvaluationEntity _evaluation;
+  late ServicesEntity _evaluation;
   late bool _isProfileLoading = true;
   late bool _isEvaluationsLoading = true;
   late ValueNotifier<void> stateChange = ValueNotifier(null);
@@ -26,7 +26,7 @@ class ProfileController {
 
   double rating = 4;
 
-  ProfileEvaluationEntity get evaluation => _evaluation;
+  ServicesEntity get evaluation => _evaluation;
   UserProfileEntity? get userProfile => _userProfile;
 
   void edit() {
@@ -35,7 +35,7 @@ class ProfileController {
 
   void loadPage(String? id) {
     _userProfile = UserProfileEntity();
-    _evaluation = ProfileEvaluationEntity(evaluations: []);
+    _evaluation = ServicesEntity(evaluations: []);
     loadProfile(id);
     loadEvaluations(id);
   }
@@ -73,7 +73,7 @@ class ProfileController {
 
   void disposePage() {
     _userProfile = null;
-    _evaluation = ProfileEvaluationEntity(evaluations: []);
+    _evaluation = ServicesEntity(evaluations: []);
     _isEvaluationsLoading = true;
     _isProfileLoading = true;
   }

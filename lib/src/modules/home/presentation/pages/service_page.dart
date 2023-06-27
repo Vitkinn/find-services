@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/home/presentation/controllers/service_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 
 class ServicesPage extends StatefulWidget {
@@ -10,7 +12,17 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
-  final filterController = TextEditingController();
+  late final ServiceController _serviceController;
+
+  @override
+  void initState() {
+    super.initState();
+    _serviceController = Modular.get<ServiceController>();
+    _serviceController.loading.addListener(() {
+      setState(() {});
+    });
+    _serviceController.loadPage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +88,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
+                        itemCount: _serviceController.getRequestsSize(),
                         itemBuilder: (BuildContext context, int index) {
                           return Align(
                             child: Container(

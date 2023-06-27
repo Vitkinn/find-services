@@ -1,12 +1,12 @@
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 
-class ProfileEvaluationEntity {
+class ServicesEntity {
   final int? rate;
   final int? quantity;
   final List<EvaluationEntity>? evaluations;
   final DateTime? evaluationDate;
 
-  ProfileEvaluationEntity({
+  ServicesEntity({
     this.rate,
     this.quantity,
     this.evaluations,
