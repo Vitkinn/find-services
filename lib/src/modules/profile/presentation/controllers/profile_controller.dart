@@ -111,4 +111,8 @@ class ProfileController {
   backToHome() {
     Modular.to.navigate('/categories');
   }
+
+  void sendServiceRequest() {
+    Modular.to.navigate('/request_service', arguments: {"serviceProviderId": serviceProviderId});
+  }
 }

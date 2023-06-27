@@ -8,3 +8,13 @@ class RequiredValidator extends Validator {
     return value == null || value.isEmpty ? 'O campo é obrigatório' : null;
   }
 }
+
+class NumberValidator extends Validator {
+  @override
+  String? call(String? value) {
+    if (value != null && double.tryParse(value) == null) {
+      return 'Por favor, insira um valor válido';
+    }
+    return null;
+  }
+}

@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
@@ -108,28 +107,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 const SizedBox(height: 10),
                 Stack(
-                  alignment: Alignment.bottomRight,
+                  alignment: Alignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Modular.to.navigate("/profile_edit", arguments: {"userId": null});
-                      },
-                      child: ImageLoading(
-                        radius: 75,
-                        loading: _profileController.isProfileLoading,
-                        userProfile: _profileController.userProfile,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black54,
-                        borderRadius: BorderRadius.circular(75),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.camera_alt),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
+                    ImageLoading(
+                      radius: 75,
+                      loading: _profileController.isProfileLoading,
+                      userProfile: _profileController.userProfile,
                     ),
                   ],
                 ),
@@ -179,9 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: _profileController.isProfileLoading
                         ? null
                         : () {
-                            Modular.to.navigate('/request_service', arguments: {
-                              "serviceProviderId": _profileController.serviceProviderId
-                            });
+                            _profileController.sendServiceRequest();
                           },
                     child: const Text('Solicitar'),
                   ),
@@ -297,15 +278,21 @@ class ImageLoading extends StatelessWidget {
     return GestureDetector(
       child: Visibility(
         visible: !loading,
-        replacement: CircleAvatar(
-          radius: radius,
-          backgroundImage: const AssetImage('lib/assets/images/user_icon.png'),
-          backgroundColor: Colors.grey,
+        replacement: Container(
+          width: 125,
+          height: 125,
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey,
+              image: DecorationImage(image: AssetImage('lib/assets/images/user_icon.png'))),
         ),
-        child: CircleAvatar(
-          radius: radius,
-          backgroundImage: getImage(userProfile),
-          backgroundColor: Colors.grey,
+        child: Container(
+          width: 125,
+          height: 125,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey,
+              image: DecorationImage(image: getImage(userProfile))),
         ),
       ),
     );

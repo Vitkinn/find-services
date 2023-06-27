@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/home/data/models/service_provider_list_model.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
-import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 

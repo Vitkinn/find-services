@@ -19,7 +19,6 @@ class RegisterPhotoPage extends StatefulWidget {
 class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
   late final NewUserController _newUserController;
   late final IImagePickerController _imagePickerController;
-  late final String _profilePictureUrl = 'lib/assets/images/user_icon.png';
   String? _selectedOption;
 
   final List<String> _options = [

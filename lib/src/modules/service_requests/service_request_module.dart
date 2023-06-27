@@ -3,7 +3,7 @@ import 'package:tcc_frontend/src/modules/service_requests/data/datasource/remote
 import 'package:tcc_frontend/src/modules/service_requests/data/repositories/service_request_repository.dart';
 import 'package:tcc_frontend/src/modules/service_requests/domain/usecases/request_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/service_requests/presentation/controllers/form_service_controller.dart';
-import 'package:tcc_frontend/src/modules/service_requests/presentation/pages/request_service.dart';
+import 'package:tcc_frontend/src/modules/service_requests/presentation/pages/request_service_page.dart';
 
 class ServiceRequestModule extends Module {
   @override

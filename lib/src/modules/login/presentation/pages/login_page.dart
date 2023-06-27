@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                       CustomTextField(
                         controller: controller.userNameController,
                         requiredField: true,
+                        keyboardType: TextInputType.emailAddress,
                         hintText: 'Usuário',
                         obscureText: false,
                       ),
@@ -57,19 +58,19 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                         errorText: controller.passwordError.value,
                       ),
-                      const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Esqueceu sua senha?',
-                              style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // const SizedBox(height: 20),
+                      // const Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 25.0),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.end,
+                      //     children: [
+                      //       Text(
+                      //         'Esqueceu sua senha?',
+                      //         style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(height: 90),
                     ],
                   ),

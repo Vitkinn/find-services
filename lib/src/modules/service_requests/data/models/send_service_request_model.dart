@@ -5,12 +5,14 @@ class SendServiceRequestModel extends SendServiceRequestEntity {
     required super.serviceDescription,
     required super.clientWishValue,
     required super.serviceProviderId,
+    required super.title,
   });
 
   Map<String, dynamic> toMap() {
     return {
       "serviceDescription": serviceDescription,
       "clientWishValue": clientWishValue,
+      "title": title,
       "serviceProvider": {"id": serviceProviderId},
     };
   }
@@ -20,6 +22,7 @@ class SendServiceRequestModel extends SendServiceRequestEntity {
       serviceDescription: entity.serviceDescription,
       clientWishValue: entity.clientWishValue,
       serviceProviderId: entity.serviceProviderId,
+      title: entity.title,
     );
   }
 }

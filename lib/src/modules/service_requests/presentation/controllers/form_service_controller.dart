@@ -6,9 +6,11 @@ import 'package:tcc_frontend/src/modules/service_requests/domain/usecases/reques
 class RequestServiceController {
   final IRequestServiceUsecase _requestServiceUsecase;
 
+  final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController clientValueController = TextEditingController();
   final ValueNotifier<bool> loading = ValueNotifier(false);
+  final formKey = GlobalKey<FormState>();
 
   late String serviceProviderId;
 
@@ -26,6 +28,7 @@ class RequestServiceController {
         serviceProviderId: serviceProviderId,
         clientWishValue: double.tryParse(clientValueController.text),
         serviceDescription: descriptionController.text,
+        title: titleController.text,
       ));
 
       request.fold((l) {
@@ -38,6 +41,10 @@ class RequestServiceController {
   }
 
   bool formIsValid() {
-    return true;
+    return formKey.currentState!.validate();
+  }
+
+  void cancel() {
+    Modular.to.navigate('/home');
   }
 }
