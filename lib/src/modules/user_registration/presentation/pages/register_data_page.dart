@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';

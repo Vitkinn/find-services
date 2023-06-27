@@ -6,7 +6,6 @@ import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller
 import 'package:tcc_frontend/src/modules/shared/controllers/impl/image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/domain/usecases/get_categories_by_key_usecase.dart';
 import 'package:tcc_frontend/src/modules/shared/domain/usecases/get_categories_usecase.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/form_service.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/terms_responsibility.dart';
 
 class SharedModule extends Module {
@@ -32,10 +31,6 @@ class SharedModule extends Module {
           child: (context, args) {
             return TermsResponsibilityPage();
           },
-        ),
-        ChildRoute(
-          '/form_service',
-          child: (_, args) => FormServicePage(),
         ),
       ];
 }

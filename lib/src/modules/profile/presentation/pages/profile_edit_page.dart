@@ -127,6 +127,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       CustomTextField(
                         controller: _profileEditController.emailController,
                         hintText: 'E-mail',
+                        keyboardType: TextInputType.emailAddress,
                         obscureText: false,
                       ),
                       const SizedBox(height: 10),
@@ -263,7 +264,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                           obscureText: false,
                                           width: MediaQuery.of(context).size.width * 0.80,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: 50,
                                           child: ElevatedButton(
                                             child: Icon(Icons.delete_forever),
@@ -285,7 +286,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 25),
                               child: ElevatedButton(
-                                child: Icon(Icons.add_box_sharp),
+                                child: const Icon(Icons.add_box_sharp),
                                 onPressed: () {
                                   setState(() {
                                     _profileEditController.citiesController
@@ -294,7 +295,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 },
                               ),
                             ),
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                           ],
                         ),
                       ),
