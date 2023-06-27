@@ -42,7 +42,6 @@ class _FormServicePage extends State<FormServicePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 16.0),
                       CustomTextField(
                         controller: _requestServiceController.titleController,
                         hintText: 'Breve descrição',
