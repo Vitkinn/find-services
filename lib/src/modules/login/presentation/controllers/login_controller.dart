@@ -33,7 +33,7 @@ class LoginController {
       passwordError.value = 'Nome de usuário ou senha inválidos';
     }, (r) {
       _isLoading.value = false;
-      Modular.to.navigate('home');
+      Modular.to.navigate('categories');
     });
   }
 
