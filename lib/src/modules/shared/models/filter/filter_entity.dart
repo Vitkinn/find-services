@@ -16,7 +16,7 @@ class FilterEntity {
   }) {
     return FilterEntity(
       name: name ?? this.name,
-      category: category ?? this.category,
+      category: category,
       city: city ?? this.city,
     );
   }

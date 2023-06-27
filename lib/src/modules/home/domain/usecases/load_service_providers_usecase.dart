@@ -17,6 +17,10 @@ class LoadServiceProviderUsecase extends ILoadServiceProviderUsecase {
 
   @override
   Future<Either<Failure, List<ServiceProviderModel>>> call(FilterEntity filter) async {
-    return repository.findServiceProfiles(filter);
+    var filterCopy = filter;
+    if (filter.category == 'ALL') {
+      filterCopy = FilterEntity(name: filterCopy.name, city: filterCopy.city);
+    }
+    return repository.findServiceProfiles(filterCopy);
   }
 }

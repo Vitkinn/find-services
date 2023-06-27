@@ -20,7 +20,6 @@ class _ServicesPageState extends State<ServicesPage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         title: const Text('FindServices'),
-        actions: [GestureDetector(child: Icon(Icons.chat))],
         elevation: 0,
       ),
       drawer: const AppDrawer(),
@@ -135,7 +134,7 @@ class _ServicesPageState extends State<ServicesPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const FootBar(initialIndex: 2),
+      bottomNavigationBar: FootBar(initialIndex: 1),
     );
   }
 }

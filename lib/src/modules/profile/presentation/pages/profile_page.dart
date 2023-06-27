@@ -55,7 +55,6 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         title: const Text('FindServices'),
-        actions: [GestureDetector(child: Icon(Icons.chat))],
         elevation: 0,
       ),
       drawer: const AppDrawer(),

@@ -22,12 +22,9 @@ class _FootBarState extends State<FootBar> {
 
     switch (_currentIndex) {
       case 0:
-        Modular.to.navigate('/home');
-        break;
-      case 1:
         Modular.to.navigate('/categories');
         break;
-      case 2:
+      case 1:
         Modular.to.navigate('/services');
         break;
     }
@@ -41,10 +38,6 @@ class _FootBarState extends State<FootBar> {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Início',
-        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.list),
           label: 'Categorias',

@@ -107,6 +107,6 @@ class ProfileController {
   }
 
   backToHome() {
-    Modular.to.navigate('/home');
+    Modular.to.navigate('/categories');
   }
 }
