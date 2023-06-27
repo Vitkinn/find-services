@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 class AuthController extends IAuthController {
   LogedUserEntity? currentUser;
@@ -44,5 +45,13 @@ class AuthController extends IAuthController {
   @override
   void toServiceProvider() {
     currentUser = currentUser!.copyWith(role: RoleType.serviceProvider);
+  }
+
+  @override
+  void update(UserEntity user) {
+    currentUser = currentUser!.copyWith(
+      username: '${user.name} ${user.lastName}',
+      login: user.login,
+    );
   }
 }

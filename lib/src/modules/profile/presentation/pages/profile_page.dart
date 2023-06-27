@@ -8,6 +8,7 @@ import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
+import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -65,22 +66,43 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Visibility(
                   visible: Modular.args.data?['profilerId'] == null,
-                  child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: GestureDetector(
-                        child: const Text(
-                          'Editar',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF14cd84),
+                  replacement: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ReturnButton(onTap: _profileController.backToHome),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ReturnButton(onTap: _profileController.backToHome),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                            child: GestureDetector(
+                              child: const Text(
+                                'Editar',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF14cd84),
+                                ),
+                              ),
+                              onTap: () {
+                                _profileController.edit();
+                              },
+                            ),
                           ),
-                        ),
-                        onTap: () {
-                          _profileController.edit();
-                        },
+                        ],
                       ),
                     ),
                   ),
@@ -230,7 +252,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: const FootBar(initialIndex: 2),
     );
   }
 }

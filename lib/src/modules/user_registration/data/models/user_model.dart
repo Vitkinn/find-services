@@ -37,7 +37,7 @@ class UserModel extends UserEntity {
       number: map["number"],
       complement: map["complement"],
       phone: map["phone"],
-      userPhotoUrl: map["userPhotoUrl"],
+      userPhotoUrl: map["photoUrl"],
     );
   }
 

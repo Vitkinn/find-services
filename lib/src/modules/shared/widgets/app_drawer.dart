@@ -12,16 +12,23 @@ class AppDrawer extends StatelessWidget {
     var authController = Modular.get<AuthController>();
 
     LogedUserEntity user = authController.getCurrentUser();
-
+    print(user.photoUrl);
     return Drawer(
       width: MediaQuery.of(context).size.width * 70 / 100,
       child: Column(
         children: [
           GestureDetector(
             child: UserAccountsDrawerHeader(
-              currentAccountPicture: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.asset('lib/assets/images/user_icon.png'),
+              currentAccountPicture: Visibility(
+                visible: user.photoUrl != null,
+                replacement: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset('lib/assets/images/user_icon.png'),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.network('https://storage.googleapis.com${user.photoUrl}'),
+                ),
               ),
               accountName: Text(user.username!),
               accountEmail: Text(user.login!),
@@ -52,17 +59,14 @@ class AppDrawer extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .pop(); // Fechar o diálogo
-                                    Modular.to
-                                        .navigate('/terms_responsability');
+                                    Navigator.of(context).pop(); // Fechar o diálogo
+                                    Modular.to.navigate('/terms_responsability');
                                   },
                                   child: const Text('Ver termos'),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .pop(); // Fechar o diálogo
+                                    Navigator.of(context).pop(); // Fechar o diálogo
                                   },
                                   child: const Text('Fechar'),
                                 ),
@@ -88,8 +92,8 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.person_off_rounded),
+          const ListTile(
+            leading: Icon(Icons.person_off_rounded),
             title: Text('Inativar conta'),
           ),
         ],

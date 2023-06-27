@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class TermsResponsibilityPage extends StatelessWidget {
+  const TermsResponsibilityPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

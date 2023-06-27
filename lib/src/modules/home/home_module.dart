@@ -11,10 +11,11 @@ class HomeModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton((i) => HomePageDatasource(restClient: i.get())),
         Bind.lazySingleton((i) => HomePageRepository(datasource: i.get())),
-        Bind.lazySingleton(
-            (i) => LoadServiceProviderUsecase(repository: i.get())),
-        Bind.lazySingleton(
-            (i) => HomeController(loadServiceProviderUsecase: i.get())),
+        Bind.lazySingleton((i) => LoadServiceProviderUsecase(repository: i.get())),
+        Bind.lazySingleton((i) => HomeController(
+              loadServiceProviderUsecase: i.get(),
+              getCategoryByKeyUsecase: i.get(),
+            )),
       ];
 
   @override

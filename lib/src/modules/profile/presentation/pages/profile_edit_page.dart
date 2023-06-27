@@ -57,24 +57,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   key: _profileEditController.userFormState,
                   child: Column(
                     children: [
-                      const SizedBox(height: 35),
                       Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Column(
-                          children: [
-                            ReturnButton(onTap: _profileEditController.cancel),
-                            const SizedBox(height: 20),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 25.0),
-                              child: Text(
-                                'Básico',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+                          child: ReturnButton(onTap: _profileEditController.cancel),
                         ),
                       ),
-                      const SizedBox(height: 25),
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -108,6 +97,21 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             ),
                           ),
                         ],
+                      ),
+                      const Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 30),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 25.0),
+                              child: Text(
+                                'Básico',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -310,7 +314,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
               ),
             ),
           ),
-          bottomNavigationBar: const FootBar(initialIndex: 2),
         ),
         if (_profileEditController.isLoading.value)
           const Opacity(

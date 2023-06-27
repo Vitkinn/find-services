@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/categories/domain/entities/category_entity.dart';
 import 'package:tcc_frontend/src/modules/categories/presentation/controller/categories_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
+import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
 import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -13,11 +13,12 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  final CategoriesController _categoriesController = CategoriesController();
+  late final CategoriesController _categoriesController;
 
   @override
   void initState() {
     super.initState();
+    _categoriesController = Modular.get<CategoriesController>();
     _categoriesController.loadCategories();
   }
 

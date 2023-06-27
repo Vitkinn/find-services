@@ -39,7 +39,7 @@ class ProfileController {
     loadProfile(id);
     loadEvaluations(id);
   }
-  
+
   String getName(UserProfileEntity? user) {
     return '${user?.name} ${user?.lastName}';
   }
@@ -104,5 +104,9 @@ class ProfileController {
       return double.parse(evaluation.rate.toString());
     }
     return 0.0;
+  }
+
+  backToHome() {
+    Modular.to.navigate('/home');
   }
 }

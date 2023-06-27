@@ -7,6 +7,7 @@ import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_en
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_current_user_profile.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/usecases/update_user_usecase.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 class ProfileEditController {
   late final ILoadCurrentUserProfileUsecase _loadCurrentUserProfileUsecase;
@@ -68,6 +69,11 @@ class ProfileEditController {
       }
       final result = await _updateUserUsecase.call(user, image);
       result.fold((l) => null, (r) {
+        _authController.update(UserEntity(
+          name: userNameController.text,
+          lastName: lastNameController.text,
+          login: emailController.text,
+        ));
         if (isServiceProvider) {
           _authController.toServiceProvider();
         }
