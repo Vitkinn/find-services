@@ -1,4 +1,5 @@
 import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 abstract class IAuthController {
   void login(LogedUserEntity user);
@@ -8,4 +9,5 @@ abstract class IAuthController {
   String getCurrentUserId();
   LogedUserEntity getCurrentUser();
   void toServiceProvider();
+  void update(UserEntity user);
 }

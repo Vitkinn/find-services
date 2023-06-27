@@ -105,4 +105,8 @@ class ProfileController {
     }
     return 0.0;
   }
+
+  backToHome() {
+    Modular.to.navigate('/categories');
+  }
 }

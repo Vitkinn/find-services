@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
@@ -46,7 +45,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
             title: const Text('FindServices'),
-            actions: [GestureDetector(child: Icon(Icons.chat))],
             elevation: 0,
           ),
           drawer: const AppDrawer(),
@@ -57,24 +55,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   key: _profileEditController.userFormState,
                   child: Column(
                     children: [
-                      const SizedBox(height: 35),
                       Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Column(
-                          children: [
-                            ReturnButton(onTap: _profileEditController.cancel),
-                            const SizedBox(height: 20),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 25.0),
-                              child: Text(
-                                'Básico',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+                          child: ReturnButton(onTap: _profileEditController.cancel),
                         ),
                       ),
-                      const SizedBox(height: 25),
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -108,6 +95,21 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             ),
                           ),
                         ],
+                      ),
+                      const Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 30),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 25.0),
+                              child: Text(
+                                'Básico',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -310,7 +312,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
               ),
             ),
           ),
-          bottomNavigationBar: const FootBar(initialIndex: 2),
         ),
         if (_profileEditController.isLoading.value)
           const Opacity(

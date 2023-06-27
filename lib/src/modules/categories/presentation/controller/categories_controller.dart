@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/categories/domain/entities/category_entity.dart';
-import 'package:tcc_frontend/src/modules/categories/domain/usecases/get_categories_usecase.dart';
+import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
+import 'package:tcc_frontend/src/modules/shared/domain/usecases/get_categories_usecase.dart';
 
 class CategoriesController {
-  final GetCategoriesUseCase _getCategoriesUseCase = GetCategoriesUseCase();
+  final GetCategoriesUseCase _getCategoriesUseCase;
   late final List<CategoryEntity> _categories;
+
+  CategoriesController({required GetCategoriesUseCase getCategoriesUseCase})
+      : _getCategoriesUseCase = getCategoriesUseCase;
 
   void loadCategories() {
     _categories = _getCategoriesUseCase.getCategories();

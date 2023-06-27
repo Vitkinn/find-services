@@ -1,9 +1,13 @@
-import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/modules/categories/domain/entities/category_entity.dart';
+import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
 
-class GetCategoriesUseCase {
-  List<CategoryEntity> getCategories() {
+class GetCategoryByKeyUsecase {
+  String call(String key) {
     return [
+      CategoryEntity(
+        id: 0,
+        name: 'ALL',
+        description: 'Todas',
+      ),
       CategoryEntity(
         id: 1,
         name: 'ARCHITECT',
@@ -44,6 +48,6 @@ class GetCategoriesUseCase {
         name: 'MASON',
         description: 'Pedreiro',
       ),
-    ];
+    ].firstWhere((element) => element.name == key).description!;
   }
 }

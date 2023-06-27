@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final String? errorText;
   final List<Validator> validators;
   final double? width;
+  final Widget? suffixIcon;
 
   const CustomTextField({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.validators = const [],
     this.errorText,
     this.width,
+    this.suffixIcon,
     required this.controller,
     required this.hintText,
   });
@@ -47,6 +49,7 @@ class CustomTextField extends StatelessWidget {
                     const OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF14cd84))),
                 fillColor: Colors.grey.shade200,
                 errorText: errorText,
+                suffixIcon: suffixIcon,
                 filled: true,
                 hintText: hintText)),
       ),
