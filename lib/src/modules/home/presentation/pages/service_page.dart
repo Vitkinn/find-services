@@ -40,9 +40,42 @@ class _ServicesPageState extends State<ServicesPage> {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // Lógica para o botão "Feitas"
+                      },
+                      child: Text(
+                        'Feitas',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 60,
+                      width: 1,
+                      color: Colors.black,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Lógica para o botão "Recebidas"
+                      },
+                      child: Text(
+                        'Recebidas',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 25),
                 Visibility(
                   visible: true,
                   replacement: const Align(
@@ -97,41 +130,65 @@ class _ServicesPageState extends State<ServicesPage> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
                                             Text(
-                                              'Título $index',
+                                              _serviceController
+                                                      .getRequestDescription(
+                                                          index) ??
+                                                  '',
                                               style: const TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                             const SizedBox(width: 15),
-                                            const Text(
-                                              '10/Jun/2023',
-                                              style: TextStyle(
+                                            Text(
+                                              _serviceController
+                                                      .getRequestDate(index) ??
+                                                  '',
+                                              style: const TextStyle(
                                                 fontSize: 15,
                                               ),
                                             ),
                                           ],
                                         ),
                                         const SizedBox(height: 10),
-                                        const Text(
-                                          'Preciso concertar a encanação da pia do salão de festas do prédio onde eu moro. Trata-se de um único cano rachado.',
+                                        Text(
+                                          _serviceController
+                                                  .getRequestDescription(
+                                                      index) ??
+                                              '',
                                           textAlign: TextAlign.justify,
                                         ),
                                         const SizedBox(height: 5),
-                                        const Text(
-                                          'Usuário X',
+                                        Text(
+                                          _serviceController
+                                                  .getProvider(index) ??
+                                              '',
                                           textAlign: TextAlign.justify,
                                         ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(width: 15),
-                                  const Icon(Icons.circle),
+                                  SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.black26,
+                                            width: 1.0,
+                                          ),
+                                          color: _serviceController
+                                              .getRequestTypeColor(index)),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

@@ -12,24 +12,24 @@ class ServicesEntity {
 
 class ServiceEntity {
   final String? id;
-  final String? serviceDescription;
+  final String? description;
   final double? value;
   final double? clientWishValue;
   final String? title;
   final String? valueJustification;
   final String? requestStatus;
-  final UserProfileEntity? serviceProvider;
-  final UserProfileEntity? serviceRequester;
+  final UserProfileEntity? provider;
+  final UserProfileEntity? requester;
 
   ServiceEntity({
     this.id,
-    this.serviceDescription,
+    this.description,
     this.value,
     this.clientWishValue,
     this.title,
     this.valueJustification,
     this.requestStatus,
-    this.serviceProvider,
-    this.serviceRequester,
+    this.provider,
+    this.requester,
   });
 }
