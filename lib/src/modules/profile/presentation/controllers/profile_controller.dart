@@ -14,6 +14,7 @@ class ProfileController {
   late bool _isProfileLoading = true;
   late bool _isEvaluationsLoading = true;
   late ValueNotifier<void> stateChange = ValueNotifier(null);
+  late String? serviceProviderId;
 
   bool get isProfileLoading => _isProfileLoading;
   bool get isEvaluationsLoading => _isEvaluationsLoading;
@@ -34,6 +35,7 @@ class ProfileController {
   }
 
   void loadPage(String? id) {
+    serviceProviderId = id;
     _userProfile = UserProfileEntity();
     _evaluation = ProfileEvaluationEntity(evaluations: []);
     loadProfile(id);

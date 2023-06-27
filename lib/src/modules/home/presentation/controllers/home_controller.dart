@@ -29,10 +29,6 @@ class HomeController {
     });
   }
 
-  void dispose() {
-    serviceProviders.clear();
-  }
-
   String getPhotoUrl(ServiceProviderModel serviceProvider) {
     if (serviceProvider.user?.userPhotoUrl != null) {
       String photo = serviceProvider.user!.userPhotoUrl!;

@@ -180,7 +180,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: _profileController.isProfileLoading
                         ? null
                         : () {
-                            Modular.to.navigate('/form_service');
+                            Modular.to.navigate('/request_service', arguments: {
+                              "serviceProviderId": _profileController.serviceProviderId
+                            });
                           },
                     child: const Text('Solicitar'),
                   ),
