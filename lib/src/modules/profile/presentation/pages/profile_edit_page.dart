@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
+import 'package:tcc_frontend/src/modules/shared/utils/validators.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
@@ -104,7 +105,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 25.0),
                               child: Text(
-                                'Básico',
+                                'Dados Pessoais',
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -153,11 +154,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
                       CustomTextField(
                         controller: _profileEditController.cepController,
                         hintText: 'CEP',
                         obscureText: false,
+                        keyboardType: TextInputType.number,
+                        validators:[CEPValidator()],
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
@@ -188,6 +190,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         controller: _profileEditController.numberController,
                         hintText: 'Número',
                         obscureText: false,
+                        keyboardType: TextInputType.number,
+                        validators:[NumValidator()],
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
