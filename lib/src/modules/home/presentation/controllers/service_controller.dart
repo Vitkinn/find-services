@@ -35,8 +35,8 @@ class ServiceController {
     });
   }
 
-  int getServicesSize() {
-    return _myServices.length;
+  int getRequestsSize() {
+    return _myRequests.length;
   }
 
   String? getRequestTitle(int index) {
@@ -47,14 +47,14 @@ class ServiceController {
     return _myRequests[index].description;
   }
 
-  String? getRequester(int index) {
+  String? getRequestRequester(int index) {
     if (_myRequests[index].requester != null) {
       return _myRequests[index].requester!.name;
     }
     return null;
   }
 
-  String? getProvider(int index) {
+  String? getRequestProvider(int index) {
     if (_myRequests[index].provider != null) {
       return _myRequests[index].provider!.name;
     }
@@ -84,7 +84,52 @@ class ServiceController {
     }
   }
 
-  int getRequestsSize() {
-    return _myRequests.length;
+  int getServicesSize() {
+    return _myServices.length;
+  }
+
+  String? getServiceTitle(int index) {
+    return _myServices[index].title;
+  }
+
+  String? getServiceDescription(int index) {
+    return _myServices[index].description;
+  }
+
+  String? getServiceRequester(int index) {
+    if (_myServices[index].requester != null) {
+      return _myServices[index].requester!.name;
+    }
+    return null;
+  }
+
+  String? getServiceProvider(int index) {
+    if (_myServices[index].provider != null) {
+      return _myServices[index].provider!.name;
+    }
+    return null;
+  }
+
+  String? getServiceDate(int index) {
+    return '01/01/2023';
+  }
+
+  Color getServiceTypeColor(int index) {
+    switch (_myServices[index].requestStatus) {
+      case 'PENDING_SERVICE_ACCEPT':
+        return Colors.yellow;
+      case 'PENDING_SERVICE_APPROVED':
+        return Colors.blue;
+      case 'APPROVED':
+        return Colors.green;
+      case 'CANCELED':
+        return Colors.grey;
+      case 'SERVICE_REJECTED':
+        return Colors.red;
+      case 'DONE':
+        return Colors.lightGreen;
+      default:
+        return Colors.white;
+    }
   }
 }
