@@ -52,8 +52,13 @@ class ViewRequestController {
   void loadPage() {
     serviceEntity = Modular.args.data["serviceRequest"] as ServiceEntity;
     isMyServices = Modular.args.data["isMyServices"] as bool;
-    clientValueController.text = serviceEntity.clientWishValue.toString();
+    clientValueController.text = serviceEntity.clientWishValue != null
+        ? serviceEntity.clientWishValue!.round().toString()
+        : '00';
     descriptionController.text = serviceEntity.description!;
+    valueController.text =
+        serviceEntity.value != null ? serviceEntity.value!.round().toString() : '00';
+    valueJustificationController.text = serviceEntity.valueJustification ?? '';
     loading.value = false;
   }
 
