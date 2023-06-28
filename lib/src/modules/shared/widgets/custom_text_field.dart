@@ -12,12 +12,14 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType keyboardType;
   final int? minLines;
+  final bool enabled;
 
   const CustomTextField({
     super.key,
     this.requiredField = false,
     this.obscureText = false,
     this.validators = const [],
+    this.enabled = true,
     this.errorText,
     this.minLines,
     this.width,
@@ -46,9 +48,10 @@ class CustomTextField extends StatelessWidget {
               return null;
             },
             minLines: minLines,
-            maxLines: minLines != null ? minLines! + 5 : null,
+            maxLines: minLines != null ? minLines! + 5 : 1,
             controller: controller,
             obscureText: obscureText,
+            enabled: enabled,
             keyboardType: keyboardType,
             decoration: InputDecoration(
                 enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),

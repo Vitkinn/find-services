@@ -12,7 +12,6 @@ class AppDrawer extends StatelessWidget {
     var authController = Modular.get<AuthController>();
 
     LogedUserEntity user = authController.getCurrentUser();
-    print(user.photoUrl);
     return Drawer(
       width: MediaQuery.of(context).size.width * 70 / 100,
       child: Column(

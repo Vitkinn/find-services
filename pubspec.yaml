@@ -46,6 +46,7 @@ dependencies:
   shimmer: ^3.0.0
   image_picker: ^0.8.9
   intl: ^0.18.1
+  flutter_masked_text2: ^0.9.1
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/service_requests/domain/entities/send_service_request_entity.dart';
 import 'package:tcc_frontend/src/modules/service_requests/domain/usecases/request_service_usecase.dart';
@@ -8,7 +9,12 @@ class RequestServiceController {
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController clientValueController = TextEditingController();
+  final MoneyMaskedTextController clientValueController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
+    precision: 2,
+    decimalSeparator: ',', // Separador decimal
+    thousandSeparator: '.', // Separador de milhares
+  );
   final ValueNotifier<bool> loading = ValueNotifier(false);
   final formKey = GlobalKey<FormState>();
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_services_usecase.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
@@ -131,5 +132,13 @@ class ServiceController {
       default:
         return Colors.white;
     }
+  }
+
+  void toRecivedDetailView(int index) {
+    Modular.to.navigate('/view_request', arguments: {"serviceRequest": _myServices[index]});
+  }
+
+  void toSendDetailView(int index) {
+    Modular.to.navigate('/view_request', arguments: {"serviceRequest": _myRequests[index]});
   }
 }
