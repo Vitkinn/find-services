@@ -28,6 +28,7 @@ class ProfileEditController {
   final complementController = TextEditingController();
   final referencePointController = TextEditingController();
   String? photoUrl;
+  String? userPhotoName;
   File? _image;
   final cnpjController = TextEditingController();
   final categoryController = TextEditingController();
@@ -56,6 +57,7 @@ class ProfileEditController {
         login: emailController.text,
         phone: phoneController.text,
         photoUrl: photoUrl,
+        userPhotoName: userPhotoName,
       );
 
       if (_authController.getCurrentUser().role == RoleType.serviceProvider || isServiceProvider) {
@@ -107,6 +109,7 @@ class ProfileEditController {
       phoneController.text = r.phone!;
       if (r.photoUrl != null) {
         photoUrl = r.photoUrl;
+        userPhotoName = r.userPhotoName;
       }
       if (r.cnpj != null) {
         isServiceProvider = true;

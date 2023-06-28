@@ -22,6 +22,8 @@ class UpdateUserUsecase extends IUpdateUserUsecase {
       final photoUrl = await repository.uploadPhoto(photo);
       final imageId = photoUrl.fold((l) => null, (r) => r.imageId);
       copyEntity = entity.copyWith(photoUrl: imageId);
+    } else {
+      copyEntity = entity.copyWith(photoUrl: entity.userPhotoName);
     }
     return await repository.updateUser(ProfileEditModel.fromEntity(copyEntity));
   }

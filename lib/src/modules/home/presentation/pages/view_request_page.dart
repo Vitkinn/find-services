@@ -113,6 +113,7 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                         controller: _controller.valueController,
                         hintText: 'Valor Ofertado',
                         requiredField: true,
+                        enabled: _controller.isMyServices,
                         keyboardType: TextInputType.number,
                         obscureText: false,
                       ),
@@ -121,6 +122,7 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                         controller: _controller.valueJustificationController,
                         hintText: 'Detalhamento do serviço',
                         requiredField: true,
+                        enabled: _controller.isMyServices,
                         keyboardType: TextInputType.multiline,
                         minLines: 4,
                         obscureText: false,
@@ -184,7 +186,7 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                           SizedBox(width: 15),
                           Visibility(
                             visible: !_controller.isMyServices &&
-                                !_controller.isApproved() &&
+                                _controller.isApproved() &&
                                 !_controller.isBlocked(),
                             child: ElevatedButton(
                               onPressed: () {

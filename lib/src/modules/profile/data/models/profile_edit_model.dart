@@ -8,6 +8,7 @@ class ProfileEditModel extends ProfileEditEntity {
     required super.cpf,
     required super.phone,
     required super.login,
+    required super.userPhotoName,
     super.cnpj,
     super.description,
     super.category,
@@ -15,7 +16,9 @@ class ProfileEditModel extends ProfileEditEntity {
   });
 
   static ProfileEditModel fromMap(Map<String, dynamic> map) {
-    var cities = (map["actuationCities"] as List).map((e) => e as String).toList();
+    var cities = map["actuationCities"] != null
+        ? (map["actuationCities"] as List).map((e) => e as String).toList()
+        : null;
     return ProfileEditModel(
       name: map["name"],
       lastName: map["lastName"],
@@ -26,6 +29,7 @@ class ProfileEditModel extends ProfileEditEntity {
       cnpj: map["cnpj"],
       description: map["description"],
       category: map["category"],
+      userPhotoName: map["userPhotoName"],
       actuationCities: cities,
     );
   }
@@ -42,6 +46,7 @@ class ProfileEditModel extends ProfileEditEntity {
       "description": description,
       "category": category,
       "actuationCities": actuationCities,
+      "userPhotoName": userPhotoName,
     };
   }
 
@@ -50,6 +55,7 @@ class ProfileEditModel extends ProfileEditEntity {
       name: entity.name,
       lastName: entity.lastName,
       login: entity.login,
+      userPhotoName: entity.userPhotoName,
       cpf: entity.cpf,
       phone: entity.phone,
       photoUrl: entity.photoUrl,

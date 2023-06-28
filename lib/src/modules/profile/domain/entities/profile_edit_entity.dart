@@ -2,6 +2,7 @@ class ProfileEditEntity {
   final String? name;
   final String? lastName;
   final String? photoUrl;
+  final String? userPhotoName;
   final String? phone;
   final String? cpf;
   final String? login;
@@ -14,6 +15,7 @@ class ProfileEditEntity {
     this.name,
     this.lastName,
     this.photoUrl,
+    this.userPhotoName,
     this.phone,
     this.cpf,
     this.login,
@@ -33,6 +35,7 @@ class ProfileEditEntity {
     String? cnpj,
     String? description,
     String? category,
+    String? userPhotoName,
     List<String>? actuationCities,
   }) {
     return ProfileEditEntity(
@@ -42,6 +45,7 @@ class ProfileEditEntity {
       phone: phone ?? this.phone,
       cpf: cpf ?? this.cpf,
       login: login ?? this.login,
+      userPhotoName: userPhotoName ?? this.userPhotoName,
       cnpj: cnpj ?? this.cnpj,
       description: description ?? this.description,
       category: category ?? this.category,
