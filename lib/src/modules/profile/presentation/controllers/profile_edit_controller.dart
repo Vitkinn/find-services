@@ -30,6 +30,7 @@ class ProfileEditController {
   String? photoUrl;
   String? userPhotoName;
   File? _image;
+  Option? selectedCategory;
   final cnpjController = TextEditingController();
   final categoryController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -39,6 +40,17 @@ class ProfileEditController {
 
   final GlobalKey<FormState> _userFormState = GlobalKey<FormState>();
   final ValueNotifier<bool> _loading = ValueNotifier(false);
+
+  List<Option> options = [
+    Option(key: 'PLUMBER', value: 'Encanador'),
+    Option(key: 'ELECTRICIAN', value: 'Eletrecista'),
+    Option(key: 'MASON', value: 'Pedreiro'),
+    Option(key: 'MASONS_ASSISTANT', value: 'Assistente de predreiro'),
+    Option(key: 'MECHANIC', value: 'Mecânico'),
+    Option(key: 'ENGINEER', value: 'Engenheiro'),
+    Option(key: 'ARCHITECT', value: 'Arquiteto'),
+    Option(key: 'FORWARDING_AGENT', value: 'Despachante'),
+  ];
 
   ProfileEditController({
     required ILoadCurrentUserProfileUsecase loadCurrentUserProfileUsecase,
@@ -62,7 +74,7 @@ class ProfileEditController {
 
       if (_authController.getCurrentUser().role == RoleType.serviceProvider || isServiceProvider) {
         user = user.copyWith(
-          category: categoryController.text,
+          category: selectedCategory?.key,
           cnpj: cnpjController.text,
           description: descriptionController.text,
           actuationCities:
@@ -143,4 +155,11 @@ class ProfileEditController {
       isServiceProvider = _authController.getCurrentUser().role == RoleType.serviceProvider;
     }
   }
+}
+
+class Option {
+  final String key;
+  final String value;
+
+  Option({required this.key, required this.value});
 }

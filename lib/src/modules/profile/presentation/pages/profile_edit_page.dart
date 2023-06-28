@@ -143,65 +143,65 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         obscureText: false,
                       ),
                       const SizedBox(height: 20),
-                      const Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 25.0),
-                          child: Text(
-                            'Dados Pessoais',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        controller: _profileEditController.cepController,
-                        hintText: 'CEP',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.neighborhoodController,
-                        hintText: 'Bairro',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.cityController,
-                        hintText: 'Cidade',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.ufController,
-                        hintText: 'Estado',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.streetController,
-                        hintText: 'Rua',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.numberController,
-                        hintText: 'Número',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.complementController,
-                        hintText: 'Complemento',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _profileEditController.referencePointController,
-                        hintText: 'Ponto de referência',
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 30),
+                      // const Align(
+                      //   alignment: AlignmentDirectional.centerStart,
+                      //   child: Padding(
+                      //     padding: EdgeInsets.symmetric(horizontal: 25.0),
+                      //     child: Text(
+                      //       'Dados Pessoais',
+                      //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 20),
+                      // CustomTextField(
+                      //   controller: _profileEditController.cepController,
+                      //   hintText: 'CEP',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.neighborhoodController,
+                      //   hintText: 'Bairro',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.cityController,
+                      //   hintText: 'Cidade',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.ufController,
+                      //   hintText: 'Estado',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.streetController,
+                      //   hintText: 'Rua',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.numberController,
+                      //   hintText: 'Número',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.complementController,
+                      //   hintText: 'Complemento',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // CustomTextField(
+                      //   controller: _profileEditController.referencePointController,
+                      //   hintText: 'Ponto de referência',
+                      //   obscureText: false,
+                      // ),
+                      // const SizedBox(height: 30),
                       const SizedBox(height: 30),
                       Visibility(
                         visible: _profileEditController.isServiceProvider,
@@ -226,17 +226,30 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             ),
                             const SizedBox(height: 10),
                             CustomTextField(
-                              controller: _profileEditController.categoryController,
-                              hintText: 'Categoria de Serviço',
-                              obscureText: false,
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
                               controller: _profileEditController.descriptionController,
                               hintText: 'Descrição',
                               obscureText: false,
                             ),
                             const SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 25.0),
+                              child: DropdownButton<Option>(
+                                value: _profileEditController.selectedCategory,
+                                onChanged: (Option? newValue) {
+                                  setState(() {
+                                    _profileEditController.selectedCategory = newValue;
+                                  });
+                                },
+                                items: _profileEditController.options
+                                    .map<DropdownMenuItem<Option>>((Option option) {
+                                  return DropdownMenuItem<Option>(
+                                    value: option,
+                                    child: Text(option.value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
                             const Align(
                               alignment: AlignmentDirectional.centerStart,
                               child: Padding(

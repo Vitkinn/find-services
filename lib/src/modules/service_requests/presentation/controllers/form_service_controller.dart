@@ -30,9 +30,15 @@ class RequestServiceController {
   void sendRequest() async {
     if (formIsValid()) {
       loading.value = true;
+      var parsedValue = double.tryParse(clientValueController.text
+              .replaceAll('R', '')
+              .replaceAll('\$', '')
+              .replaceAll(',', '')
+              .replaceAll('.', '')) ??
+          0;
       final request = await _requestServiceUsecase.call(SendServiceRequestEntity(
         serviceProviderId: serviceProviderId,
-        clientWishValue: double.tryParse(clientValueController.text),
+        clientWishValue: parsedValue / 100,
         serviceDescription: descriptionController.text,
         title: titleController.text,
       ));
