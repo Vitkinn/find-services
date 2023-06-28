@@ -53,11 +53,11 @@ class ViewRequestController {
     serviceEntity = Modular.args.data["serviceRequest"] as ServiceEntity;
     isMyServices = Modular.args.data["isMyServices"] as bool;
     clientValueController.text = serviceEntity.clientWishValue != null
-        ? serviceEntity.clientWishValue!.round().toString()
+        ? (serviceEntity.clientWishValue! * 10).toString()
         : '00';
     descriptionController.text = serviceEntity.description!;
     valueController.text =
-        serviceEntity.value != null ? serviceEntity.value!.round().toString() : '00';
+        serviceEntity.value != null ? (serviceEntity.value! * 10).toString() : '00';
     valueJustificationController.text = serviceEntity.valueJustification ?? '';
     loading.value = false;
   }
@@ -79,7 +79,6 @@ class ViewRequestController {
       result.fold((l) {
         loading.value = false;
       }, (r) {
-        loading.value = false;
         Modular.to.navigate('/services');
       });
     }
@@ -189,8 +188,23 @@ class ViewRequestController {
   }
 
   bool isBlocked() {
-    return serviceEntity.requestStatus == 'DONE' ||
-        serviceEntity.requestStatus == 'CANCELED' ||
-        serviceEntity.requestStatus == 'SERVICE_REJECTED';
+    return !isMyServices ||
+        (serviceEntity.requestStatus == 'DONE' ||
+            serviceEntity.requestStatus == 'CANCELED' ||
+            serviceEntity.requestStatus == 'SERVICE_REJECTED' ||
+            serviceEntity.requestStatus == 'APPROVED' ||
+            serviceEntity.requestStatus == 'PENDING_CLIENT_APPROVED');
+  }
+
+  bool isPendingEvaluate() {
+    return serviceEntity.requestStatus == 'PENDING_SERVICE_ACCEPT';
+  }
+
+  bool isPendingClientAccept() {
+    return serviceEntity.requestStatus == 'PENDING_CLIENT_APPROVED';
+  }
+
+  bool isDone() {
+    return serviceEntity.requestStatus == 'DONE' || serviceEntity.requestStatus == 'CANCELED';
   }
 }

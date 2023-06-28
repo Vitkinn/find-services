@@ -56,11 +56,11 @@ class UserProfileRepository extends IUserProfileRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateUser(ProfileEditModel entity) async {
+  Future<Either<Failure, ProfileEditModel>> updateUser(ProfileEditModel entity) async {
     try {
-      await datasource.editUser(entity);
+      final result = await datasource.editUser(entity);
 
-      return right(null);
+      return right(ProfileEditModel.fromEntity(result));
     } on Failure catch (e) {
       return Left(e);
     } catch (_) {

@@ -111,6 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     ImageLoading(
                       radius: 75,
+                      size: 125,
                       loading: _profileController.isProfileLoading,
                       userProfile: _profileController.userProfile,
                     ),
@@ -191,7 +192,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageLoading(
-                              radius: 25,
+                              radius: 15,
+                              size: 65,
                               userProfile: evaluation.user,
                               loading: _profileController.isEvaluationsLoading,
                             ),
@@ -265,11 +267,13 @@ class ImageLoading extends StatelessWidget {
   final bool loading;
   final UserProfileEntity? userProfile;
   final double radius;
+  final double size;
 
   const ImageLoading({
     Key? key,
     required this.radius,
     required this.loading,
+    required this.size,
     this.userProfile,
   }) : super(key: key);
 
@@ -279,16 +283,16 @@ class ImageLoading extends StatelessWidget {
       child: Visibility(
         visible: !loading,
         replacement: Container(
-          width: 125,
-          height: 125,
+          width: size,
+          height: size,
           decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.grey,
               image: DecorationImage(image: AssetImage('lib/assets/images/user_icon.png'))),
         ),
         child: Container(
-          width: 125,
-          height: 125,
+          width: size,
+          height: size,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.grey,

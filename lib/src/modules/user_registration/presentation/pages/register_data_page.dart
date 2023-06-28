@@ -23,6 +23,28 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
     _newUserController.addListener(() {
       setState(() {});
     });
+    // _newUserController.cpfController.addListener(() {
+    //   final text = _newUserController.cpfController.text;
+    //   if (text.length == 3 || text.length == 7) {
+    //     if (text.endsWith('.')) {
+    //       _newUserController.cpfController.text = text.substring(0, text.length - 1);
+    //     } else {
+    //       _newUserController.cpfController.text = '$text.';
+    //     }
+    //     _newUserController.cpfController.selection = TextSelection.fromPosition(
+    //         TextPosition(offset: _newUserController.cpfController.text.length));
+    //   } else if (text.length == 12) {
+    //     _newUserController.cpfController.text = '$text-';
+    //     _newUserController.cpfController.selection = TextSelection.fromPosition(
+    //         TextPosition(offset: _newUserController.cpfController.text.length));
+    //   }
+    // });
+  }
+
+  @override
+  void dispose() {
+    // _newUserController.cpfController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,12 +84,14 @@ class _RegisterDataPageState extends State<RegisterDataPage> {
                     hintText: 'Informe seu telefone',
                     obscureText: false,
                     requiredField: true,
+                    keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 10),
                   CustomTextField(
                     controller: _newUserController.cpfController,
                     hintText: 'Informe seu CPF',
                     obscureText: false,
+                    keyboardType: TextInputType.number,
                     requiredField: true,
                   ),
                   const SizedBox(height: 30),

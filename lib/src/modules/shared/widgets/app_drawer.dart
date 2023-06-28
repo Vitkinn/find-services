@@ -91,10 +91,10 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const ListTile(
-            leading: Icon(Icons.person_off_rounded),
-            title: Text('Inativar conta'),
-          ),
+          // const ListTile(
+          //   leading: Icon(Icons.person_off_rounded),
+          //   title: Text('Inativar conta'),
+          // ),
         ],
       ),
     );

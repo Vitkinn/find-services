@@ -5,6 +5,8 @@ import 'package:tcc_frontend/src/core/errors/failure.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_entity.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/repositories/i_user_profile_repository.dart';
+import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 abstract class IUpdateUserUsecase {
   Future<Either<Failure, void>> call(ProfileEditEntity entity, File? photo);
@@ -12,8 +14,9 @@ abstract class IUpdateUserUsecase {
 
 class UpdateUserUsecase extends IUpdateUserUsecase {
   final IUserProfileRepository repository;
+  final IAuthController authController;
 
-  UpdateUserUsecase({required this.repository});
+  UpdateUserUsecase({required this.repository, required this.authController});
 
   @override
   Future<Either<Failure, void>> call(ProfileEditEntity entity, File? photo) async {
@@ -25,6 +28,16 @@ class UpdateUserUsecase extends IUpdateUserUsecase {
     } else {
       copyEntity = entity.copyWith(photoUrl: entity.userPhotoName);
     }
-    return await repository.updateUser(ProfileEditModel.fromEntity(copyEntity));
+    final user = await repository.updateUser(ProfileEditModel.fromEntity(copyEntity));
+    user.fold((l) => null, (r) {
+      authController.update(UserEntity(
+        name: r.name,
+        lastName: r.lastName,
+        userPhotoUrl: r.photoUrl,
+        login: r.login,
+      ));
+    });
+
+    return user;
   }
 }

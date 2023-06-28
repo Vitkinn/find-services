@@ -135,12 +135,14 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       CustomTextField(
                         controller: _profileEditController.phoneController,
                         hintText: 'Telefone',
+                        keyboardType: TextInputType.number,
                         obscureText: false,
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
                         controller: _profileEditController.cpfController,
                         hintText: 'CPF',
+                        keyboardType: TextInputType.number,
                         obscureText: false,
                       ),
                       const SizedBox(height: 20),
@@ -222,6 +224,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             const SizedBox(height: 20),
                             CustomTextField(
                               controller: _profileEditController.cnpjController,
+                              keyboardType: TextInputType.number,
                               hintText: 'CNPJ',
                               obscureText: false,
                             ),

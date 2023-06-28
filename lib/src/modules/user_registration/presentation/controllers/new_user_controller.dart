@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
@@ -15,8 +16,8 @@ class NewUserController extends ChangeNotifier {
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _cpfController = TextEditingController();
+  final _phoneController = MaskedTextController(mask: '(00) 00000-0000');
+  final _cpfController = MaskedTextController(mask: '000.000.000-00');
   bool _isTermsChecked = false;
   bool _isTermsTouched = false;
   final ValueNotifier<bool> loading = ValueNotifier(false);
@@ -31,17 +32,23 @@ class NewUserController extends ChangeNotifier {
 
   Future<void> create() async {
     loading.value = true;
+    var phone = _phoneController.text
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+        .replaceAll('-', '')
+        .replaceAll(' ', '');
+    var cpf = _cpfController.text.replaceAll('.', '').replaceAll('-', '');
     final user = UserEntity(
-      cpf: cpfController.text,
+      cpf: cpf,
       name: _nameController.text,
       lastName: _lastNameController.text,
       login: _emailController.text,
       password: passwordController.text,
-      phone: phoneController.text,
+      phone: phone,
       complement: cpfController.text,
       number: cpfController.text,
     );
-    final result = await createUserUsecase(user, _image.value);
+    final result = await createUserUsecase.call(user, _image.value);
 
     result.fold((l) => null, (r) => {Modular.to.navigate('/')});
   }

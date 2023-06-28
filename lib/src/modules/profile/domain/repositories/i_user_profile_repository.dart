@@ -12,6 +12,6 @@ abstract class IUserProfileRepository {
   Future<Either<Failure, UserProfileModel>> loadUserProfile(String userId);
   Future<Either<Failure, ProfileEditModel>> loadUserEditData();
   Future<Either<Failure, ProfileEvaluationModel>> loadProfileEvaluations(String userId);
-  Future<Either<Failure, void>> updateUser(ProfileEditModel entity);
+  Future<Either<Failure, ProfileEditModel>> updateUser(ProfileEditModel entity);
   Future<Either<Failure, ImageIdModel>> uploadPhoto(File photo);
 }

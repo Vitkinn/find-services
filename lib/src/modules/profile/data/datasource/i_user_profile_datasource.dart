@@ -9,6 +9,6 @@ abstract class IUserProfileDatasource {
   Future<UserProfileModel> loadUserProfile(String userId);
   Future<ProfileEvaluationModel> loadProfileEvaluations(String userId);
   Future<ProfileEditModel> loadUserEdit();
-  Future<void> editUser(ProfileEditModel data);
+  Future<ProfileEditModel> editUser(ProfileEditModel data);
   Future<ImageIdModel> uploadPhoto(File photo);
 }

@@ -26,8 +26,9 @@ class UserProfileDatasource extends IUserProfileDatasource {
   }
 
   @override
-  Future<void> editUser(ProfileEditModel data) async {
-    await restClient.put('/api/user', data: data.toMap());
+  Future<ProfileEditModel> editUser(ProfileEditModel data) async {
+    final user = await restClient.put('/api/user', data: data.toMap());
+    return ProfileEditModel.fromMap(user.data);
   }
 
   @override

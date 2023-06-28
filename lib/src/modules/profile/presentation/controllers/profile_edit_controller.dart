@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
 import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_entity.dart';
@@ -17,8 +18,8 @@ class ProfileEditController {
   final userNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
-  final phoneController = TextEditingController();
-  final cpfController = TextEditingController();
+  final phoneController = MaskedTextController(mask: '(00) 00000-0000');
+  final cpfController = MaskedTextController(mask: '000.000.000-00');
   final cepController = TextEditingController();
   final neighborhoodController = TextEditingController();
   final cityController = TextEditingController();
@@ -31,7 +32,7 @@ class ProfileEditController {
   String? userPhotoName;
   File? _image;
   Option? selectedCategory;
-  final cnpjController = TextEditingController();
+  final cnpjController = MaskedTextController(mask: '00.000.000/0000-00');
   final categoryController = TextEditingController();
   final descriptionController = TextEditingController();
   final List<TextEditingController> citiesController = [];
@@ -62,12 +63,19 @@ class ProfileEditController {
 
   void save() async {
     if (_userFormState.currentState!.validate()) {
+      var phone = phoneController.text
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .replaceAll('-', '')
+          .replaceAll(' ', '');
+      var cpf = cpfController.text.replaceAll('.', '').replaceAll('-', '');
+
       var user = ProfileEditEntity(
         name: userNameController.text,
         lastName: lastNameController.text,
-        cpf: cpfController.text,
+        cpf: cpf,
         login: emailController.text,
-        phone: phoneController.text,
+        phone: phone,
         photoUrl: photoUrl,
         userPhotoName: userPhotoName,
       );
@@ -75,7 +83,7 @@ class ProfileEditController {
       if (_authController.getCurrentUser().role == RoleType.serviceProvider || isServiceProvider) {
         user = user.copyWith(
           category: selectedCategory?.key,
-          cnpj: cnpjController.text,
+          cnpj: cnpjController.text.replaceAll('.', '').replaceAll('/', '').replaceAll('-', ''),
           description: descriptionController.text,
           actuationCities:
               citiesController.map((TextEditingController cityCont) => cityCont.text).toList(),
@@ -83,11 +91,7 @@ class ProfileEditController {
       }
       final result = await _updateUserUsecase.call(user, image);
       result.fold((l) => null, (r) {
-        _authController.update(UserEntity(
-          name: userNameController.text,
-          lastName: lastNameController.text,
-          login: emailController.text,
-        ));
+        image = null;
         if (isServiceProvider) {
           _authController.toServiceProvider();
         }
@@ -124,6 +128,7 @@ class ProfileEditController {
         userPhotoName = r.userPhotoName;
       }
       if (r.cnpj != null) {
+        selectedCategory = options.firstWhere((element) => element.key == r.category);
         isServiceProvider = true;
         cnpjController.text = r.cnpj!;
         descriptionController.text = r.description!;

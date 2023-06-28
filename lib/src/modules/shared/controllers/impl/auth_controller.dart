@@ -52,6 +52,7 @@ class AuthController extends IAuthController {
     currentUser = currentUser!.copyWith(
       username: '${user.name} ${user.lastName}',
       login: user.login,
+      photoUrl: user.userPhotoUrl,
     );
   }
 }

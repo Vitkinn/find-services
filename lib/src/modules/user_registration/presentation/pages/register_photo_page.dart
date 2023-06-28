@@ -106,31 +106,31 @@ class _RegisterPhotoPageState extends State<RegisterPhotoPage> {
                   ],
                 ),
                 const SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration:
-                        BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
-                    child: DropdownButtonFormField(
-                      value: _selectedOption,
-                      isExpanded: true,
-                      decoration: InputDecoration(
-                          hintText: 'Selecione o seu sexo',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
-                      items: _options.map((String option) {
-                        return DropdownMenuItem(
-                          value: option,
-                          child: Text(option),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _selectedOption = newValue;
-                        });
-                      },
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: Container(
+                //     decoration:
+                //         BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                //     child: DropdownButtonFormField(
+                //       value: _selectedOption,
+                //       isExpanded: true,
+                //       decoration: InputDecoration(
+                //           hintText: 'Selecione o seu sexo',
+                //           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+                //       items: _options.map((String option) {
+                //         return DropdownMenuItem(
+                //           value: option,
+                //           child: Text(option),
+                //         );
+                //       }).toList(),
+                //       onChanged: (String? newValue) {
+                //         setState(() {
+                //           _selectedOption = newValue;
+                //         });
+                //       },
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
