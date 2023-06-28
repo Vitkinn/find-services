@@ -55,7 +55,6 @@ class _FormServicePage extends State<FormServicePage> {
                         hintText: 'Valor Ofertado',
                         requiredField: true,
                         keyboardType: TextInputType.number,
-                        validators: [NumberValidator()],
                         obscureText: false,
                       ),
                       SizedBox(height: 16.0),

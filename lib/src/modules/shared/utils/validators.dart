@@ -5,7 +5,7 @@ abstract class Validator {
 class RequiredValidator extends Validator {
   @override
   String? call(String? value) {
-    return value == null || value.isEmpty ? 'O campo é obrigatório' : null;
+    return value == null || value.trim().isEmpty ? 'O campo é obrigatório' : null;
   }
 }
 

@@ -17,6 +17,7 @@ class ServiceEntity {
   final double? clientWishValue;
   final String? title;
   final String? valueJustification;
+  final DateTime? createDate;
   final String? requestStatus;
   final UserProfileEntity? provider;
   final UserProfileEntity? requester;
@@ -25,6 +26,7 @@ class ServiceEntity {
     this.id,
     this.description,
     this.value,
+    this.createDate,
     this.clientWishValue,
     this.title,
     this.valueJustification,

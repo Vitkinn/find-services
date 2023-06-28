@@ -123,73 +123,67 @@ class _ServicesPageState extends State<ServicesPage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: _serviceController.getRequestsSize(),
                         itemBuilder: (BuildContext context, int index) {
-                          return Align(
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              _serviceController
-                                                      .getRequestDescription(
-                                                          index) ??
-                                                  '',
-                                              style: const TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
+                          return GestureDetector(
+                            onTap: () {
+                              _serviceController.toDetailView(index);
+                            },
+                            child: Align(
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                _serviceController.getRequestDescription(index) ??
+                                                    '',
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 15),
-                                            Text(
-                                              _serviceController
-                                                      .getRequestDate(index) ??
-                                                  '',
-                                              style: const TextStyle(
-                                                fontSize: 15,
+                                              const SizedBox(width: 15),
+                                              Text(
+                                                _serviceController.getRequestDate(index) ?? '',
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          _serviceController
-                                                  .getRequestDescription(
-                                                      index) ??
-                                              '',
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          _serviceController
-                                                  .getProvider(index) ??
-                                              '',
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-                                  SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Colors.black26,
-                                            width: 1.0,
+                                            ],
                                           ),
-                                          color: _serviceController
-                                              .getRequestTypeColor(index)),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            _serviceController.getRequestDescription(index) ?? '',
+                                            textAlign: TextAlign.justify,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            _serviceController.getProvider(index) ?? '',
+                                            textAlign: TextAlign.justify,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(width: 15),
+                                    SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Colors.black26,
+                                              width: 1.0,
+                                            ),
+                                            color: _serviceController.getRequestTypeColor(index)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
