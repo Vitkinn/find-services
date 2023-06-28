@@ -24,9 +24,10 @@ class AppDrawer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(40),
                   child: Image.asset('lib/assets/images/user_icon.png'),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image.network('https://storage.googleapis.com${user.photoUrl}'),
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundImage: NetworkImage('https://storage.googleapis.com${user.photoUrl}'),
+                  backgroundColor: Colors.grey,
                 ),
               ),
               accountName: Text(user.username!),

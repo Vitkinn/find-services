@@ -19,7 +19,10 @@ class UserModule extends Module {
         //Repositories
         Bind.lazySingleton<IUserRepository>((i) => UserRepository(datasource: i.get())),
         //Usercases
-        Bind.lazySingleton<ICreateUserUsecase>((i) => CreateUserUsecase(repository: i.get())),
+        Bind.lazySingleton<ICreateUserUsecase>((i) => CreateUserUsecase(
+              repository: i.get(),
+              imageCompressController: i.get(),
+            )),
         // Controllers
         Bind.lazySingleton<NewUserController>(
           (i) => NewUserController(createUserUsecase: i.get()),

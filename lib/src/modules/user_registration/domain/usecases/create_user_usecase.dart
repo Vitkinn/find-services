@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:tcc_frontend/src/modules/shared/controllers/impl/image_compress_controller.dart';
 import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -13,14 +14,16 @@ abstract class ICreateUserUsecase {
 
 class CreateUserUsecase extends ICreateUserUsecase {
   late final IUserRepository repository;
+  late final ImageCompressController imageCompressController;
 
-  CreateUserUsecase({required this.repository});
+  CreateUserUsecase({required this.repository, required this.imageCompressController});
 
   @override
   Future<Either<Failure, Unit>> call(UserEntity entity, File? photo) async {
     var copyEntity = entity;
     if (photo != null) {
-      final photoUrl = await repository.uploadPhoto(photo);
+      final compressedPhoto = await imageCompressController.compressImage(photo);
+      final photoUrl = await repository.uploadPhoto(compressedPhoto);
       final imageId = photoUrl.fold((l) => null, (r) => r.imageId);
       copyEntity = entity.copyWith(userPhotoUrl: imageId);
     }

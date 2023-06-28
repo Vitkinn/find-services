@@ -290,13 +290,10 @@ class ImageLoading extends StatelessWidget {
               color: Colors.grey,
               image: DecorationImage(image: AssetImage('lib/assets/images/user_icon.png'))),
         ),
-        child: Container(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey,
-              image: DecorationImage(image: getImage(userProfile))),
+        child: CircleAvatar(
+          radius: 75,
+          backgroundImage: getImage(userProfile),
+          backgroundColor: Colors.grey,
         ),
       ),
     );

@@ -63,6 +63,7 @@ class ProfileEditController {
 
   void save() async {
     if (_userFormState.currentState!.validate()) {
+      _loading.value = true;
       var phone = phoneController.text
           .replaceAll('(', '')
           .replaceAll(')', '')

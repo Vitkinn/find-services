@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
@@ -38,7 +37,7 @@ class UserProfileDatasource extends IUserProfileDatasource {
   }
 
   @override
-  Future<ImageIdModel> uploadPhoto(File photo) async {
+  Future<ImageIdModel> uploadPhoto(XFile photo) async {
     FormData formData = FormData.fromMap({
       "image": await MultipartFile.fromFile(photo.path),
     });

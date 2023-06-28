@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tcc_frontend/src/core/errors/failure.dart';
 import 'package:tcc_frontend/src/modules/profile/data/datasource/i_user_profile_datasource.dart';
 import 'package:tcc_frontend/src/modules/profile/data/models/profile_edit_model.dart';
@@ -69,7 +68,7 @@ class UserProfileRepository extends IUserProfileRepository {
   }
 
   @override
-  Future<Either<Failure, ImageIdModel>> uploadPhoto(File photo) async {
+  Future<Either<Failure, ImageIdModel>> uploadPhoto(XFile photo) async {
     try {
       final result = await datasource.uploadPhoto(photo);
 

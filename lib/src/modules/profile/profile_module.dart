@@ -34,6 +34,7 @@ class ProfileModule extends Module {
             )),
         Bind.lazySingleton((i) => UpdateUserUsecase(
               repository: i.get(),
+              imageCompressController: i.get(),
               authController: i.get(),
             )),
         // Controller
