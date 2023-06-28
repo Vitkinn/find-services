@@ -159,7 +159,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         hintText: 'CEP',
                         obscureText: false,
                         keyboardType: TextInputType.number,
-                        validators:[CEPValidator()],
+                        //validators:[CEPValidator()],
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
@@ -191,7 +191,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         hintText: 'Número',
                         obscureText: false,
                         keyboardType: TextInputType.number,
-                        validators:[NumValidator()],
+                        //validators:[NumValidator()],
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
