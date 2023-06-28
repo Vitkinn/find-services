@@ -4,12 +4,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:tcc_frontend/src/modules/home/domain/entities/evaluate_service_entity.dart';
 import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/accept_service_usecase.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/cancel_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/evaluate_service_usecase.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/finish_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/reject_service_usecase.dart';
 
 class ViewRequestController {
   final IEvaluateServiceUsecase _evaluateServiceUsecase;
   final IRejectServiceUsecase _rejectServiceUsecase;
+  final ICancelServiceUsecase _cancelServiceUsecase;
+  final IAcceptServiceUsecase _acceptServiceUsecase;
+  final IFinishServiceUsecase _finishServiceUsecase;
 
   final MoneyMaskedTextController clientValueController = MoneyMaskedTextController(
     leftSymbol: 'R\$ ',
@@ -28,18 +34,24 @@ class ViewRequestController {
 
   final ValueNotifier<bool> loading = ValueNotifier(true);
   late ServiceEntity serviceEntity;
-  late bool isMyRequests;
+  late bool isMyServices;
   final formKey = GlobalKey<FormState>();
 
   ViewRequestController({
     required IEvaluateServiceUsecase evaluateServiceUsecase,
+    required ICancelServiceUsecase cancelServiceUsecase,
+    required IFinishServiceUsecase finishServiceUsecase,
+    required IAcceptServiceUsecase acceptServiceUsecase,
     required IRejectServiceUsecase rejectServiceUsecase,
   })  : _evaluateServiceUsecase = evaluateServiceUsecase,
+        _cancelServiceUsecase = cancelServiceUsecase,
+        _acceptServiceUsecase = acceptServiceUsecase,
+        _finishServiceUsecase = finishServiceUsecase,
         _rejectServiceUsecase = rejectServiceUsecase;
 
   void loadPage() {
     serviceEntity = Modular.args.data["serviceRequest"] as ServiceEntity;
-    isMyRequests = Modular.args.data["isMyRequests"] as bool;
+    isMyServices = Modular.args.data["isMyServices"] as bool;
     clientValueController.text = serviceEntity.clientWishValue.toString();
     descriptionController.text = serviceEntity.description!;
     loading.value = false;
@@ -132,5 +144,48 @@ class ViewRequestController {
       default:
         return Colors.white;
     }
+  }
+
+  void cancel() async {
+    loading.value = true;
+    final request = await _cancelServiceUsecase.call(serviceEntity.id!);
+    request.fold((l) {
+      loading.value = false;
+    }, (r) {
+      loading.value = false;
+      Modular.to.navigate('/services');
+    });
+  }
+
+  void accept() async {
+    loading.value = true;
+    final request = await _acceptServiceUsecase.call(serviceEntity.id!);
+    request.fold((l) {
+      loading.value = false;
+    }, (r) {
+      loading.value = false;
+      Modular.to.navigate('/services');
+    });
+  }
+
+  void finish() async {
+    loading.value = true;
+    final request = await _finishServiceUsecase.call(serviceEntity.id!);
+    request.fold((l) {
+      loading.value = false;
+    }, (r) {
+      loading.value = false;
+      Modular.to.navigate('/services');
+    });
+  }
+
+  bool isApproved() {
+    return serviceEntity.requestStatus == 'APPROVED';
+  }
+
+  bool isBlocked() {
+    return serviceEntity.requestStatus == 'DONE' ||
+        serviceEntity.requestStatus == 'CANCELED' ||
+        serviceEntity.requestStatus == 'SERVICE_REJECTED';
   }
 }

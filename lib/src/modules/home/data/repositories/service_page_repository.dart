@@ -51,4 +51,43 @@ class ServicePageRepository extends IServicePageRepository {
       return Left(UnhandledFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> cancelService(String serviceId) async {
+    try {
+      await datasource.cancelService(serviceId);
+
+      return right(null);
+    } on Failure catch (e) {
+      return Left(e);
+    } catch (_) {
+      return Left(UnhandledFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> acceptService(String serviceId) async {
+    try {
+      await datasource.acceptService(serviceId);
+
+      return right(null);
+    } on Failure catch (e) {
+      return Left(e);
+    } catch (_) {
+      return Left(UnhandledFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> finishService(String serviceId) async {
+    try {
+      await datasource.finishService(serviceId);
+
+      return right(null);
+    } on Failure catch (e) {
+      return Left(e);
+    } catch (_) {
+      return Left(UnhandledFailure());
+    }
+  }
 }

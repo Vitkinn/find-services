@@ -137,14 +137,14 @@ class ServiceController {
   void toRecivedDetailView(int index) {
     Modular.to.navigate('/view_request', arguments: {
       "serviceRequest": _myServices[index],
-      "isMyRequests": true,
+      "isMyServices": true,
     });
   }
 
   void toSendDetailView(int index) {
     Modular.to.navigate('/view_request', arguments: {
       "serviceRequest": _myRequests[index],
-      "isMyRequests": false,
+      "isMyServices": false,
     });
   }
 }

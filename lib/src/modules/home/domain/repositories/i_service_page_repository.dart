@@ -9,4 +9,7 @@ abstract class IServicePageRepository {
   Future<Either<Failure, ServiceModel>> evaluateServiceRequest(
       String serviceId, EvaluateServiceEntity entity);
   Future<Either<Failure, void>> rejectService(String serviceId);
+  Future<Either<Failure, void>> cancelService(String serviceId);
+  Future<Either<Failure, void>> acceptService(String serviceId);
+  Future<Either<Failure, void>> finishService(String serviceId);
 }

@@ -129,24 +129,93 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              _controller.rejectService();
-                            },
-                            child: Text('Recusar'),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                return Colors.red;
-                              }),
+                          Visibility(
+                            visible: _controller.isMyServices &&
+                                !_controller.isApproved() &&
+                                !_controller.isBlocked(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _controller.rejectService();
+                              },
+                              child: Text('Recusar'),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  return Colors.red;
+                                }),
+                              ),
                             ),
                           ),
                           SizedBox(width: 15),
-                          ElevatedButton(
+                          Visibility(
+                            visible: _controller.isMyServices &&
+                                !_controller.isApproved() &&
+                                !_controller.isBlocked(),
+                            child: ElevatedButton(
                               onPressed: () {
                                 _controller.evaluate();
                               },
-                              child: Text('Enviar')),
+                              child: Text('Enviar'),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  return Colors.green;
+                                }),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: !_controller.isMyServices &&
+                                !_controller.isApproved() &&
+                                !_controller.isBlocked(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _controller.cancel();
+                              },
+                              child: Text('Cancelar'),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  return Colors.grey;
+                                }),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          Visibility(
+                            visible: !_controller.isMyServices &&
+                                !_controller.isApproved() &&
+                                !_controller.isBlocked(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _controller.accept();
+                              },
+                              child: Text('Aceitar'),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  return Colors.green;
+                                }),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: _controller.isMyServices &&
+                                _controller.isApproved() &&
+                                !_controller.isBlocked(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _controller.accept();
+                              },
+                              child: Text('Finalizar'),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  return Colors.green;
+                                }),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(height: 20),

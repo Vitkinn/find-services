@@ -25,4 +25,19 @@ class ServicePageDatasource extends IServicesPageDatasource {
   Future<void> rejectService(String serviceId) async {
     await restClient.put('/api/serviceRequest/rejectService/$serviceId');
   }
+
+  @override
+  Future<void> cancelService(String serviceId) async {
+    await restClient.put('/api/serviceRequest/canceled/$serviceId');
+  }
+
+  @override
+  Future<void> acceptService(String serviceId) async {
+    await restClient.put('/api/serviceRequest/accept/$serviceId');
+  }
+
+  @override
+  Future<void> finishService(String serviceId) async {
+    await restClient.put('/api/serviceRequest/finish/$serviceId');
+  }
 }

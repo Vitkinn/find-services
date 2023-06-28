@@ -3,7 +3,10 @@ import 'package:tcc_frontend/src/modules/home/data/datasource/remote/home_page_d
 import 'package:tcc_frontend/src/modules/home/data/datasource/remote/service_page_datasource.dart';
 import 'package:tcc_frontend/src/modules/home/data/repositories/home_page_repository.dart';
 import 'package:tcc_frontend/src/modules/home/data/repositories/service_page_repository.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/accept_service_usecase.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/cancel_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/evaluate_service_usecase.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/finish_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_service_providers_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_services_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/reject_service_usecase.dart';
@@ -22,6 +25,9 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => LoadServiceProviderUsecase(repository: i.get())),
         Bind.lazySingleton((i) => EvaluateServiceUsecase(repository: i.get())),
         Bind.lazySingleton((i) => RejectServiceUsecase(repository: i.get())),
+        Bind.lazySingleton((i) => CancelServiceUsecase(repository: i.get())),
+        Bind.lazySingleton((i) => AcceptServiceUsecase(repository: i.get())),
+        Bind.lazySingleton((i) => FinishServiceUsecase(repository: i.get())),
         Bind.lazySingleton((i) => HomeController(
               loadServiceProviderUsecase: i.get(),
               getCategoryByKeyUsecase: i.get(),
@@ -30,10 +36,14 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => ServicePageRepository(datasource: i.get())),
         Bind.lazySingleton((i) => LoadServicesUsecase(repository: i.get())),
         Bind.lazySingleton((i) => ServiceController(loadServicesUsecase: i.get())),
-        Bind.lazySingleton((i) => ViewRequestController(
+        Bind.lazySingleton(
+          (i) => ViewRequestController(
+              cancelServiceUsecase: i.get(),
               evaluateServiceUsecase: i.get(),
               rejectServiceUsecase: i.get(),
-            )),
+              finishServiceUsecase: i.get(),
+              acceptServiceUsecase: i.get()),
+        ),
       ];
 
   @override
