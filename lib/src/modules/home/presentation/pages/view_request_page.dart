@@ -130,7 +130,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _controller.rejectService();
+                            },
                             child: Text('Recusar'),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.resolveWith<Color>(

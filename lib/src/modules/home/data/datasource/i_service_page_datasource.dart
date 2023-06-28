@@ -4,4 +4,5 @@ import 'package:tcc_frontend/src/modules/home/data/models/service_list_model.dar
 abstract class IServicesPageDatasource {
   Future<ServicesModel> findServiceSolicitations();
   Future<ServiceModel> evaluateServiceRequest(String serviceId, EvaluateServiceModel model);
+  Future<void> rejectService(String serviceId);
 }

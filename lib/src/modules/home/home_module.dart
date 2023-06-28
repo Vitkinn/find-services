@@ -6,6 +6,7 @@ import 'package:tcc_frontend/src/modules/home/data/repositories/service_page_rep
 import 'package:tcc_frontend/src/modules/home/domain/usecases/evaluate_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_service_providers_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/domain/usecases/load_services_usecase.dart';
+import 'package:tcc_frontend/src/modules/home/domain/usecases/reject_service_usecase.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/service_controller.dart';
 import 'package:tcc_frontend/src/modules/home/presentation/controllers/view_request_controller.dart';
@@ -20,6 +21,7 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => HomePageRepository(datasource: i.get())),
         Bind.lazySingleton((i) => LoadServiceProviderUsecase(repository: i.get())),
         Bind.lazySingleton((i) => EvaluateServiceUsecase(repository: i.get())),
+        Bind.lazySingleton((i) => RejectServiceUsecase(repository: i.get())),
         Bind.lazySingleton((i) => HomeController(
               loadServiceProviderUsecase: i.get(),
               getCategoryByKeyUsecase: i.get(),
@@ -28,7 +30,10 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => ServicePageRepository(datasource: i.get())),
         Bind.lazySingleton((i) => LoadServicesUsecase(repository: i.get())),
         Bind.lazySingleton((i) => ServiceController(loadServicesUsecase: i.get())),
-        Bind.lazySingleton((i) => ViewRequestController(evaluateServiceUsecase: i.get())),
+        Bind.lazySingleton((i) => ViewRequestController(
+              evaluateServiceUsecase: i.get(),
+              rejectServiceUsecase: i.get(),
+            )),
       ];
 
   @override

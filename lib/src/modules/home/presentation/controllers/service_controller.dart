@@ -70,7 +70,7 @@ class ServiceController {
     switch (_myRequests[index].requestStatus) {
       case 'PENDING_SERVICE_ACCEPT':
         return Colors.yellow;
-      case 'PENDING_SERVICE_APPROVED':
+      case 'PENDING_CLIENT_APPROVED':
         return Colors.blue;
       case 'APPROVED':
         return Colors.green;
@@ -119,7 +119,7 @@ class ServiceController {
     switch (_myServices[index].requestStatus) {
       case 'PENDING_SERVICE_ACCEPT':
         return Colors.yellow;
-      case 'PENDING_SERVICE_APPROVED':
+      case 'PENDING_CLIENT_APPROVED':
         return Colors.blue;
       case 'APPROVED':
         return Colors.green;
@@ -135,10 +135,16 @@ class ServiceController {
   }
 
   void toRecivedDetailView(int index) {
-    Modular.to.navigate('/view_request', arguments: {"serviceRequest": _myServices[index]});
+    Modular.to.navigate('/view_request', arguments: {
+      "serviceRequest": _myServices[index],
+      "isMyRequests": true,
+    });
   }
 
   void toSendDetailView(int index) {
-    Modular.to.navigate('/view_request', arguments: {"serviceRequest": _myRequests[index]});
+    Modular.to.navigate('/view_request', arguments: {
+      "serviceRequest": _myRequests[index],
+      "isMyRequests": false,
+    });
   }
 }

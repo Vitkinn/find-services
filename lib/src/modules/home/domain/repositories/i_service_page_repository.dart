@@ -8,4 +8,5 @@ abstract class IServicePageRepository {
   Future<Either<Failure, ServicesModel>> findServices();
   Future<Either<Failure, ServiceModel>> evaluateServiceRequest(
       String serviceId, EvaluateServiceEntity entity);
+  Future<Either<Failure, void>> rejectService(String serviceId);
 }

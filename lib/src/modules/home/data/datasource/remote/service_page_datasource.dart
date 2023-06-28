@@ -20,4 +20,9 @@ class ServicePageDatasource extends IServicesPageDatasource {
         await restClient.put('/api/serviceRequest/evaluate/$serviceId', data: model.toMap());
     return ServiceModel.fromMap(result.data);
   }
+
+  @override
+  Future<void> rejectService(String serviceId) async {
+    await restClient.put('/api/serviceRequest/rejectService/$serviceId');
+  }
 }

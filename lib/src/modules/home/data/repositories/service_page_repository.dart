@@ -38,4 +38,17 @@ class ServicePageRepository extends IServicePageRepository {
       return Left(UnhandledFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> rejectService(String serviceId) async {
+    try {
+      await datasource.rejectService(serviceId);
+
+      return right(null);
+    } on Failure catch (e) {
+      return Left(e);
+    } catch (_) {
+      return Left(UnhandledFailure());
+    }
+  }
 }
