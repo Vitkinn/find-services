@@ -35,270 +35,292 @@ class _ServicesPageState extends State<ServicesPage> {
   Widget build(BuildContext context) {
     LogedUserEntity user = authController.getCurrentUser();
 
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        title: const Text('FindServices'),
-        elevation: 0,
-      ),
-      drawer: const AppDrawer(),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 25),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Solicitações',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Colors.grey[100],
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.black,
+            title: const Text('FindServices'),
+            elevation: 0,
+          ),
+          drawer: const AppDrawer(),
+          body: SingleChildScrollView(
+            child: SafeArea(
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 25),
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Solicitações',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 25),
-                Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: 30,
-                          color: selectedDone,
-                          child: const Center(
-                            child: Text(
-                              'Feitas',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                    const SizedBox(height: 25),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 30,
+                              color: selectedDone,
+                              child: const Center(
+                                child: Text(
+                                  'Feitas',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
+                            onTap: () => {selectOption(selectedDone)},
                           ),
-                        ),
-                        onTap: () => {selectOption(selectedDone)},
-                      ),
-                      GestureDetector(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: 30,
-                          color: selectedReceived,
-                          child: const Center(
-                            child: Text(
-                              'Recebidas',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                          GestureDetector(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 30,
+                              color: selectedReceived,
+                              child: const Center(
+                                child: Text(
+                                  'Recebidas',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
+                            onTap: () => {selectOption(selectedReceived)},
                           ),
-                        ),
-                        onTap: () => {selectOption(selectedReceived)},
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 25),
-                Visibility(
-                  visible: isDoneSelected,
-                  replacement: Visibility(
-                    visible: user.role == RoleType.serviceProvider,
-                    replacement: const Text(
-                      'É necesssário tornar-se um prestador para receber novas solicitações',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15, color: Colors.black54),
                     ),
-                    child: Visibility(
-                      visible: areServices(),
-                      replacement: const Text(
-                        'Não há solicitações',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 15, color: Colors.black54),
-                      ),
-                      child: Column(children: [
-                        const SizedBox(height: 25),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: _serviceController.getServicesSize(),
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  _serviceController.toRecivedDetailView(index);
-                                },
-                                child: Align(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
+                    const SizedBox(height: 25),
+                    Visibility(
+                      visible: isDoneSelected,
+                      replacement: Visibility(
+                        visible: user.role == RoleType.serviceProvider,
+                        replacement: const Text(
+                          'É necesssário tornar-se um prestador para receber novas solicitações',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15, color: Colors.black54),
+                        ),
+                        child: Visibility(
+                          visible: areServices(),
+                          replacement: const Text(
+                            'Não há solicitações',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 15, color: Colors.black54),
+                          ),
+                          child: Column(children: [
+                            const SizedBox(height: 25),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: _serviceController.getServicesSize(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      _serviceController.toRecivedDetailView(index);
+                                    },
+                                    child: Align(
+                                      child: Container(
+                                        margin: const EdgeInsets.only(bottom: 20),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Flexible(
-                                                    child: Text(
-                                                      _serviceController.getServiceTitle(index) ??
-                                                          'Solicitação sem Título',
-                                                      style: const TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight: FontWeight.w500,
+                                                  Row(
+                                                    children: [
+                                                      Flexible(
+                                                        child: Text(
+                                                          _serviceController
+                                                                  .getServiceTitle(index) ??
+                                                              'Solicitação sem Título',
+                                                          style: const TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                          overflow: TextOverflow.ellipsis,
+                                                        ),
                                                       ),
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
+                                                      const SizedBox(width: 8),
+                                                      Text(
+                                                        _serviceController.getServiceDate(index) ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  const SizedBox(width: 8),
+                                                  const SizedBox(height: 10),
                                                   Text(
-                                                    _serviceController.getServiceDate(index) ?? '',
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                    ),
+                                                    _serviceController
+                                                            .getServiceDescription(index) ??
+                                                        '',
+                                                    textAlign: TextAlign.justify,
+                                                  ),
+                                                  const SizedBox(height: 5),
+                                                  Text(
+                                                    _serviceController.getServiceRequester(index) ??
+                                                        '',
+                                                    textAlign: TextAlign.justify,
                                                   ),
                                                 ],
                                               ),
-                                              const SizedBox(height: 10),
-                                              Text(
-                                                _serviceController.getServiceDescription(index) ??
-                                                    '',
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                              const SizedBox(height: 5),
-                                              Text(
-                                                _serviceController.getServiceRequester(index) ?? '',
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(width: 15),
-                                        SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: Colors.black26,
-                                                width: 1.0,
-                                              ),
-                                              color: _serviceController.getServiceTypeColor(index),
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
-                  child: Visibility(
-                    visible: areRequests(),
-                    replacement: const Text(
-                      'Não há solicitações',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15, color: Colors.black54),
-                    ),
-                    child: Column(children: [
-                      const SizedBox(height: 25),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: _serviceController.getRequestsSize(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return GestureDetector(
-                              onTap: () {
-                                _serviceController.toSendDetailView(index);
-                              },
-                              child: Align(
-                                child: Container(
-                                  margin: const EdgeInsets.only(bottom: 20),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Flexible(
-                                                  child: Text(
-                                                    _serviceController.getRequestTitle(index) ??
-                                                        'Solicitação sem Título',
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
-                                                    overflow: TextOverflow.ellipsis,
+                                            const SizedBox(width: 15),
+                                            SizedBox(
+                                              width: 20,
+                                              height: 20,
+                                              child: DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: Colors.black26,
+                                                    width: 1.0,
                                                   ),
+                                                  color:
+                                                      _serviceController.getServiceTypeColor(index),
                                                 ),
-                                                const SizedBox(width: 8),
-                                                Text(
-                                                  _serviceController.getRequestDate(index) ?? '',
-                                                  style: const TextStyle(
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 10),
-                                            Text(
-                                              _serviceController.getRequestDescription(index) ?? '',
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              _serviceController.getRequestProvider(index) ?? '',
-                                              textAlign: TextAlign.justify,
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(width: 15),
-                                      SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: Colors.black26,
-                                                width: 1.0,
-                                              ),
-                                              color: _serviceController.getRequestTypeColor(index)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
+                            ),
+                          ]),
                         ),
                       ),
-                    ]),
-                  ),
+                      child: Visibility(
+                        visible: areRequests(),
+                        replacement: const Text(
+                          'Não há solicitações',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15, color: Colors.black54),
+                        ),
+                        child: Column(children: [
+                          const SizedBox(height: 25),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: _serviceController.getRequestsSize(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    _serviceController.toSendDetailView(index);
+                                  },
+                                  child: Align(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(
+                                                        _serviceController.getRequestTitle(index) ??
+                                                            'Solicitação sem Título',
+                                                        style: const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 8),
+                                                    Text(
+                                                      _serviceController.getRequestDate(index) ??
+                                                          '',
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Text(
+                                                  _serviceController.getRequestDescription(index) ??
+                                                      '',
+                                                  textAlign: TextAlign.justify,
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Text(
+                                                  _serviceController.getRequestProvider(index) ??
+                                                      '',
+                                                  textAlign: TextAlign.justify,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(width: 15),
+                                          SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: Colors.black26,
+                                                    width: 1.0,
+                                                  ),
+                                                  color: _serviceController
+                                                      .getRequestTypeColor(index)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
+          bottomNavigationBar: const FootBar(initialIndex: 1),
         ),
-      ),
-      bottomNavigationBar: const FootBar(initialIndex: 1),
+        if (_serviceController.loading.value)
+          const Opacity(
+            opacity: 0.8,
+            child: ModalBarrier(dismissible: false, color: Colors.black),
+          ),
+        if (_serviceController.loading.value)
+          const Center(
+            child: CircularProgressIndicator(),
+          ),
+      ],
     );
   }
 

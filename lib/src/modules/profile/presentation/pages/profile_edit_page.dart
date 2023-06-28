@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
 import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
 import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/utils/validators.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
 import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
