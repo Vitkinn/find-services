@@ -18,3 +18,27 @@ class NumberValidator extends Validator {
     return null;
   }
 }
+
+class CEPValidator extends Validator {
+  @override
+  String? call(String? value) {
+    if (value!.isEmpty) {
+      return 'Por favor, informe um CEP';
+    } else if (value.length > 8 || int.tryParse(value) == null) {
+      return 'CEP inválido';
+    }
+      return null;
+    }
+}
+
+class NumValidator extends Validator {
+  @override
+  String? call(String? value) {
+    if (value!.isEmpty) {
+      return 'Por favor, informe um número';
+    } else if (value.length > 4 || int.tryParse(value) == null) {
+        return 'Número inválido';
+    }
+    return null;
+  }
+}
