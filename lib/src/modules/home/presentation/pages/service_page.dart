@@ -140,21 +140,32 @@ class _ServicesPageState extends State<ServicesPage> {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    _serviceController.getServiceTitle(index) ??
-                                                        'Solicitação sem Título',
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.w500,
+                                                  Flexible(
+                                                    child: Text(
+                                                      _serviceController
+                                                              .getServiceTitle(
+                                                                  index) ??
+                                                          'Solicitação sem Título',
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                     ),
                                                   ),
-                                                  const SizedBox(width: 15),
+                                                  const SizedBox(width: 8),
                                                   Text(
-                                                    _serviceController.getServiceDate(index) ?? '',
+                                                    _serviceController
+                                                            .getServiceDate(
+                                                                index) ??
+                                                        '',
                                                     style: const TextStyle(
                                                       fontSize: 15,
                                                     ),
@@ -163,13 +174,18 @@ class _ServicesPageState extends State<ServicesPage> {
                                               ),
                                               const SizedBox(height: 10),
                                               Text(
-                                                _serviceController.getServiceDescription(index) ??
+                                                _serviceController
+                                                        .getServiceDescription(
+                                                            index) ??
                                                     '',
                                                 textAlign: TextAlign.justify,
                                               ),
                                               const SizedBox(height: 5),
                                               Text(
-                                                _serviceController.getServiceRequester(index) ?? '',
+                                                _serviceController
+                                                        .getServiceRequester(
+                                                            index) ??
+                                                    '',
                                                 textAlign: TextAlign.justify,
                                               ),
                                             ],
@@ -186,7 +202,8 @@ class _ServicesPageState extends State<ServicesPage> {
                                                 color: Colors.black26,
                                                 width: 1.0,
                                               ),
-                                              color: _serviceController.getServiceTypeColor(index),
+                                              color: _serviceController
+                                                  .getServiceTypeColor(index),
                                             ),
                                           ),
                                         ),
@@ -228,21 +245,32 @@ class _ServicesPageState extends State<ServicesPage> {
                                     children: [
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
-                                                Text(
-                                                  _serviceController.getRequestTitle(index) ??
-                                                      'Solicitação sem Título',
-                                                  style: const TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
+                                                Flexible(
+                                                  child: Text(
+                                                    _serviceController
+                                                            .getRequestTitle(
+                                                                index) ??
+                                                        'Solicitação sem Título',
+                                                    style: const TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
-                                                const SizedBox(width: 15),
+                                                const SizedBox(width: 8),
                                                 Text(
-                                                  _serviceController.getRequestDate(index) ?? '',
+                                                  _serviceController
+                                                          .getRequestDate(
+                                                              index) ??
+                                                      '',
                                                   style: const TextStyle(
                                                     fontSize: 15,
                                                   ),
@@ -251,12 +279,18 @@ class _ServicesPageState extends State<ServicesPage> {
                                             ),
                                             const SizedBox(height: 10),
                                             Text(
-                                              _serviceController.getRequestDescription(index) ?? '',
+                                              _serviceController
+                                                      .getRequestDescription(
+                                                          index) ??
+                                                  '',
                                               textAlign: TextAlign.justify,
                                             ),
                                             const SizedBox(height: 5),
                                             Text(
-                                              _serviceController.getRequestProvider(index) ?? '',
+                                              _serviceController
+                                                      .getRequestProvider(
+                                                          index) ??
+                                                  '',
                                               textAlign: TextAlign.justify,
                                             ),
                                           ],
@@ -273,7 +307,8 @@ class _ServicesPageState extends State<ServicesPage> {
                                                 color: Colors.black26,
                                                 width: 1.0,
                                               ),
-                                              color: _serviceController.getRequestTypeColor(index)),
+                                              color: _serviceController
+                                                  .getRequestTypeColor(index)),
                                         ),
                                       ),
                                     ],
