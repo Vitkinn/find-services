@@ -1,5 +1,5 @@
 # FindServices
-## Front-end
+Front-end
 
 ## Find out in this project:
 - [FindServices](#findservices)
@@ -12,7 +12,8 @@
 
 ## Description
 FindServices is an app that allows the user to create a registration for himself and access the platform, where he will be able to view several service providers already registered, view information about the services provided by them, their evaluations and then, if he wishes, hire a service. It has search engines, filters and other instruments that facilitate visualization. The commun user can also modify his registration to become a service provider.  
-Important to remeber that this initial version was developed as a form of study and training.
+
+Important to remember that this initial version was developed as a form of study and training.
 
 This project comprises the Front-end layer of the FindServices application. It was developed using the Dart language together with the Flutter framework in a modular architecture, standard adopted in many real market scenarios, and it was a study of these technologies.  
 Here you'll find the structure of all the screens/pages of the application.
