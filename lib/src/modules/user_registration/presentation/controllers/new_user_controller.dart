@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
+import 'package:findservices/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:findservices/src/modules/user_registration/domain/usecases/create_user_usecase.dart';
 
 class NewUserController extends ChangeNotifier {
   final ICreateUserUsecase createUserUsecase;

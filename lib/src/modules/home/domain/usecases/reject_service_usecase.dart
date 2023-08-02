@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/core/errors/failure.dart';
-import 'package:tcc_frontend/src/modules/home/domain/repositories/i_service_page_repository.dart';
+import 'package:findservices/src/core/errors/failure.dart';
+import 'package:findservices/src/modules/home/domain/repositories/i_service_page_repository.dart';
 
 abstract class IRejectServiceUsecase {
   Future<Either<Failure, void>> call(String serviceId);

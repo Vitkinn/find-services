@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tcc_frontend">
+    package="com.example.findservices">
    <application
-        android:label="tcc_frontend"
+        android:label="findservices"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

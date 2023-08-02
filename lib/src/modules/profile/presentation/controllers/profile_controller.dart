@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_evaluations_usecase.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_profile_usecase.dart';
+import 'package:findservices/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
+import 'package:findservices/src/modules/profile/domain/entities/user_profile_entity.dart';
+import 'package:findservices/src/modules/profile/domain/usecases/load_evaluations_usecase.dart';
+import 'package:findservices/src/modules/profile/domain/usecases/load_profile_usecase.dart';
 
 class ProfileController {
   late final ILoadProfileUsecase _loadProfileUsecase;
@@ -113,6 +113,7 @@ class ProfileController {
   }
 
   void sendServiceRequest() {
-    Modular.to.navigate('/request_service', arguments: {"serviceProviderId": serviceProviderId});
+    Modular.to.navigate('/request_service',
+        arguments: {"serviceProviderId": serviceProviderId});
   }
 }

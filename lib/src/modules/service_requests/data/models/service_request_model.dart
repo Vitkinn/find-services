@@ -1,5 +1,5 @@
-import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
-import 'package:tcc_frontend/src/modules/service_requests/domain/entities/service_request_entity.dart';
+import 'package:findservices/src/modules/profile/data/models/user_profile_model.dart';
+import 'package:findservices/src/modules/service_requests/domain/entities/service_request_entity.dart';
 
 class ServiceRequestModel extends ServiceRequestEntity {
   ServiceRequestModel({
@@ -15,10 +15,12 @@ class ServiceRequestModel extends ServiceRequestEntity {
   });
 
   static ServiceRequestModel fromMap(Map<String, dynamic> map) {
-    var serviceRequester =
-        map["serviceRequester"] != null ? UserProfileModel.fromMap(map["serviceRequester"]) : null;
-    var serviceProvider =
-        map["serviceRequester"] != null ? UserProfileModel.fromMap(map["serviceProvider"]) : null;
+    var serviceRequester = map["serviceRequester"] != null
+        ? UserProfileModel.fromMap(map["serviceRequester"])
+        : null;
+    var serviceProvider = map["serviceRequester"] != null
+        ? UserProfileModel.fromMap(map["serviceProvider"])
+        : null;
     return ServiceRequestModel(
       id: map["id"],
       serviceDescription: map["serviceDescription"],

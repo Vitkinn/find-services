@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_shimmer.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
+import 'package:findservices/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
+import 'package:findservices/src/modules/profile/domain/entities/user_profile_entity.dart';
+import 'package:findservices/src/modules/profile/presentation/controllers/profile_controller.dart';
+import 'package:findservices/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:findservices/src/modules/shared/widgets/app_drawer.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_shimmer.dart';
+import 'package:findservices/src/modules/shared/widgets/return_button.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -65,7 +65,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Visibility(
                   visible: Modular.args.data?['profilerId'] == null,
                   replacement: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18.0, vertical: 8),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Row(
@@ -77,7 +78,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18.0, vertical: 8),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Row(
@@ -85,7 +87,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           ReturnButton(onTap: _profileController.backToHome),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 25.0),
                             child: GestureDetector(
                               child: const Text(
                                 'Editar',
@@ -143,9 +146,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         ratingWidget: RatingWidget(
                           full: Image.asset('lib/assets/images/star.png'),
                           half: Image.asset('lib/assets/images/star_half.png'),
-                          empty: Image.asset('lib/assets/images/star_border.png'),
+                          empty:
+                              Image.asset('lib/assets/images/star_border.png'),
                         ),
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 4.0),
                         onRatingUpdate: (rating) {},
                         itemSize: 25,
                       ),
@@ -171,7 +176,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 10),
                 TextVisible(
                   visible: !_profileController.isProfileLoading,
-                  text: 'Na plataforma desde ${_profileController.getCreateAccountDate()}',
+                  text:
+                      'Na plataforma desde ${_profileController.getCreateAccountDate()}',
                 ),
                 const SizedBox(height: 50),
                 const Text('Comentários', style: TextStyle(fontSize: 25)),
@@ -184,9 +190,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     scrollDirection: Axis.vertical,
                     itemCount: _profileController.getEvaluationsSize(),
                     itemBuilder: (context, index) {
-                      EvaluationEntity evaluation = _profileController.getEvaluation(index);
+                      EvaluationEntity evaluation =
+                          _profileController.getEvaluation(index);
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25.0, vertical: 12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +217,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                       Text(
-                                        _profileController.getEvaluationDate(evaluation),
+                                        _profileController
+                                            .getEvaluationDate(evaluation),
                                         style: const TextStyle(
                                           fontSize: 15,
                                           color: Colors.black45,
@@ -288,7 +297,8 @@ class ImageLoading extends StatelessWidget {
           decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.grey,
-              image: DecorationImage(image: AssetImage('lib/assets/images/user_icon.png'))),
+              image: DecorationImage(
+                  image: AssetImage('lib/assets/images/user_icon.png'))),
         ),
         child: CircleAvatar(
           radius: 75,
@@ -300,8 +310,10 @@ class ImageLoading extends StatelessWidget {
   }
 
   ImageProvider getImage(UserProfileEntity? userProfileEntity) {
-    if (userProfileEntity?.photoUrl != null && userProfileEntity?.photoUrl != "") {
-      var imageUrl = 'https://storage.googleapis.com${userProfileEntity!.photoUrl!}';
+    if (userProfileEntity?.photoUrl != null &&
+        userProfileEntity?.photoUrl != "") {
+      var imageUrl =
+          'https://storage.googleapis.com${userProfileEntity!.photoUrl!}';
       return NetworkImage(imageUrl);
     }
     return const AssetImage('lib/assets/images/user_icon.png');

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/service_requests/presentation/controllers/form_service_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/service_requests/presentation/controllers/form_service_controller.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
 
 class FormServicePage extends StatefulWidget {
   const FormServicePage({super.key});
@@ -16,7 +16,8 @@ class _FormServicePage extends State<FormServicePage> {
   @override
   void initState() {
     super.initState();
-    _requestServiceController = Modular.get<RequestServiceController>()..initPage();
+    _requestServiceController = Modular.get<RequestServiceController>()
+      ..initPage();
     _requestServiceController.loading.addListener(() {
       setState(() {});
     });
@@ -50,7 +51,8 @@ class _FormServicePage extends State<FormServicePage> {
                       ),
                       SizedBox(height: 16.0),
                       CustomTextField(
-                        controller: _requestServiceController.clientValueController,
+                        controller:
+                            _requestServiceController.clientValueController,
                         hintText: 'Valor Ofertado',
                         requiredField: true,
                         keyboardType: TextInputType.number,
@@ -58,7 +60,8 @@ class _FormServicePage extends State<FormServicePage> {
                       ),
                       SizedBox(height: 16.0),
                       CustomTextField(
-                        controller: _requestServiceController.descriptionController,
+                        controller:
+                            _requestServiceController.descriptionController,
                         hintText: 'Detalhamento do serviço',
                         requiredField: true,
                         keyboardType: TextInputType.multiline,

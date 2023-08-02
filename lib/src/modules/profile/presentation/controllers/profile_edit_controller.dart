@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/usecases/load_current_user_profile.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/usecases/update_user_usecase.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:findservices/src/modules/login/domain/entities/role_type.dart';
+import 'package:findservices/src/modules/profile/domain/entities/profile_edit_entity.dart';
+import 'package:findservices/src/modules/profile/domain/usecases/load_current_user_profile.dart';
+import 'package:findservices/src/modules/profile/domain/usecases/update_user_usecase.dart';
+import 'package:findservices/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:findservices/src/modules/user_registration/domain/entities/user_entity.dart';
 
 class ProfileEditController {
   late final ILoadCurrentUserProfileUsecase _loadCurrentUserProfileUsecase;
@@ -81,13 +81,18 @@ class ProfileEditController {
         userPhotoName: userPhotoName,
       );
 
-      if (_authController.getCurrentUser().role == RoleType.serviceProvider || isServiceProvider) {
+      if (_authController.getCurrentUser().role == RoleType.serviceProvider ||
+          isServiceProvider) {
         user = user.copyWith(
           category: selectedCategory?.key,
-          cnpj: cnpjController.text.replaceAll('.', '').replaceAll('/', '').replaceAll('-', ''),
+          cnpj: cnpjController.text
+              .replaceAll('.', '')
+              .replaceAll('/', '')
+              .replaceAll('-', ''),
           description: descriptionController.text,
-          actuationCities:
-              citiesController.map((TextEditingController cityCont) => cityCont.text).toList(),
+          actuationCities: citiesController
+              .map((TextEditingController cityCont) => cityCont.text)
+              .toList(),
         );
       }
       final result = await _updateUserUsecase.call(user, image);
@@ -129,7 +134,8 @@ class ProfileEditController {
         userPhotoName = r.userPhotoName;
       }
       if (r.cnpj != null) {
-        selectedCategory = options.firstWhere((element) => element.key == r.category);
+        selectedCategory =
+            options.firstWhere((element) => element.key == r.category);
         isServiceProvider = true;
         cnpjController.text = r.cnpj!;
         descriptionController.text = r.description!;
@@ -156,9 +162,11 @@ class ProfileEditController {
   File? get image => _image;
 
   void checkServiceProvider(bool? data) {
-    isServiceProvider = (Modular.args.data?['createServicePrivider'] as bool?) ?? false;
+    isServiceProvider =
+        (Modular.args.data?['createServicePrivider'] as bool?) ?? false;
     if (!isServiceProvider) {
-      isServiceProvider = _authController.getCurrentUser().role == RoleType.serviceProvider;
+      isServiceProvider =
+          _authController.getCurrentUser().role == RoleType.serviceProvider;
     }
   }
 }

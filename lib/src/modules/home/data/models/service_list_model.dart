@@ -1,5 +1,5 @@
-import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
-import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
+import 'package:findservices/src/modules/home/domain/entities/service_entity.dart';
+import 'package:findservices/src/modules/profile/data/models/user_profile_model.dart';
 
 class ServicesModel extends ServicesEntity {
   ServicesModel({
@@ -40,7 +40,9 @@ class ServiceModel extends ServiceEntity {
     return ServiceModel(
       id: map["id"],
       description: map["serviceDescription"],
-      createDate: map["createDate"] != null ? DateTime.tryParse(map["createDate"]) : null,
+      createDate: map["createDate"] != null
+          ? DateTime.tryParse(map["createDate"])
+          : null,
       value: map["value"] ?? 0,
       clientWishValue: map["clientWishValue"] ?? 0,
       title: map["title"],

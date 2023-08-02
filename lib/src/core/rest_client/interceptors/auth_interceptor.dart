@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:findservices/src/modules/shared/controllers/i_auth_controller.dart';
 
 class AuthInterceptor extends Interceptor {
   static const BARRER = 'Authorization';
 
   late final IAuthController _authController;
 
-  AuthInterceptor({required IAuthController authController}) : _authController = authController;
+  AuthInterceptor({required IAuthController authController})
+      : _authController = authController;
 
   @override
   void onRequest(
@@ -16,7 +17,8 @@ class AuthInterceptor extends Interceptor {
     if (options.headers.containsKey(BARRER)) {
       options.headers.remove(BARRER);
     } else {
-      options.headers.addAll({'Authorization': 'Bearer ${_authController.getToken()}'});
+      options.headers
+          .addAll({'Authorization': 'Bearer ${_authController.getToken()}'});
     }
     handler.next(options);
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
-import 'package:tcc_frontend/src/modules/home/presentation/controllers/view_request_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
-import 'package:tcc_frontend/src/modules/shared/utils/validators.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
+import 'package:findservices/src/modules/home/presentation/controllers/home_controller.dart';
+import 'package:findservices/src/modules/home/presentation/controllers/view_request_controller.dart';
+import 'package:findservices/src/modules/shared/components/footbar.dart';
+import 'package:findservices/src/modules/shared/utils/validators.dart';
+import 'package:findservices/src/modules/shared/widgets/app_drawer.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/shared/widgets/return_button.dart';
 
 class ViewRequestPage extends StatefulWidget {
   const ViewRequestPage({Key? key}) : super(key: key);
@@ -47,7 +47,8 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 18.0, vertical: 10),
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: ReturnButton(onTap: () {
@@ -115,16 +116,19 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                             controller: _controller.valueController,
                             hintText: 'Valor Ofertado',
                             requiredField: true,
-                            enabled: _controller.isMyServices && !_controller.isBlocked(),
+                            enabled: _controller.isMyServices &&
+                                !_controller.isBlocked(),
                             keyboardType: TextInputType.number,
                             obscureText: false,
                           ),
                           SizedBox(height: 16.0),
                           CustomTextField(
-                            controller: _controller.valueJustificationController,
+                            controller:
+                                _controller.valueJustificationController,
                             hintText: 'Detalhamento do serviço',
                             requiredField: true,
-                            enabled: _controller.isMyServices && !_controller.isBlocked(),
+                            enabled: _controller.isMyServices &&
+                                !_controller.isBlocked(),
                             keyboardType: TextInputType.multiline,
                             minLines: 4,
                             obscureText: false,
@@ -145,8 +149,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                         _controller.rejectService();
                                       },
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                            (Set<MaterialState> states) {
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                                (Set<MaterialState> states) {
                                           return Colors.red;
                                         }),
                                       ),
@@ -168,8 +173,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                         _controller.evaluate();
                                       },
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                            (Set<MaterialState> states) {
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                                (Set<MaterialState> states) {
                                           return Colors.green;
                                         }),
                                       ),
@@ -181,7 +187,8 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                               ),
                               Visibility(
                                 visible: !_controller.isMyServices &&
-                                    !(_controller.isApproved() || _controller.isDone()),
+                                    !(_controller.isApproved() ||
+                                        _controller.isDone()),
                                 child: Row(
                                   children: [
                                     SizedBox(width: 7),
@@ -190,8 +197,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                         _controller.cancel();
                                       },
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                            (Set<MaterialState> states) {
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                                (Set<MaterialState> states) {
                                           return Colors.grey;
                                         }),
                                       ),
@@ -212,8 +220,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                         _controller.accept();
                                       },
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                            (Set<MaterialState> states) {
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                                (Set<MaterialState> states) {
                                           return Colors.green;
                                         }),
                                       ),
@@ -224,7 +233,8 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                 ),
                               ),
                               Visibility(
-                                visible: _controller.isMyServices && _controller.isApproved(),
+                                visible: _controller.isMyServices &&
+                                    _controller.isApproved(),
                                 child: Row(
                                   children: [
                                     const SizedBox(width: 7),
@@ -233,8 +243,9 @@ class _ViewRequestPageState extends State<ViewRequestPage> {
                                         _controller.finish();
                                       },
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                            (Set<MaterialState> states) {
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                                (Set<MaterialState> states) {
                                           return Colors.green;
                                         }),
                                       ),

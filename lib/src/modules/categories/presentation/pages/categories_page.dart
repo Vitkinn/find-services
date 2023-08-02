@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/categories/presentation/controller/categories_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
-import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
-import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
+import 'package:findservices/src/modules/categories/presentation/controller/categories_controller.dart';
+import 'package:findservices/src/modules/shared/components/footbar.dart';
+import 'package:findservices/src/modules/shared/domain/entities/category_entity.dart';
+import 'package:findservices/src/modules/shared/models/filter/filter_entity.dart';
+import 'package:findservices/src/modules/shared/widgets/app_drawer.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -51,18 +51,22 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: _categoriesController.getCategoriesSize(),
                     itemBuilder: (context, index) {
-                      CategoryEntity category = _categoriesController.getCategory(index);
+                      CategoryEntity category =
+                          _categoriesController.getCategory(index);
                       return GestureDetector(
                         onTap: () {
-                          Modular.to.navigate('/home',
-                              arguments: {"filter": FilterEntity(category: category.name)});
+                          Modular.to.navigate('/home', arguments: {
+                            "filter": FilterEntity(category: category.name)
+                          });
                         },
                         child: Container(
                           width: 75,
                           height: 75,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: _categoriesController.getCategoryImage(category.name!).image,
+                              image: _categoriesController
+                                  .getCategoryImage(category.name!)
+                                  .image,
                               fit: BoxFit.cover,
                             ),
                             border: const Border(

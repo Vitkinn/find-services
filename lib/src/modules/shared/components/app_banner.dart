@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/shared/utils/color_utils.dart';
+import 'package:findservices/src/modules/shared/utils/color_utils.dart';
 
 class AppBanner extends StatelessWidget {
   final String? title;
@@ -18,7 +18,7 @@ class AppBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Image.asset(
-        'lib/assets/images/find_services.png',
+        'lib/assets/images/findservices.png',
         height: logoSize ?? 100,
       ),
       const SizedBox(height: 10),

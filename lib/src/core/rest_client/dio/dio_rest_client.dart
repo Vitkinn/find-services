@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:tcc_frontend/src/core/rest_client/interceptors/auth_interceptor.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:findservices/src/core/rest_client/interceptors/auth_interceptor.dart';
+import 'package:findservices/src/modules/shared/controllers/i_auth_controller.dart';
 
 import '../interceptors/failure_interceptor.dart';
 import '../rest_client.dart';
@@ -163,7 +163,8 @@ class DioRestClient implements RestClient {
     }
   }
 
-  Future<RestClientResponse<T>> _dioResponseConverter<T>(Response<dynamic> response) async {
+  Future<RestClientResponse<T>> _dioResponseConverter<T>(
+      Response<dynamic> response) async {
     return RestClientResponse<T>(
       data: response.data,
       statusCode: response.statusCode,

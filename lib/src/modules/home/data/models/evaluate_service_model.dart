@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/home/domain/entities/evaluate_service_entity.dart';
+import 'package:findservices/src/modules/home/domain/entities/evaluate_service_entity.dart';
 
 class EvaluateServiceModel extends EvaluateServiceEntity {
   EvaluateServiceModel({

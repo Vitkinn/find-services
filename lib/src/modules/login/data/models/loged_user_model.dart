@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
+import 'package:findservices/src/modules/login/domain/entities/loged_user_entity.dart';
 
 import '../../domain/entities/role_type.dart';
 

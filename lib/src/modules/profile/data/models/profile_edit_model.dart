@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_edit_entity.dart';
+import 'package:findservices/src/modules/profile/domain/entities/profile_edit_entity.dart';
 
 class ProfileEditModel extends ProfileEditEntity {
   ProfileEditModel({

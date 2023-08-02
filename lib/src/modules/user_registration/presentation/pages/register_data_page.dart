@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
-import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
-import 'package:tcc_frontend/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
+import 'package:findservices/src/modules/shared/components/app_banner.dart';
+import 'package:findservices/src/modules/shared/components/save_cancel_buttons.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/user_registration/presentation/controllers/new_user_controller.dart';
 
 class RegisterDataPage extends StatefulWidget {
   const RegisterDataPage({super.key});

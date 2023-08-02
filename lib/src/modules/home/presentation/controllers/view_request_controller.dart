@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:tcc_frontend/src/modules/home/domain/entities/evaluate_service_entity.dart';
-import 'package:tcc_frontend/src/modules/home/domain/entities/service_entity.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/accept_service_usecase.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/cancel_service_usecase.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/evaluate_service_usecase.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/finish_service_usecase.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/reject_service_usecase.dart';
+import 'package:findservices/src/modules/home/domain/entities/evaluate_service_entity.dart';
+import 'package:findservices/src/modules/home/domain/entities/service_entity.dart';
+import 'package:findservices/src/modules/home/domain/usecases/accept_service_usecase.dart';
+import 'package:findservices/src/modules/home/domain/usecases/cancel_service_usecase.dart';
+import 'package:findservices/src/modules/home/domain/usecases/evaluate_service_usecase.dart';
+import 'package:findservices/src/modules/home/domain/usecases/finish_service_usecase.dart';
+import 'package:findservices/src/modules/home/domain/usecases/reject_service_usecase.dart';
 
 class ViewRequestController {
   final IEvaluateServiceUsecase _evaluateServiceUsecase;
@@ -17,7 +17,8 @@ class ViewRequestController {
   final IAcceptServiceUsecase _acceptServiceUsecase;
   final IFinishServiceUsecase _finishServiceUsecase;
 
-  final MoneyMaskedTextController clientValueController = MoneyMaskedTextController(
+  final MoneyMaskedTextController clientValueController =
+      MoneyMaskedTextController(
     leftSymbol: 'R\$ ',
     precision: 2,
     decimalSeparator: ',',
@@ -30,7 +31,8 @@ class ViewRequestController {
     decimalSeparator: ',',
     thousandSeparator: '.',
   );
-  final TextEditingController valueJustificationController = TextEditingController();
+  final TextEditingController valueJustificationController =
+      TextEditingController();
 
   final ValueNotifier<bool> loading = ValueNotifier(true);
   late ServiceEntity serviceEntity;
@@ -56,8 +58,9 @@ class ViewRequestController {
         ? (serviceEntity.clientWishValue! * 10).toString()
         : '00';
     descriptionController.text = serviceEntity.description!;
-    valueController.text =
-        serviceEntity.value != null ? (serviceEntity.value! * 10).toString() : '00';
+    valueController.text = serviceEntity.value != null
+        ? (serviceEntity.value! * 10).toString()
+        : '00';
     valueJustificationController.text = serviceEntity.valueJustification ?? '';
     loading.value = false;
   }
@@ -109,7 +112,9 @@ class ViewRequestController {
 
   String getFormatedDate() {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
-    return serviceEntity.createDate != null ? formatter.format(serviceEntity.createDate!) : '';
+    return serviceEntity.createDate != null
+        ? formatter.format(serviceEntity.createDate!)
+        : '';
   }
 
   String getStatus() {
@@ -205,6 +210,7 @@ class ViewRequestController {
   }
 
   bool isDone() {
-    return serviceEntity.requestStatus == 'DONE' || serviceEntity.requestStatus == 'CANCELED';
+    return serviceEntity.requestStatus == 'DONE' ||
+        serviceEntity.requestStatus == 'CANCELED';
   }
 }

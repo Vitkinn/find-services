@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/save_cancel_buttons.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_image_picker_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/return_button.dart';
+import 'package:findservices/src/modules/profile/presentation/controllers/profile_edit_controller.dart';
+import 'package:findservices/src/modules/shared/components/save_cancel_buttons.dart';
+import 'package:findservices/src/modules/shared/controllers/i_image_picker_controller.dart';
+import 'package:findservices/src/modules/shared/widgets/app_drawer.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/shared/widgets/return_button.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({Key? key}) : super(key: key);
@@ -27,8 +27,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     _profileEditController = Modular.get<ProfileEditController>();
     _imagePickerController = Modular.get<IImagePickerController>();
 
-    _profileEditController
-        .checkServiceProvider(Modular.args.data?['createServicePrivider'] as bool?);
+    _profileEditController.checkServiceProvider(
+        Modular.args.data?['createServicePrivider'] as bool?);
     _profileEditController.loadUserData();
     _profileEditController.isLoading.addListener(() {
       setState(() {});
@@ -58,8 +58,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
-                          child: ReturnButton(onTap: _profileEditController.cancel),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 18.0, vertical: 10),
+                          child: ReturnButton(
+                              onTap: _profileEditController.cancel),
                         ),
                       ),
                       Stack(
@@ -69,9 +71,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             onTap: () {},
                             child: GestureDetector(
                               onTap: () {
-                                _imagePickerController.dialogBuilder(context).then((value) {
+                                _imagePickerController
+                                    .dialogBuilder(context)
+                                    .then((value) {
                                   setState(() {
-                                    _profileEditController.image = _imagePickerController.image();
+                                    _profileEditController.image =
+                                        _imagePickerController.image();
                                   });
                                 });
                               },
@@ -105,7 +110,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               padding: EdgeInsets.symmetric(horizontal: 25.0),
                               child: Text(
                                 'Dados Pessoais',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ],
@@ -216,7 +222,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                                 child: Text(
                                   'Prestador de Serviço',
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -229,7 +237,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             ),
                             const SizedBox(height: 10),
                             CustomTextField(
-                              controller: _profileEditController.descriptionController,
+                              controller:
+                                  _profileEditController.descriptionController,
                               hintText: 'Descrição',
                               obscureText: false,
                             ),
@@ -240,11 +249,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 value: _profileEditController.selectedCategory,
                                 onChanged: (Option? newValue) {
                                   setState(() {
-                                    _profileEditController.selectedCategory = newValue;
+                                    _profileEditController.selectedCategory =
+                                        newValue;
                                   });
                                 },
                                 items: _profileEditController.options
-                                    .map<DropdownMenuItem<Option>>((Option option) {
+                                    .map<DropdownMenuItem<Option>>(
+                                        (Option option) {
                                   return DropdownMenuItem<Option>(
                                     value: option,
                                     child: Text(option.value),
@@ -259,26 +270,34 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                                 child: Text(
                                   'Cidades de atuação',
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
                             const SizedBox(height: 10),
                             ListView.builder(
                               shrinkWrap: true,
-                              itemCount: _profileEditController.citiesController.length,
+                              itemCount: _profileEditController
+                                  .citiesController.length,
                               itemBuilder: (context, index) {
-                                var controller = _profileEditController.citiesController[index];
+                                var controller = _profileEditController
+                                    .citiesController[index];
                                 return Column(
                                   children: [
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         CustomTextField(
                                           controller: controller,
                                           hintText: 'Cidade',
                                           obscureText: false,
-                                          width: MediaQuery.of(context).size.width * 0.80,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.80,
                                         ),
                                         SizedBox(
                                           height: 50,
@@ -286,7 +305,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                             child: Icon(Icons.delete_forever),
                                             onPressed: () {
                                               setState(() {
-                                                _profileEditController.citiesController
+                                                _profileEditController
+                                                    .citiesController
                                                     .remove(controller);
                                               });
                                             },
@@ -316,7 +336,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         ),
                       ),
                       Visibility(
-                          visible: _profileEditController.showSaveCancelButtons(),
+                          visible:
+                              _profileEditController.showSaveCancelButtons(),
                           child: SizedBox(
                               height: 120,
                               child: SaveCancelButtons(

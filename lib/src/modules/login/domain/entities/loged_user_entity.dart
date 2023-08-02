@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
+import 'package:findservices/src/modules/login/domain/entities/role_type.dart';
 
 class LogedUserEntity {
   final String? id;

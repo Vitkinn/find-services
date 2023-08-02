@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/login/presentation/controllers/login_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/app_banner.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_button.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/login/presentation/controllers/login_controller.dart';
+import 'package:findservices/src/modules/shared/components/app_banner.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_button.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomButton(
                   hintText: 'Entrar',
                   color: '14cd84',
-                  onTap: () => {controller.login()},
+                  onTap: () => {Modular.to.navigate('/home')},
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -102,7 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       child: const Text(
                         'Registre-se aqui',
-                        style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
                       ),
                       onTap: () => {controller.register()},
                     ),

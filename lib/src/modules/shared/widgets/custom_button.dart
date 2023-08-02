@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/shared/utils/color_utils.dart';
+import 'package:findservices/src/modules/shared/utils/color_utils.dart';
 
 class CustomButton extends StatelessWidget {
   final String hintText;
@@ -24,9 +24,11 @@ class CustomButton extends StatelessWidget {
         padding: EdgeInsets.all(padding),
         margin: const EdgeInsets.symmetric(horizontal: 25.0),
         decoration: BoxDecoration(
-            color: ColorUtils.getHexadecimalColor(color), borderRadius: BorderRadius.circular(10)),
+            color: ColorUtils.getHexadecimalColor(color),
+            borderRadius: BorderRadius.circular(10)),
         child: Center(
-            child: Text(hintText, style: const TextStyle(color: Colors.white, fontSize: 20))),
+            child: Text(hintText,
+                style: const TextStyle(color: Colors.white, fontSize: 20))),
       ),
     );
   }

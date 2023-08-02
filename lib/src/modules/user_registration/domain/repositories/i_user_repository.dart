@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tcc_frontend/src/modules/user_registration/data/models/image_id_model.dart';
+import 'package:findservices/src/modules/user_registration/data/models/image_id_model.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../data/models/user_model.dart';

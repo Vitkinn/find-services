@@ -1,5 +1,5 @@
-import 'package:tcc_frontend/src/modules/home/domain/entities/service_provider_list_entity.dart';
-import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
+import 'package:findservices/src/modules/home/domain/entities/service_provider_list_entity.dart';
+import 'package:findservices/src/modules/user_registration/data/models/user_model.dart';
 
 class ServiceProviderModel extends ServiceProviderEntity {
   ServiceProviderModel({

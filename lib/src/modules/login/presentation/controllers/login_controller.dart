@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/login_entity.dart';
-import 'package:tcc_frontend/src/modules/login/domain/usecases/login_usecase.dart';
+import 'package:findservices/src/modules/login/domain/entities/login_entity.dart';
+import 'package:findservices/src/modules/login/domain/usecases/login_usecase.dart';
 
 class LoginController {
   final LoginUsecase loginUsecase;

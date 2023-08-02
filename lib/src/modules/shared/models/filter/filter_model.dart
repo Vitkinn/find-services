@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
+import 'package:findservices/src/modules/shared/models/filter/filter_entity.dart';
 
 class FilterModel extends FilterEntity {
   FilterModel({

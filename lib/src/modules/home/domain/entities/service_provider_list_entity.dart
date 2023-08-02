@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:findservices/src/modules/user_registration/domain/entities/user_entity.dart';
 
 class ServiceProviderEntity {
   final String? id;

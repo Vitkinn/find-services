@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/service_requests/domain/entities/send_service_request_entity.dart';
+import 'package:findservices/src/modules/service_requests/domain/entities/send_service_request_entity.dart';
 
 class SendServiceRequestModel extends SendServiceRequestEntity {
   SendServiceRequestModel({

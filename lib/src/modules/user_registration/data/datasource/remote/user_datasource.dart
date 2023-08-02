@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tcc_frontend/src/core/rest_client/rest_client.dart';
-import 'package:tcc_frontend/src/modules/user_registration/data/models/image_id_model.dart';
-import 'package:tcc_frontend/src/modules/user_registration/data/models/user_model.dart';
+import 'package:findservices/src/core/rest_client/rest_client.dart';
+import 'package:findservices/src/modules/user_registration/data/models/image_id_model.dart';
+import 'package:findservices/src/modules/user_registration/data/models/user_model.dart';
 
 import '../i_user_datasource.dart';
 

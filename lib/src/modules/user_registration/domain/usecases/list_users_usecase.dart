@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/core/errors/failure.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/entities/user_entity.dart';
-import 'package:tcc_frontend/src/modules/user_registration/domain/repositories/i_user_repository.dart';
+import 'package:findservices/src/core/errors/failure.dart';
+import 'package:findservices/src/modules/user_registration/domain/entities/user_entity.dart';
+import 'package:findservices/src/modules/user_registration/domain/repositories/i_user_repository.dart';
 
 abstract class IListUsersUsecase {
   Future<Either<Failure, List<UserEntity>>> call();

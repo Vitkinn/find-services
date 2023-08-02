@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "tcc_frontend",
+            "name": "findservices",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "tcc_frontend (profile mode)",
+            "name": "findservices (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "tcc_frontend (release mode)",
+            "name": "findservices (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

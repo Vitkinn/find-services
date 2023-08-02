@@ -1,6 +1,6 @@
 {
-    "name": "tcc_frontend",
-    "short_name": "tcc_frontend",
+    "name": "findservices",
+    "short_name": "findservices",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_button.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_button.dart';
 
 class SaveCancelButtons extends StatelessWidget {
   static const String primaryColorHexadecimal = '14cd84';

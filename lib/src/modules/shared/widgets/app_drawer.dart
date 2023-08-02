@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/role_type.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/impl/auth_controller.dart';
+import 'package:findservices/src/modules/login/domain/entities/loged_user_entity.dart';
+import 'package:findservices/src/modules/login/domain/entities/role_type.dart';
+import 'package:findservices/src/modules/shared/controllers/impl/auth_controller.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -26,7 +26,8 @@ class AppDrawer extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: NetworkImage('https://storage.googleapis.com${user.photoUrl}'),
+                  backgroundImage: NetworkImage(
+                      'https://storage.googleapis.com${user.photoUrl}'),
                   backgroundColor: Colors.grey,
                 ),
               ),
@@ -59,14 +60,17 @@ class AppDrawer extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(); // Fechar o diálogo
-                                    Modular.to.navigate('/terms_responsability');
+                                    Navigator.of(context)
+                                        .pop(); // Fechar o diálogo
+                                    Modular.to
+                                        .navigate('/terms_responsability');
                                   },
                                   child: const Text('Ver termos'),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(); // Fechar o diálogo
+                                    Navigator.of(context)
+                                        .pop(); // Fechar o diálogo
                                   },
                                   child: const Text('Fechar'),
                                 ),

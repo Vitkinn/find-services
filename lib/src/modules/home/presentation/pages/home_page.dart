@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/home/data/models/service_provider_list_model.dart';
-import 'package:tcc_frontend/src/modules/home/presentation/controllers/home_controller.dart';
-import 'package:tcc_frontend/src/modules/shared/components/footbar.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/app_drawer.dart';
-import 'package:tcc_frontend/src/modules/shared/widgets/custom_text_field.dart';
+import 'package:findservices/src/modules/home/data/models/service_provider_list_model.dart';
+import 'package:findservices/src/modules/home/presentation/controllers/home_controller.dart';
+import 'package:findservices/src/modules/shared/components/footbar.dart';
+import 'package:findservices/src/modules/shared/widgets/app_drawer.dart';
+import 'package:findservices/src/modules/shared/widgets/custom_text_field.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -78,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: 36,
                             decoration: BoxDecoration(
-                                color: Colors.green[400], borderRadius: BorderRadius.circular(50)),
+                                color: Colors.green[400],
+                                borderRadius: BorderRadius.circular(50)),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -113,7 +114,8 @@ class _HomePageState extends State<HomePage> {
                             _homeController.serviceProviders[index];
                         return GestureDetector(
                           onTap: () {
-                            _homeController.navigateToProfile(serviceProvider.id!);
+                            _homeController
+                                .navigateToProfile(serviceProvider.id!);
                           },
                           child: Align(
                               alignment: Alignment.centerLeft,
@@ -124,7 +126,8 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Visibility(
-                                      visible: _homeController.hasImage(serviceProvider),
+                                      visible: _homeController
+                                          .hasImage(serviceProvider),
                                       replacement: Container(
                                         width: 70,
                                         height: 70,
@@ -132,7 +135,8 @@ class _HomePageState extends State<HomePage> {
                                           shape: BoxShape.circle,
                                           color: Colors.grey,
                                           image: DecorationImage(
-                                            image: AssetImage('lib/assets/images/user_icon.png'),
+                                            image: AssetImage(
+                                                'lib/assets/images/user_icon.png'),
                                           ),
                                         ),
                                       ),
@@ -143,8 +147,8 @@ class _HomePageState extends State<HomePage> {
                                           shape: BoxShape.circle,
                                           color: Colors.grey,
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                _homeController.getPhotoUrl(serviceProvider)),
+                                            image: NetworkImage(_homeController
+                                                .getPhotoUrl(serviceProvider)),
                                           ),
                                         ),
                                       ),
@@ -152,7 +156,8 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
@@ -169,12 +174,15 @@ class _HomePageState extends State<HomePage> {
                                           Container(
                                             decoration: BoxDecoration(
                                                 color: Colors.green[400],
-                                                borderRadius: BorderRadius.circular(50)),
+                                                borderRadius:
+                                                    BorderRadius.circular(50)),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(3.8),
+                                              padding:
+                                                  const EdgeInsets.all(3.8),
                                               child: Text(
                                                 '${_homeController.translateCategory(serviceProvider)}',
-                                                style: const TextStyle(fontSize: 14),
+                                                style: const TextStyle(
+                                                    fontSize: 14),
                                               ),
                                             ),
                                           ),

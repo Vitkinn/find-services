@@ -1,4 +1,4 @@
-package com.example.tcc_frontend
+package com.example.findservices
 
 import io.flutter.embedding.android.FlutterActivity
 

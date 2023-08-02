@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
-import 'package:tcc_frontend/src/modules/shared/domain/usecases/get_categories_usecase.dart';
+import 'package:findservices/src/modules/shared/domain/entities/category_entity.dart';
+import 'package:findservices/src/modules/shared/domain/usecases/get_categories_usecase.dart';
 
 class CategoriesController {
   final GetCategoriesUseCase _getCategoriesUseCase;

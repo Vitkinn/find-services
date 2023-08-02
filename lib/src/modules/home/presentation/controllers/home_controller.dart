@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tcc_frontend/src/modules/home/data/models/service_provider_list_model.dart';
-import 'package:tcc_frontend/src/modules/home/domain/usecases/load_service_providers_usecase.dart';
-import 'package:tcc_frontend/src/modules/shared/domain/usecases/get_categories_by_key_usecase.dart';
-import 'package:tcc_frontend/src/modules/shared/models/filter/filter_entity.dart';
+import 'package:findservices/src/modules/home/data/models/service_provider_list_model.dart';
+import 'package:findservices/src/modules/home/domain/usecases/load_service_providers_usecase.dart';
+import 'package:findservices/src/modules/shared/domain/usecases/get_categories_by_key_usecase.dart';
+import 'package:findservices/src/modules/shared/models/filter/filter_entity.dart';
 
 class HomeController {
   late final ILoadServiceProviderUsecase _loadServiceProviderUsecase;
@@ -24,7 +24,8 @@ class HomeController {
     serviceProviders.clear();
     loading.value = true;
     this.filter = filter;
-    final result = await _loadServiceProviderUsecase.call(filter ?? FilterEntity());
+    final result =
+        await _loadServiceProviderUsecase.call(filter ?? FilterEntity());
 
     result.fold((l) => null, (r) {
       serviceProviders.addAll(r);
@@ -70,8 +71,10 @@ class HomeController {
 
   void filterByName() {
     filter = filter != null
-        ? filter!
-            .copyWith(name: filterController.text, category: filter?.category, city: filter?.city)
+        ? filter!.copyWith(
+            name: filterController.text,
+            category: filter?.category,
+            city: filter?.city)
         : FilterEntity(name: filterController.text);
 
     loadPage(filter);

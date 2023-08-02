@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/profile/domain/entities/user_profile_entity.dart';
+import 'package:findservices/src/modules/profile/domain/entities/user_profile_entity.dart';
 
 class ServicesEntity {
   final int? rate;

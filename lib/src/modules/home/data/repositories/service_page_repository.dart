@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/core/errors/failure.dart';
-import 'package:tcc_frontend/src/modules/home/data/datasource/i_service_page_datasource.dart';
-import 'package:tcc_frontend/src/modules/home/data/models/evaluate_service_model.dart';
-import 'package:tcc_frontend/src/modules/home/data/models/service_list_model.dart';
-import 'package:tcc_frontend/src/modules/home/domain/entities/evaluate_service_entity.dart';
-import 'package:tcc_frontend/src/modules/home/domain/repositories/i_service_page_repository.dart';
+import 'package:findservices/src/core/errors/failure.dart';
+import 'package:findservices/src/modules/home/data/datasource/i_service_page_datasource.dart';
+import 'package:findservices/src/modules/home/data/models/evaluate_service_model.dart';
+import 'package:findservices/src/modules/home/data/models/service_list_model.dart';
+import 'package:findservices/src/modules/home/domain/entities/evaluate_service_entity.dart';
+import 'package:findservices/src/modules/home/domain/repositories/i_service_page_repository.dart';
 
 class ServicePageRepository extends IServicePageRepository {
   final IServicesPageDatasource datasource;

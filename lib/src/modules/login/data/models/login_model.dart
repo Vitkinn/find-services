@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/login/domain/entities/login_entity.dart';
+import 'package:findservices/src/modules/login/domain/entities/login_entity.dart';
 
 class LoginModel extends LoginEntity {
   LoginModel({

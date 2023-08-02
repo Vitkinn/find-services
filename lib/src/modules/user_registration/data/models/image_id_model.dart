@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/user_registration/domain/entities/image_id_entity.dart';
+import 'package:findservices/src/modules/user_registration/domain/entities/image_id_entity.dart';
 
 class ImageIdModel extends ImageIdEntity {
   ImageIdModel({

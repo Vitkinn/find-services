@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_frontend/src/modules/shared/utils/validators.dart';
+import 'package:findservices/src/modules/shared/utils/validators.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -54,9 +54,10 @@ class CustomTextField extends StatelessWidget {
             enabled: enabled,
             keyboardType: keyboardType,
             decoration: InputDecoration(
-                enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                focusedBorder:
-                    const OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF14cd84))),
+                enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
+                focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF14cd84))),
                 fillColor: Colors.grey.shade200,
                 errorText: errorText,
                 suffixIcon: suffixIcon,

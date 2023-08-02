@@ -1,5 +1,5 @@
-import 'package:tcc_frontend/src/modules/profile/data/models/user_profile_model.dart';
-import 'package:tcc_frontend/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
+import 'package:findservices/src/modules/profile/data/models/user_profile_model.dart';
+import 'package:findservices/src/modules/profile/domain/entities/profile_evaluation_entity.dart';
 
 class ProfileEvaluationModel extends ServicesEntity {
   ProfileEvaluationModel({

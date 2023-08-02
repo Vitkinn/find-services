@@ -1,4 +1,4 @@
-import 'package:tcc_frontend/src/modules/shared/domain/entities/category_entity.dart';
+import 'package:findservices/src/modules/shared/domain/entities/category_entity.dart';
 
 class GetCategoryByKeyUsecase {
   String call(String key) {

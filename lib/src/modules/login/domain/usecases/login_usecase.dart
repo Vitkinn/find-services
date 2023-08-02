@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:tcc_frontend/src/modules/login/data/models/loged_user_model.dart';
-import 'package:tcc_frontend/src/modules/login/data/models/login_model.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/loged_user_entity.dart';
-import 'package:tcc_frontend/src/modules/login/domain/entities/login_entity.dart';
-import 'package:tcc_frontend/src/modules/login/domain/repositories/i_login_repository.dart';
-import 'package:tcc_frontend/src/modules/shared/controllers/i_auth_controller.dart';
+import 'package:findservices/src/modules/login/data/models/loged_user_model.dart';
+import 'package:findservices/src/modules/login/data/models/login_model.dart';
+import 'package:findservices/src/modules/login/domain/entities/loged_user_entity.dart';
+import 'package:findservices/src/modules/login/domain/entities/login_entity.dart';
+import 'package:findservices/src/modules/login/domain/repositories/i_login_repository.dart';
+import 'package:findservices/src/modules/shared/controllers/i_auth_controller.dart';
 
 import '../../../../core/errors/failure.dart';
 
