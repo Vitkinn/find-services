@@ -39,11 +39,11 @@ https://github.com/Vitkinn/find-services-backend
 You can run the following commands in Bash:  
 1. Clone the repository:  
 ```bash
-git clone https://github.com/Vitkinn/find-services.git
+git clone https://github.com/Vitkinn/findservices.git
 ```
 2. Navigate to the project directory:  
 ```bash
-cd find-services
+cd findservices
 ```
 3. Install the dependencies:  
 ```bash
