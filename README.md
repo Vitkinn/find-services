@@ -1,6 +1,4 @@
-# FindServices
-Front-end
-
+# FindServices  
 ## Find out in this project:
 - [FindServices](#findservices)
   - [Description](#description)
@@ -18,10 +16,10 @@ Important to remember that this initial version was developed as a form of study
 This project comprises the Front-end layer of the FindServices application. It was developed using the Dart language together with the Flutter framework in a modular architecture, standard adopted in many real market scenarios, and it was a study of these technologies.  
 Here you'll find the structure of all the screens/pages of the application.  
 
-
-![FindServicesLogin](https://github.com/Vitkinn/findservices/assets/113398069/f5842fe7-1be6-4150-87de-17a68a7462b6)
+<img src="https://github.com/Vitkinn/findservices/assets/113398069/c6fe4076-ce71-4adc-8ed4-812eb324840f" width="200"/> <img src="https://github.com/Vitkinn/findservices/assets/113398069/624a823b-bf51-4977-a33a-5647635738e2" width="180"/> <img src="https://github.com/Vitkinn/findservices/assets/113398069/6c09ac81-4106-47d2-8944-9d2374c80735" width="180"/>
 
 ## Features
+
 Some of the features that are part of this project are:  
 - Registration of new users;  
 - Registration of service providers;  
@@ -32,10 +30,10 @@ Some of the features that are part of this project are:
 - Etc...  
 
 ## Requirements  
-### Flutter 3.10.5  
-### Dart 3.0.5 • DevTools 2.23.1  
+ **Flutter 3.10.5**  
+ **Dart 3.0.5 • DevTools 2.23.1**  
 
-You'll also need to have and run the **Back-end** layer of the application, which can be found in the following:  
+To use the application, you'll also need to have and run the **Back-end** layer of the application, which can be found in the following:  
 https://github.com/Vitkinn/find-services-backend
 
 ## Installation
