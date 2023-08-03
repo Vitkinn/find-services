@@ -58,19 +58,6 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                         errorText: controller.passwordError.value,
                       ),
-                      // const SizedBox(height: 20),
-                      // const Padding(
-                      //   padding: EdgeInsets.symmetric(horizontal: 25.0),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: [
-                      //       Text(
-                      //         'Esqueceu sua senha?',
-                      //         style: TextStyle(fontSize: 18, color: Color(0xFF14cd84)),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       const SizedBox(height: 90),
                     ],
                   ),
@@ -86,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomButton(
                   hintText: 'Entrar',
                   color: '14cd84',
-                  onTap: () => {Modular.to.navigate('/home')},
+                  onTap: () => {controller.login()},
                 ),
                 const SizedBox(height: 20),
                 Row(

@@ -18,7 +18,7 @@ class AppBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Image.asset(
-        'lib/assets/images/findservices.png',
+        'lib/assets/images/find_services.png',
         height: logoSize ?? 100,
       ),
       const SizedBox(height: 10),
