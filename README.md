@@ -16,7 +16,10 @@ FindServices is an app that allows the user to create a registration for himself
 Important to remember that this initial version was developed as a form of study and training.
 
 This project comprises the Front-end layer of the FindServices application. It was developed using the Dart language together with the Flutter framework in a modular architecture, standard adopted in many real market scenarios, and it was a study of these technologies.  
-Here you'll find the structure of all the screens/pages of the application.
+Here you'll find the structure of all the screens/pages of the application.  
+
+
+![FindServicesLogin](https://github.com/Vitkinn/findservices/assets/113398069/f5842fe7-1be6-4150-87de-17a68a7462b6)
 
 ## Features
 Some of the features that are part of this project are:  
